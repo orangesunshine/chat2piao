@@ -33,7 +33,7 @@ import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 import im.sdk.debug.activity.setting.RegisterActivity;
 import im.sdk.debug.utils.AndroidUtils;
-import 您自己的包名.R;
+import im.sdk.debug.R;
 
 /**
  * Created by ${chenyn} on 16/3/23.

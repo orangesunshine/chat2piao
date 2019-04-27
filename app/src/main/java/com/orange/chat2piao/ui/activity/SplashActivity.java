@@ -1,5 +1,6 @@
-package com.orange.chat2piao;
+package com.orange.chat2piao.ui.activity;
 
+import com.orange.chat2piao.R;
 import com.stephentuso.welcome.BasicPage;
 import com.stephentuso.welcome.TitlePage;
 import com.stephentuso.welcome.WelcomeActivity;

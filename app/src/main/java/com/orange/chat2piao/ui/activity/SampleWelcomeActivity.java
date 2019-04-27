@@ -1,4 +1,4 @@
-package com.orange.chat2piao;
+package com.orange.chat2piao.ui.activity;
 
 import com.stephentuso.welcome.BasicPage;
 import com.stephentuso.welcome.ParallaxPage;

@@ -28,6 +28,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -40,4 +45,9 @@ dependencies {
     implementation "cn.jiguang.sdk:jmessage:${JPUSH_JMESSAGE}"  // 此处以JMessage 2.8.2 版本为例。
     implementation "cn.jiguang.sdk:jcore:${JPUSH_JCORE}"  // 此处以JCore 1.2.7 版本为例。
     implementation "com.stephentuso:welcome:${STEPHENTUSO_WELCOME}"
+
+    implementation "com.jakewharton:butterknife:${BUTTERKNIFE}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE}"
+    implementation "com.githang:status-bar-compat:${STATUS_BAR_COMPAT}"
+    implementation "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
 }

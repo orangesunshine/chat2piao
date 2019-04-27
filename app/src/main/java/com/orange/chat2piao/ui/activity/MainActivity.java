@@ -1,9 +1,9 @@
-package com.orange.chat2piao;
+package com.orange.chat2piao.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.stephentuso.welcome.WelcomeActivity;
+import com.orange.chat2piao.R;
 import com.stephentuso.welcome.WelcomeHelper;
 
 public class MainActivity extends AppCompatActivity {
