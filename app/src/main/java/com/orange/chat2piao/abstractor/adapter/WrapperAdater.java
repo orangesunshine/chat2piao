@@ -1,10 +1,14 @@
 package com.orange.chat2piao.abstractor.adapter;
 
-import com.orange.chat2piao.abstractor.ifc.IWrapper;
+import com.orange.chat2piao.abstractor.ifc.wrapper.IWrapper;
 
-public abstract class WrapperAdater<P, T> implements IWrapper<T> {
+public abstract class WrapperAdater<R, T> implements IWrapper<R,T> {
     protected T mArg;
-    protected P mIfc;
+    protected R mIfc;
+
+    public WrapperAdater(T arg) {
+        mArg = arg;
+    }
 
     @Override
     public IWrapper wrap(IWrapper wrapper) {
@@ -15,16 +19,13 @@ public abstract class WrapperAdater<P, T> implements IWrapper<T> {
         return this;
     }
 
-    public IWrapper setArg(T arg) {
-        mArg = arg;
-        return this;
-    }
-
+    @Override
     public T getArg() {
         return mArg;
     }
 
-    public IWrapper setIfc(P ifc) {
+    @Override
+    public IWrapper setIfc(R ifc) {
         mIfc = ifc;
         return this;
     }

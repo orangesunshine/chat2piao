@@ -1,4 +1,4 @@
-package com.orange.chat2piao.abstractor.ifc.act.net;
+package com.orange.chat2piao.abstractor.ifc.net;
 
 /**
  * 网络回调抽象层
