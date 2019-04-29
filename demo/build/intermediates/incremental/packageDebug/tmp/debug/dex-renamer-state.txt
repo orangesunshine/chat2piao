@@ -1,0 +1,4 @@
+#Sat Apr 27 09:24:25 CST 2019
+base.0=D\:\\Develop\\Android\\Github\\jmessage-sdk-android-2.8.2\\Chat2Piao\\demo\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+path.0=classes.dex
+renamed.0=classes.dex
