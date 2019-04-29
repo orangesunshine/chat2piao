@@ -9,9 +9,10 @@ import com.orange.chat2piao.utils.LogUtil;
 
 public class GlobleImp implements IGloble {
     //static&final
-    private static volatile GlobleImp ourInstance=null;
+    private static volatile GlobleImp ourInstance = null;
 
     //vars
+    private int mScreenWidth, mScreenHeight;
 
     public static GlobleImp getInstance() {
         if (null == ourInstance) {
@@ -30,5 +31,15 @@ public class GlobleImp implements IGloble {
     @Override
     public Context getAppContext() {
         return LypApp.getAppContext();
+    }
+
+    @Override
+    public int getScreenWidth() {
+        return mScreenWidth;
+    }
+
+    @Override
+    public int getScreenHeight() {
+        return mScreenHeight;
     }
 }

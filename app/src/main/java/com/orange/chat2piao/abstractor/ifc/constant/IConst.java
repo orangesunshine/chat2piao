@@ -1,7 +1,7 @@
 package com.orange.chat2piao.abstractor.ifc.constant;
 
+import com.orange.chat2piao.utils.ScreenUtils;
+
 public interface IConst {
-    String ACT_BASE = "BaseActvity";
-    String ACT_COMMON = "CommonActivity";
-    String ACT_BUZ = "BuzActivity";
+    String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";
 }

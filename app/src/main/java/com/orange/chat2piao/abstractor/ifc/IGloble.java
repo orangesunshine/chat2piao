@@ -8,4 +8,8 @@ public interface IGloble {
 
     //loadingDialog
 
+
+    //screen width、height
+    int getScreenWidth();
+    int getScreenHeight();
 }

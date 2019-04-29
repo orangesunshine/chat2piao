@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Apr 27 09:24:25 CST 2019
+#Mon Apr 29 17:11:50 CST 2019
 2.base=D\:\\Develop\\Android\\Github\\jmessage-sdk-android-2.8.2\\Chat2Piao\\demo\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
 0.path=test.mp3
 2.baseType=DIRECTORY
