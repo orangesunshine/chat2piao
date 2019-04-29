@@ -5,6 +5,9 @@ package com.orange.chat2piao.abstractor.ifc.net;
  * @param <T>
  */
 public interface INetCallback<T> {
+    //网络请求开始
+    void onNetStart();
+
     //成功
     void onSuccess(T t);
 

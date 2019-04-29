@@ -1,4 +1,7 @@
 package com.orange.chat2piao.ui.activity.base;
 
-public class NetActivity {
+import com.orange.chat2piao.abstractor.ifc.net.INetCallback;
+
+public abstract class NetActivity<T> extends CommonActivity implements INetCallback<T> {
+
 }

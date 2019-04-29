@@ -1,30 +1,32 @@
 package com.orange.chat2piao.ui.activity;
 
-import com.orange.chat2piao.R;
-import com.stephentuso.welcome.BasicPage;
-import com.stephentuso.welcome.TitlePage;
-import com.stephentuso.welcome.WelcomeActivity;
-import com.stephentuso.welcome.WelcomeConfiguration;
+import android.os.Bundle;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 
-public class SplashActivity extends WelcomeActivity {
+import com.orange.chat2piao.R;
+import com.orange.chat2piao.ui.activity.base.CommonActivity;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class SplashActivity extends CommonActivity {
+    @BindView(R.id.view_bg)
+    View viewBg;
+    private AnimationSet mAnimationSet;
+
     @Override
-    protected WelcomeConfiguration configuration() {
-        return new WelcomeConfiguration.Builder(this)
-                .defaultBackgroundColor(R.color.white)
-                .page(new TitlePage(R.drawable.ic_launcher_background,
-                        "Title")
-                )
-                .page(new BasicPage(R.drawable.ic_launcher_foreground,
-                        "Header",
-                        "More text.")
-                        .background(R.color.red)
-                )
-                .page(new BasicPage(R.drawable.ic_launcher_background,
-                        "Lorem ipsum",
-                        "dolor sit amet.")
-                        .background(R.color.green)
-                )
-                .swipeToDismiss(true)
-                .build();
+    public void initVars(Bundle saveInstance) {
+        mAnimationSet = new AnimationSet(true);
+        mAnimationSet.addAnimation(new ScaleAnimation(0.5f, 1, 0.5f, 1));
+        mAnimationSet.addAnimation(new AlphaAnimation(0.5f, 1));
+        viewBg.startAnimation(mAnimationSet);
+    }
+
+    @Override
+    public int getContentLayoutId() {
+        return R.layout.activity_splash;
     }
 }

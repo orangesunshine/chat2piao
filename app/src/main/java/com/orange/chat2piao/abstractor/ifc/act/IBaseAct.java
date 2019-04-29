@@ -4,4 +4,6 @@ import android.app.Activity;
 
 public interface IBaseAct {
     void setStatusBarTranslucent(Activity activity);
+
+    int getContentLayoutId();
 }

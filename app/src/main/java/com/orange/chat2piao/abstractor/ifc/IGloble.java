@@ -6,5 +6,6 @@ public interface IGloble {
     //获取全局context
     Context getAppContext();
 
-    void initParty();
+    //loadingDialog
+
 }
