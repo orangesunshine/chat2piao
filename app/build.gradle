@@ -44,8 +44,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "cn.jiguang.sdk:jmessage:${JPUSH_JMESSAGE}"  // 此处以JMessage 2.8.2 版本为例。
     implementation "cn.jiguang.sdk:jcore:${JPUSH_JCORE}"  // 此处以JCore 1.2.7 版本为例。
-    implementation "com.stephentuso:welcome:${STEPHENTUSO_WELCOME}"
-
+//    implementation "com.stephentuso:welcome:${STEPHENTUSO_WELCOME}"
     implementation "com.jakewharton:butterknife:${BUTTERKNIFE}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE}"
     implementation "com.githang:status-bar-compat:${STATUS_BAR_COMPAT}"

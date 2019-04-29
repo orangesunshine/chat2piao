@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.orange.chat2piao.abstractor.adapter.WrapperAdater;
 import com.orange.chat2piao.abstractor.ifc.act.IBaseAct;
 import com.orange.chat2piao.abstractor.ifc.act.IBuzAct;
+import com.orange.chat2piao.abstractor.ifc.act.ICommonAct;
 import com.orange.chat2piao.abstractor.ifc.wrapper.IWrapper;
 import com.orange.chat2piao.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.ui.activity.base.BuzActivity;
@@ -24,38 +25,8 @@ public class BaseWrapper extends WrapperAdater<IBaseAct, Activity> {
     @Override
     public void perform() {
         if (null != mIfc) {
+            getArg().setContentView(mIfc.getContentLayoutId());
             mIfc.setStatusBarTranslucent(getArg());
         }
-    }
-
-    public void onCreateLifecycleWrapper(Activity activity, Bundle bundle) {
-        String simpleName = CommonActivity.class.getSimpleName();
-        IWrapper wrapper = new BaseWrapper(activity);
-        if (activity instanceof CommonActivity) {
-            //commonWrapper->initVars、bindViews
-            wrapper.wrap(new CommonWrapper(activity).setBundle(bundle));
-        } else if (activity instanceof BuzActivity) {
-            //commonWrapper->initVars、bindViews
-            wrapper.wrap(new CommonWrapper(activity).setBundle(bundle));
-            //BuzActivity->initViews、initListener、onActivityCreate
-            wrapper.wrap(new BuzWrapper(activity).setIfc(new IBuzAct() {
-                @Override
-                public void initViews(Context context) {
-
-                }
-
-                @Override
-                public void initListener(Context context) {
-
-                }
-
-                @Override
-                public void onActivityCreate(Context context) {
-
-                }
-            }));
-        }
-        ((BaseActivity) activity).setWrapper(wrapper);
-        wrapper.perform();
     }
 }

@@ -1,4 +1,6 @@
 package com.orange.chat2piao.ui.activity.base;
 
-public class Pull2LoadActivity {
+import com.orange.chat2piao.abstractor.ifc.act.pullload.IPullndLoad;
+
+public abstract class Pull2LoadActivity<T> extends NetActivity<T> implements IPullndLoad {
 }

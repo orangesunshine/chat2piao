@@ -1,5 +1,6 @@
 package com.orange.chat2piao.abstractor.impl.wrapper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -7,10 +8,10 @@ import com.orange.chat2piao.abstractor.adapter.WrapperAdater;
 import com.orange.chat2piao.abstractor.ifc.act.ICommonAct;
 import com.orange.chat2piao.abstractor.ifc.wrapper.IWrapper;
 
-public class CommonWrapper extends WrapperAdater<ICommonAct, Context> {
+public class CommonWrapper extends WrapperAdater<ICommonAct, Activity> {
     private Bundle mBundle;
 
-    public CommonWrapper(Context arg) {
+    public CommonWrapper(Activity arg) {
         super(arg);
     }
 
@@ -22,7 +23,7 @@ public class CommonWrapper extends WrapperAdater<ICommonAct, Context> {
         }
     }
 
-    public IWrapper setBundle(Bundle bundle) {
+    public CommonWrapper setBundle(Bundle bundle) {
         mBundle = bundle;
         return this;
     }

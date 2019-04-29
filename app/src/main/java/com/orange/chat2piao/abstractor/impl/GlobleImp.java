@@ -31,9 +31,4 @@ public class GlobleImp implements IGloble {
     public Context getAppContext() {
         return LypApp.getAppContext();
     }
-
-    @Override
-    public void initParty() {
-        LogUtil.init(BuildConfig.DEBUG);
-    }
 }
