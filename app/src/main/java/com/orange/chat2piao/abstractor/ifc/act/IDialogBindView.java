@@ -1,14 +1,12 @@
 package com.orange.chat2piao.abstractor.ifc.act;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 
 import butterknife.Unbinder;
 
-public interface ICommonAct {
-    //初始化变量
-    void initVars(Bundle saveInstance);
-
+public interface IDialogBindView {
     //绑定控件
-    Unbinder bindViews(Activity activity);
+    void bindViews(Dialog dialog);
 }

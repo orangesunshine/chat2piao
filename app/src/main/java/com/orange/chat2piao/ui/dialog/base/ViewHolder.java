@@ -1,6 +1,6 @@
 package com.orange.chat2piao.ui.dialog.base;
 
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.TextView;

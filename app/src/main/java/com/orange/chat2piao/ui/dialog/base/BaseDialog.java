@@ -1,13 +1,8 @@
 package com.orange.chat2piao.ui.dialog.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.FloatRange;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +10,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.FloatRange;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.fragment.app.DialogFragment;
+
 import com.orange.chat2piao.R;
+import com.orange.chat2piao.abstractor.ifc.act.IContentView;
+import com.orange.chat2piao.abstractor.ifc.act.IInitVars;
 
 import static com.orange.chat2piao.utils.ScreenUtils.dp2px;
 import static com.orange.chat2piao.utils.ScreenUtils.getScreenWidth;
@@ -23,31 +26,37 @@ import static com.orange.chat2piao.utils.ScreenUtils.getScreenWidth;
 /**
  * Dialog通用样式
  */
-public abstract class BaseDialog extends DialogFragment {
+public abstract class BaseDialog extends DialogFragment implements IContentView, IInitVars {
 
     @LayoutRes
     protected int mLayoutResId;
+    protected Activity mActivity;
 
     private float mDimAmount = 0.5f;//背景昏暗度
     private boolean mShowBottomEnable;//是否底部显示
     private int mMargin = 0;//左右边距
     private int mAnimStyle = 0;//进入退出动画
     private boolean mOutCancel = true;//点击外部取消
-    private Context mContext;
     private int mWidth;
     private int mHeight;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext = context;
+        mActivity = (Activity) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity = null;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.dialogTheme);
-        mLayoutResId = setUpLayoutId();
+        mLayoutResId = getContentLayoutId();
     }
 
     @Nullable
@@ -59,9 +68,19 @@ public abstract class BaseDialog extends DialogFragment {
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initVars(savedInstanceState);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         initParams();
+    }
+
+    @Override
+    public void initVars(Bundle savedInstanceState) {
     }
 
     private void initParams() {
@@ -88,6 +107,8 @@ public abstract class BaseDialog extends DialogFragment {
             } else {
                 params.height = dp2px(getContext(), mHeight);
             }
+            params.width=300;
+            params.height=300;
 
             //设置dialog动画
             if (mAnimStyle != 0) {
@@ -166,18 +187,6 @@ public abstract class BaseDialog extends DialogFragment {
         mOutCancel = outCancel;
         return this;
     }
-
-    public BaseDialog show(FragmentManager manager) {
-        super.show(manager, String.valueOf(System.currentTimeMillis()));
-        return this;
-    }
-
-    /**
-     * 设置dialog布局
-     *
-     * @return
-     */
-    public abstract int setUpLayoutId();
 
     /**
      * 操作dialog布局

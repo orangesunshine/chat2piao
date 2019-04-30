@@ -2,10 +2,11 @@ package com.orange.chat2piao.abstractor.impl;
 
 import android.content.Context;
 
-import com.orange.chat2piao.BuildConfig;
 import com.orange.chat2piao.abstractor.ifc.IGloble;
+import com.orange.chat2piao.abstractor.ifc.ILoading;
+import com.orange.chat2piao.abstractor.ifc.ILoadingDialogFragment;
 import com.orange.chat2piao.ui.app.LypApp;
-import com.orange.chat2piao.utils.LogUtil;
+import com.orange.chat2piao.ui.dialog.LoadingDialog;
 
 public class GlobleImp implements IGloble {
     //static&final
@@ -31,6 +32,11 @@ public class GlobleImp implements IGloble {
     @Override
     public Context getAppContext() {
         return LypApp.getAppContext();
+    }
+
+    @Override
+    public ILoadingDialogFragment getLoadingDialog() {
+        return new LoadingDialog();
     }
 
     @Override

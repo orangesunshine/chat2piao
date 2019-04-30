@@ -1,21 +1,35 @@
 package com.orange.chat2piao.ui.activity.base;
 
 import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 
-import com.githang.statusbar.StatusBarCompat;
-import com.orange.chat2piao.abstractor.ifc.act.IBaseAct;
-import com.orange.chat2piao.abstractor.ifc.wrapper.IWrapper;
+import com.orange.chat2piao.abstractor.ifc.act.IActivityCreated;
+import com.orange.chat2piao.abstractor.ifc.act.IBindView;
+import com.orange.chat2piao.abstractor.ifc.act.IContentView;
+import com.orange.chat2piao.abstractor.ifc.act.IInitVars;
 
-public abstract class BaseActivity extends FragmentActivity implements IBaseAct {
-    protected IWrapper mWrapper;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-    public void setWrapper(IWrapper wrapper) {
-        mWrapper = wrapper;
+public abstract class BaseActivity extends StatusBarTranslucentActivity implements IContentView, IInitVars, IBindView, IActivityCreated {
+    protected BaseActivity mActivity;
+
+    private Unbinder mUnbinder;
+
+    @Override
+    public void initVars(Bundle saveInstance) {
+        mActivity = this;
     }
 
     @Override
-    public void setStatusBarTranslucent(Activity activity) {
-        StatusBarCompat.setTranslucent(activity.getWindow(), true);
+    public void bindViews(Activity activity) {
+        mUnbinder = ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != mUnbinder)
+            mUnbinder.unbind();
     }
 }

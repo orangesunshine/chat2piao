@@ -1,7 +1,8 @@
 package com.orange.chat2piao.abstractor.ifc.constant;
 
-import com.orange.chat2piao.utils.ScreenUtils;
+import android.graphics.Point;
 
-public interface IConst {
-    String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";
+public class IConst {
+    public static Point sScreenPoint = null;//屏幕尺寸
+    public static String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";//loading
 }

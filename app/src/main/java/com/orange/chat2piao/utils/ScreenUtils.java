@@ -5,6 +5,8 @@ import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import androidx.core.util.Preconditions;
+
 public class ScreenUtils {
     /**
      * 获取屏幕宽度
@@ -13,6 +15,7 @@ public class ScreenUtils {
      * @return
      */
     public static int getScreenWidth(Context context) {
+        BeanUtils.checkNotNull(context);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return displayMetrics.widthPixels;
     }
@@ -24,21 +27,46 @@ public class ScreenUtils {
      * @return
      */
     public static int getScreenHeight(Context context) {
+        BeanUtils.checkNotNull(context);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return displayMetrics.heightPixels;
     }
 
-    public static Point getScreenSize(Context context){
-        if(null == context)throw new NullPointerException("context can not be null!");
+    /**
+     * 获取屏幕尺寸
+     *
+     * @param context
+     * @return
+     */
+    public static Point getScreenSize(Context context) {
+        BeanUtils.checkNotNull(context);
+        Point point = new Point();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getSize(point);
+        printScreenRelatedInformation(context);
+        return point;
     }
 
+    /**
+     * dp转px
+     *
+     * @param context
+     * @param dipValue
+     * @return
+     */
     public static int dp2px(Context context, float dipValue) {
+        BeanUtils.checkNotNull(context);
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
 
+    /**
+     * 记录手机屏幕参数
+     *
+     * @param context
+     */
     public static void printScreenRelatedInformation(Context context) {
+        BeanUtils.checkNotNull(context);
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         if (windowManager != null) {
             DisplayMetrics outMetrics = new DisplayMetrics();
