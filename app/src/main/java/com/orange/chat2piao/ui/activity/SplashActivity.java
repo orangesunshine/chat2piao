@@ -32,9 +32,9 @@ public class SplashActivity extends BaseActivity {
     public void initVars(Bundle saveInstance) {
         super.initVars(saveInstance);
         mAnimationSet = new AnimationSet(true);
-        ScaleAnimation scaleAnimation = new ScaleAnimation(0.1f, 1, 0.1f, 1);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0.5f, 1, 0.5f, 1);
         mAnimationSet.addAnimation(scaleAnimation);
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0.1f, 1);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.5f, 1);
         mAnimationSet.addAnimation(alphaAnimation);
         mAnimationSet.setDuration(DURATION_SPLASH);
         mAnimationSet.setAnimationListener(new AnimationListenerAdapter() {

@@ -3,17 +3,26 @@ package com.orange.chat2piao.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.abstractor.ifc.ILoading;
 import com.orange.chat2piao.ui.activity.base.Pull2LoadViewActivity;
+import com.orange.chat2piao.ui.widget.GestureUnLockView;
 import com.orange.chat2piao.utils.BeanUtils;
+import com.wangnan.library.GestureLockView;
+import com.wangnan.library.painter.JDFinancePainter;
+
+import butterknife.BindView;
 
 public class MainActivity extends Pull2LoadViewActivity {
 
+    @BindView(R.id.lockview_gesture)
+    GestureLockView lockviewGesture;
+
     @Override
     public void onActivityCreate(Context context) {
-        showLoading();
+//        showLoading();
     }
 
     @Override
@@ -23,7 +32,7 @@ public class MainActivity extends Pull2LoadViewActivity {
 
     @Override
     public void initListener(Context context) {
-
+        lockviewGesture.setPainter(new JDFinancePainter());
     }
 
     @Override
