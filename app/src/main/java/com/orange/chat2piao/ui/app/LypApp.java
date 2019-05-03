@@ -36,7 +36,7 @@ public class LypApp extends Application {
         registerActivityLifecycleCallbacks(new ActivityLifecycleAdapt() {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
-                onCreateLifecycleWrapper(activity, bundle);
+                onActivityCreate(activity, bundle);
             }
         });
     }
@@ -56,7 +56,7 @@ public class LypApp extends Application {
         IConst.sScreenPoint = ScreenUtils.getScreenSize(context);
     }
 
-    public void onCreateLifecycleWrapper(Activity activity, Bundle bundle) {
+    public void onActivityCreate(Activity activity, Bundle bundle) {
         if (activity instanceof IContentView)
             activity.setContentView(((IContentView) activity).getContentLayoutId());
 
