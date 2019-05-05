@@ -7,5 +7,9 @@ public interface IGloble {
     Context getAppContext();
 
     //loadingDialog
+    ILoadingDialogFragment getLoadingDialog();
 
+    //screen width、height
+    int getScreenWidth();
+    int getScreenHeight();
 }

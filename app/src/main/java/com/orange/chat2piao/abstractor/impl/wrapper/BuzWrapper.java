@@ -16,7 +16,6 @@ public class BuzWrapper extends WrapperAdater<IBuzAct, Context> {
             Context arg = getArg();
             mIfc.initViews(arg);
             mIfc.initListener(arg);
-            mIfc.onActivityCreate(arg);
         }
     }
 }

@@ -1,0 +1,23 @@
+#Internal package file, do not edit.
+#Mon Apr 29 17:11:50 CST 2019
+2.base=D\:\\Develop\\Android\\Github\\jmessage-sdk-android-2.8.2\\Chat2Piao\\demo\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+0.path=test.mp3
+2.baseType=DIRECTORY
+3.base=D\:\\Develop\\Android\\Github\\jmessage-sdk-android-2.8.2\\Chat2Piao\\demo\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+2.set=ASSET
+1.path=jiguang_test_img.png
+4.base=D\:\\Develop\\Android\\Github\\jmessage-sdk-android-2.8.2\\Chat2Piao\\demo\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
+count=5
+2.path=ic_launcher.png
+4.set=DEX
+3.path=jiguang_test.mp4
+3.baseType=DIRECTORY
+1.set=ASSET
+4.path=classes.dex
+1.baseType=DIRECTORY
+0.base=D\:\\Develop\\Android\\Github\\jmessage-sdk-android-2.8.2\\Chat2Piao\\demo\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+0.baseType=DIRECTORY
+3.set=ASSET
+1.base=D\:\\Develop\\Android\\Github\\jmessage-sdk-android-2.8.2\\Chat2Piao\\demo\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
+4.baseType=DIRECTORY
+0.set=ASSET

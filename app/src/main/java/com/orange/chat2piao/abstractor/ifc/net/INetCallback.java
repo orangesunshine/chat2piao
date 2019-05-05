@@ -1,18 +1,21 @@
 package com.orange.chat2piao.abstractor.ifc.net;
 
+import com.orange.chat2piao.abstractor.ifc.ILoading;
+
 /**
  * 网络回调抽象层
+ *
  * @param <T>
  */
 public interface INetCallback<T> {
     //网络请求开始
-    void onNetStart();
+    void onNetStart(ILoading loading, String netIfc);
 
     //成功
     void onSuccess(T t);
 
     //完成
-    void onFinish();
+    void onFinish(ILoading loading);
 
     //失败
     void onError(int code, Throwable error);

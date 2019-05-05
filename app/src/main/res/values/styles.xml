@@ -8,4 +8,28 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="dialogTheme" parent="Theme.AppCompat.Dialog">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item >
+        <!-- 测试了下也是内容背景色 会覆盖android:windowBackground-->
+        <!--<item name="android:background">@android:color/holo_red_dark</item>-->
+        <!--
+            如果width和height都是MATCH_PARENT 对话框外的背景色就无效了
+            int width = ViewGroup.LayoutParams.MATCH_PARENT;
+            int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            dialog.getWindow().setLayout(width, height);//全屏
+            dialog.getWindow().setGravity(Gravity.BOTTOM);//内容设置在底部
+            gravity 和 宽高设置实测无效！！！！！！还是需要代码来设置
+        -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!-- 内容的背景色.对于全屏很重要，系统的内容宽度是不全屏的，替换为自己的后宽度可以全屏-->
+        <!--相当于 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否有背景色 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 灰色的百分比 0就是全透明了-->
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+
 </resources>

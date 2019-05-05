@@ -8,7 +8,4 @@ public interface IBuzAct {
 
     //初始化监听
     void initListener(Context context);
-
-    //逻辑
-    void onActivityCreate(Context context);
 }
