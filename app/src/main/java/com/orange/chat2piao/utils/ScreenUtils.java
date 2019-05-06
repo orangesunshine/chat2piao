@@ -5,7 +5,6 @@ import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import androidx.core.util.Preconditions;
 
 public class ScreenUtils {
     /**
@@ -15,7 +14,7 @@ public class ScreenUtils {
      * @return
      */
     public static int getScreenWidth(Context context) {
-        BeanUtils.checkNotNull(context);
+        Preconditions.checkNotNull(context);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return displayMetrics.widthPixels;
     }
@@ -27,7 +26,7 @@ public class ScreenUtils {
      * @return
      */
     public static int getScreenHeight(Context context) {
-        BeanUtils.checkNotNull(context);
+        Preconditions.checkNotNull(context);
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         return displayMetrics.heightPixels;
     }
@@ -39,7 +38,7 @@ public class ScreenUtils {
      * @return
      */
     public static Point getScreenSize(Context context) {
-        BeanUtils.checkNotNull(context);
+        Preconditions.checkNotNull(context);
         Point point = new Point();
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getSize(point);
@@ -55,7 +54,7 @@ public class ScreenUtils {
      * @return
      */
     public static int dp2px(Context context, float dipValue) {
-        BeanUtils.checkNotNull(context);
+        Preconditions.checkNotNull(context);
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
@@ -66,7 +65,7 @@ public class ScreenUtils {
      * @param context
      */
     public static void printScreenRelatedInformation(Context context) {
-        BeanUtils.checkNotNull(context);
+        Preconditions.checkNotNull(context);
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         if (windowManager != null) {
             DisplayMetrics outMetrics = new DisplayMetrics();

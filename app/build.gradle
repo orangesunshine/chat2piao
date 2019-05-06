@@ -55,4 +55,7 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-6'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-6'
     implementation 'com.wangnan:gesturelockview:1.0.2'
+
+    //guava
+//    api "com.google.guava:guava:${GUAVA}"
 }

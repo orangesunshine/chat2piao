@@ -28,7 +28,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name=".ui.app.LypApp"
+        android:name=".base.ui.app.LypApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -36,13 +36,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.activity.SplashActivity">
+        <activity android:name=".buz.splash.SplashActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".buz.main.MainActivity" android:launchMode="singleTask"/>
     </application>
 
 </manifest>
