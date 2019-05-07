@@ -10,16 +10,24 @@
         <ImageView
             android:id="@id/iv_left_actbar"
             style="@style/wrap_content_layout_gravity_center"
-            android:src="@mipmap/ic_back_arrow" />
+            android:src="@mipmap/ic_left_arrow" />
 
         <TextView
             android:id="@id/tv_left_actbar"
             style="@style/tv_actbar_sub_text" />
     </FrameLayout>
 
-    <TextView
-        android:id="@id/tv_title_actbar"
-        style="@style/tv_actbar_title_text" />
+
+    <FrameLayout
+        android:id="@+id/fl_title_actbar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@id/tv_title_actbar"
+            style="@style/tv_actbar_title_text" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@id/fl_right_actbar"

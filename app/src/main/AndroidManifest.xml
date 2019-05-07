@@ -43,6 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".buz.main.MainActivity" android:launchMode="singleTask"/>
+        <activity android:name=".base.demo.activity.BaseActivityDemo" />
     </application>
 
 </manifest>

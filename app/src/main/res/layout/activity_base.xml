@@ -6,10 +6,10 @@
 
     <include layout="@layout/actbar_common" />
 
-    <ImageView
-        android:id="@+id/view_bg"
+    <FrameLayout
+        android:id="@id/fl_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:src="@mipmap/splash" />
+        android:background="@color/color_f2f2f2" />
+
 </LinearLayout>

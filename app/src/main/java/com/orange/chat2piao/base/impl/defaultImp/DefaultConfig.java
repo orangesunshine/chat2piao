@@ -7,28 +7,31 @@ import com.orange.chat2piao.base.adapter.ActivityLifecycleAdapt;
 import com.orange.chat2piao.base.adapter.NetCallbackAdapter;
 import com.orange.chat2piao.base.ifc.app.IBuildActivityLifecycleCallbacks;
 import com.orange.chat2piao.base.ifc.presenter.callback.INetCallback;
+import com.orange.chat2piao.base.ifc.view.ifc.IActionBar;
 import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
 import com.orange.chat2piao.base.ifc.view.ifc.ILoading;
 import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.view.ifc.IHeaderNdFooter;
 import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;
 import com.orange.chat2piao.base.ifc.view.ifc.IToast;
+import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildActionBar;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildBindView;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildLoadDialogFragment;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildNetCallback;
-import com.orange.chat2piao.base.ifc.view.ifc.build.IVisibleHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildHeaderNdFooter;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildStatusBar;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildToast;
 import com.orange.chat2piao.base.impl.app.ActivityLifecycleCallbacksImp;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.impl.view.ButterKnifeBindView;
+import com.orange.chat2piao.base.impl.view.CommonActionBar;
 import com.orange.chat2piao.base.impl.view.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.view.ToastHelper;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 import com.orange.chat2piao.utils.LogUtil;
 import com.orange.chat2piao.utils.Preconditions;
 
-public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildStatusBar, IBuildBindView, IBuildToast, IBuildLoadDialogFragment, IBuildNetCallback, IVisibleHeaderNdFooter, IBuildActivityLifecycleCallbacks {
+public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildStatusBar, IBuildActionBar, IBuildBindView, IBuildToast, IBuildLoadDialogFragment, IBuildNetCallback, IBuildHeaderNdFooter, IBuildActivityLifecycleCallbacks {
     private static volatile DefaultConfig sInstance;
 
     private DefaultConfig() {
@@ -66,7 +69,7 @@ public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildStatu
     }
 
     @Override
-    public IHeaderNdFooter visibleHeaderFooter() {
+    public IHeaderNdFooter buildHeaderFooter() {
         return null;
     }
 
@@ -106,5 +109,10 @@ public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildStatu
                 loading.dismissLoading();
             }
         };
+    }
+
+    @Override
+    public IActionBar buildActionBar() {
+        return new CommonActionBar();
     }
 }

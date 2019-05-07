@@ -1,16 +1,21 @@
 package com.orange.chat2piao.base.ui.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
+import com.orange.chat2piao.base.ifc.presenter.IPresenter;
+import com.orange.chat2piao.base.ifc.presenter.callback.IInit;
+import com.orange.chat2piao.base.ifc.presenter.generate.IGeneratePresenter;
+import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.ifc.view.ifc.ILoading;
 import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildLoadDialogFragment;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
-import com.orange.chat2piao.base.impl.presenter.NetPresenter;
 import com.orange.chat2piao.utils.Preconditions;
 
-public abstract class NetActivity<T, P extends NetPresenter<T>> extends InitActivity<P> implements IBuildLoadDialogFragment, ILoading {
+public abstract class NetActivity extends BaseActivity implements IBuildLoadDialogFragment, ILoading, IInit {
+    //views
     protected ILoadingDialogFragment mLoadingDialogFragment;
 
     @Override
@@ -29,16 +34,19 @@ public abstract class NetActivity<T, P extends NetPresenter<T>> extends InitActi
 
     @Override
     public void showLoading() {
-        Preconditions.checkNotNull(mPresenter);
-        if (mPresenter.isActivityAlive()) {
-            Preconditions.checkNotNull(mLoadingDialogFragment);
-            mLoadingDialogFragment.showLoading(getSupportFragmentManager());
-        }
+        Preconditions.checkNotNull(mLoadingDialogFragment);
+        mLoadingDialogFragment.showLoading(getSupportFragmentManager());
     }
 
     @Override
     public void dismissLoading() {
         Preconditions.checkNotNull(mLoadingDialogFragment);
         mLoadingDialogFragment.dismissLoading();
+    }
+
+
+    @Override
+    public void init(Context context) {
+
     }
 }

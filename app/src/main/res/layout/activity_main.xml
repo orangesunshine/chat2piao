@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".buz.main.MainActivity">
 
-    <com.wangnan.library.GestureLockView
-        android:id="@+id/lockview_gesture"
-        android:layout_width="250dp"
-        android:layout_height="250dp" />
+    <TextView
+        android:id="@+id/tv_base"
+        style="@style/bar_text"
+        android:text="BaseActivityDemo" />
 
-</FrameLayout>
+</LinearLayout>

@@ -3,10 +3,10 @@ package com.orange.chat2piao.base.impl.presenter;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.ifc.presenter.callback.IActivityCreatedNdDestroyCallback;
+import com.orange.chat2piao.base.ifc.presenter.callback.ICreatedNdDestroy;
 import com.orange.chat2piao.base.ifc.presenter.callback.IActvityAlive;
 
-public class BasePresenter implements IActvityAlive, IActivityCreatedNdDestroyCallback {
+public class BasePresenter implements IActvityAlive, ICreatedNdDestroy {
     //vars
     protected boolean isActivityAlive;
     protected Activity mActivity;

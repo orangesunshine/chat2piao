@@ -9,11 +9,14 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 
 import com.orange.chat2piao.R;
+import com.orange.chat2piao.base.adapter.AnimationListenerAdapter;
 import com.orange.chat2piao.base.ui.activity.BaseActivity;
+import com.orange.chat2piao.buz.main.MainActivity;
+import com.orange.chat2piao.utils.ActivityUtils;
 
 import butterknife.BindView;
 
-public class SplashActivity extends BaseActivity<SplashPresenter> implements ISplashView {
+public class SplashActivity extends BaseActivity {
     //final
     private final int DURATION_SPLASH_ANIM = 2000;
 
@@ -32,16 +35,6 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements ISp
     @Override
     public void onActivityCreate(Activity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
-        mPresenter.startSplashAnim(this);
-    }
-
-    @Override
-    public SplashPresenter generatePresenter() {
-        return new SplashPresenter();
-    }
-
-    @Override
-    public void splashAnim() {
         Animation animation = viewBg.getAnimation();
         if (null != animation)
             animation.cancel();
@@ -56,6 +49,12 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements ISp
             mSplashAnim.addAnimation(scale);
             mSplashAnim.addAnimation(alpha);
             mSplashAnim.setDuration(DURATION_SPLASH_ANIM);
+            mSplashAnim.setAnimationListener(new AnimationListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    ActivityUtils.launchActivity(mActivity, MainActivity.class);
+                }
+            });
         }
         return mSplashAnim;
     }

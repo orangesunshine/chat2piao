@@ -1,12 +1,12 @@
 package com.orange.chat2piao.base.ui.dialog;
 
-import androidx.fragment.app.FragmentManager;
-
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
 import com.orange.chat2piao.base.constant.IConst;
+import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ui.dialog.base.BaseDialog;
 import com.orange.chat2piao.base.ui.dialog.base.ViewHolder;
+
+import androidx.fragment.app.FragmentManager;
 
 public class LoadingDialog extends BaseDialog implements ILoadingDialogFragment {
     @Override

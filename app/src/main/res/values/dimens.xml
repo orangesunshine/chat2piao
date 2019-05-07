@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="height_divide" type="dimen">0.5dp</item>
-    <item name="height_actbar" type="dimen">?actionBarSize</item>
+    <item name="height_actbar" type="dimen">48dp</item>
+
+    <!-- footer -->
+    <item name="swiperefreshlayout_footer" type="dimen">48dp</item>
+
+    <!-- text -->
     <item name="texit_size_12sp" type="dimen">12sp</item>
     <item name="texit_size_13sp" type="dimen">13sp</item>
     <item name="texit_size_14sp" type="dimen">14sp</item>

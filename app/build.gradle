@@ -50,7 +50,6 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE}"
     implementation "com.githang:status-bar-compat:${STATUS_BAR_COMPAT}"
     implementation "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
-    implementation project(path: ':library')
     //refresh
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-6'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-6'

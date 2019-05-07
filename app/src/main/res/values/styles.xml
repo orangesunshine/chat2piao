@@ -47,6 +47,14 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="bar_text" parent="match_wrap">
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@color/color_f2f2f2</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/texit_size_16sp</item>
+        <item name="android:textColor">@color/color_666666</item>
+    </style>
+
     <style name="ll_actbar_root">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/height_actbar</item>
@@ -67,7 +75,18 @@
     <style name="tv_actbar_title_text" parent="wrap_content">
         <item name="android:textColor">@color/color_ffffff</item>
         <item name="android:textSize">@dimen/texit_size_16sp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="swiperefreshlayout_footer">
+        <item name="android:visibility">gone</item>
+        <item name="android:background">@color/color_ffffff</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/swiperefreshlayout_footer</item>
+        <item name="android:textColor">@color/color_333333</item>
+        <item name="android:text">@string/loadmore_text</item>
+        <item name="android:textSize">@dimen/texit_size_16sp</item>
         <item name="android:gravity">center</item>
     </style>
 </resources>
