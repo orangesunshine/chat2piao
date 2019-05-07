@@ -1,18 +1,24 @@
 package com.orange.chat2piao.base.ui.activity;
 
 import android.app.Activity;
+import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.orange.chat2piao.base.ifc.presenter.IBasePresenter;
-import com.orange.chat2piao.base.ifc.view.IBaseView;
+import com.orange.chat2piao.base.ifc.presenter.callback.IActivityCreatedNdDestroyCallback;
+import com.orange.chat2piao.base.ifc.presenter.callback.IContentView;
+import com.orange.chat2piao.base.ifc.presenter.generate.IGeneratePresenter;
 import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
 import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;
 import com.orange.chat2piao.base.ifc.view.ifc.IToast;
+import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildBindView;
+import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildStatusBar;
+import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildToast;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
+import com.orange.chat2piao.base.impl.presenter.BasePresenter;
 import com.orange.chat2piao.utils.Preconditions;
 
-public abstract class BaseActivity<P extends IBasePresenter> extends FragmentActivity implements IBaseView<P> {
+public abstract class BaseActivity<P extends BasePresenter> extends FragmentActivity implements IContentView, IBuildBindView, IBuildToast, IBuildStatusBar, IActivityCreatedNdDestroyCallback, IGeneratePresenter<P> {
     //protected vars
     protected BaseActivity mActivity;
     protected P mPresenter;
@@ -20,10 +26,10 @@ public abstract class BaseActivity<P extends IBasePresenter> extends FragmentAct
     //views
     protected IStatusBar mStatusBar;
     protected IToast mToast;
-    protected IBindView mBind;
+    protected IBindView mBindView;
 
     @Override
-    public void onActivityCreate(Activity activity) {
+    public void onActivityCreate(Activity activity, Bundle bundle) {
         mActivity = this;
         activity.setContentView(getContentLayoutId());
 
@@ -34,10 +40,10 @@ public abstract class BaseActivity<P extends IBasePresenter> extends FragmentAct
         mStatusBar.setStatusBar(activity);
 
         //bindViews
-        mBind = buildBindView();
-        if (null == mBind)
-            mBind = DefaultConfig.getInstance().buildBindView();
-        mBind.bindViews(activity);
+        mBindView = buildBindView();
+        if (null == mBindView)
+            mBindView = DefaultConfig.getInstance().buildBindView();
+        mBindView.bindViews(activity);
 
         //toast
         mToast = buildToast();
@@ -47,12 +53,12 @@ public abstract class BaseActivity<P extends IBasePresenter> extends FragmentAct
         //presenter
         mPresenter = generatePresenter();
         Preconditions.checkNotNull(mPresenter);
-        mPresenter.onActivityCreate(activity);
+        mPresenter.onActivityCreate(activity, bundle);
     }
 
     @Override
     public void onActivityDestroy(Activity context) {
-        mBind.unbindView();
+        mBindView.unbindView();
         Preconditions.checkNotNull(mPresenter);
         mPresenter.onActivityDestroy(context);
     }

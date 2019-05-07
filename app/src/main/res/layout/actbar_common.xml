@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_actbar_root">
+
+    <FrameLayout
+        android:id="@id/fl_left_actbar"
+        android:layout_width="64dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@id/iv_left_actbar"
+            style="@style/wrap_content_layout_gravity_center"
+            android:src="@mipmap/ic_back_arrow" />
+
+        <TextView
+            android:id="@id/tv_left_actbar"
+            style="@style/tv_actbar_sub_text" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@id/tv_title_actbar"
+        style="@style/tv_actbar_title_text" />
+
+    <FrameLayout
+        android:id="@id/fl_right_actbar"
+        android:layout_width="64dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@id/iv_right_actbar"
+            style="@style/wrap_content_layout_gravity_center" />
+
+        <TextView
+            android:id="@id/tv_right_actbar"
+            style="@style/tv_actbar_sub_text" />
+    </FrameLayout>
+</LinearLayout>

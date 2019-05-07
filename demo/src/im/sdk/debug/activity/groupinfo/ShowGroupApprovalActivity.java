@@ -230,7 +230,7 @@ public class ShowGroupApprovalActivity extends Activity {
                                     @Override
                                     public void gotResult(int responseCode, String responseMessage) {
                                         if (0 == responseCode) {
-                                            Toast.makeText(getApplicationContext(), "添加" + mUsers.get(position).getUserName() + "成功", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "ic_add" + mUsers.get(position).getUserName() + "成功", Toast.LENGTH_SHORT).show();
                                             mUsers.remove(position);
                                             MyAdapter.this.notifyDataSetChanged();
                                         } else {

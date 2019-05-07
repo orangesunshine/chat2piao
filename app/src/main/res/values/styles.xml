@@ -10,7 +10,7 @@
 
     <style name="dialogTheme" parent="Theme.AppCompat.Dialog">
         <!-- 边框 -->
-        <item name="android:windowFrame">@null</item >
+        <item name="android:windowFrame">@null</item>
         <!-- 测试了下也是内容背景色 会覆盖android:windowBackground-->
         <!--<item name="android:background">@android:color/holo_red_dark</item>-->
         <!--
@@ -32,4 +32,42 @@
         <item name="android:backgroundDimAmount">0.4</item>
     </style>
 
+    <style name="wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="match_parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="match_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ll_actbar_root">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_actbar</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="wrap_content_layout_gravity_center" parent="wrap_content">
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="tv_actbar_sub_text" parent="wrap_content_layout_gravity_center">
+        <item name="android:textColor">@color/color_333333</item>
+        <item name="android:textSize">@dimen/texit_size_14sp</item>
+    </style>
+
+    <style name="tv_actbar_title_text" parent="wrap_content">
+        <item name="android:textColor">@color/color_ffffff</item>
+        <item name="android:textSize">@dimen/texit_size_16sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>

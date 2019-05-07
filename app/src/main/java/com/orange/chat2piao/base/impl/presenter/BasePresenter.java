@@ -1,33 +1,30 @@
 package com.orange.chat2piao.base.impl.presenter;
 
 import android.app.Activity;
+import android.os.Bundle;
 
-import com.orange.chat2piao.base.ifc.presenter.IBasePresenter;
-import com.orange.chat2piao.base.ifc.view.IBaseView;
+import com.orange.chat2piao.base.ifc.presenter.callback.IActivityCreatedNdDestroyCallback;
+import com.orange.chat2piao.base.ifc.presenter.callback.IActvityAlive;
 
-public abstract class BasePresenter<V extends IBaseView> implements IBasePresenter {
-    //views
-    protected V mView;
-
+public class BasePresenter implements IActvityAlive, IActivityCreatedNdDestroyCallback {
     //vars
     protected boolean isActivityAlive;
-
-    public BasePresenter(V view) {
-        mView = view;
-    }
+    protected Activity mActivity;
 
     @Override
-    public void onActivityCreate(Activity activity) {
+    public void onActivityCreate(Activity activity, Bundle bundle) {
         isActivityAlive = true;
+        mActivity = activity;
     }
 
     @Override
     public void onActivityDestroy(Activity activity) {
         isActivityAlive = false;
+        mActivity = null;
     }
 
     @Override
     public boolean isActivityAlive() {
-        return isActivityAlive;
+        return null != mActivity && isActivityAlive;
     }
 }

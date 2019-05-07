@@ -1,16 +1,17 @@
 package com.orange.chat2piao.buz.main;
 
-import com.orange.chat2piao.base.ifc.presenter.IBasePresenter;
+import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ui.activity.BaseActivity;
+import com.orange.chat2piao.buz.splash.SplashPresenter;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
     @Override
-    protected IBasePresenter getPresenter() {
-        return null;
+    public int getContentLayoutId() {
+        return R.layout.activity_splash;
     }
 
     @Override
-    public int getContentLayoutId() {
-        return 0;
+    public Object generatePresenter() {
+        return new SplashPresenter();
     }
 }

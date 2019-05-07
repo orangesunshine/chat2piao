@@ -2,7 +2,7 @@ package com.orange.chat2piao.other;
 
 import com.orange.chat2piao.other.wrapper.IDefinedWrapper;
 
-public abstract class DefinedWrapperAdater<R, T> implements IDefinedWrapper<R,T> {
+public abstract class DefinedWrapperAdater<R, T> implements IDefinedWrapper<R, T> {
     protected T mArg;
     protected R mIfc;
 
