@@ -1,14 +1,16 @@
 package com.orange.chat2piao.base.impl.presenter;
 
+import android.app.Activity;
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.ifc.presenter.IInitPresenter;
-import com.orange.chat2piao.base.ifc.presenter.callback.IInit;
+import com.orange.chat2piao.base.ifc.presenter.callback.IInitVars;
 
-public abstract class InitPresenter<V extends IInit> extends BasePresenter<V> implements IInitPresenter {
+public class InitPresenter extends BasePresenter implements IInitVars {
 
-    public InitPresenter(V view) {
-        super(view);
+    @Override
+    public void onActivityCreate(Activity activity, Bundle bundle) {
+        super.onActivityCreate(activity, bundle);
+        initVars(bundle);
     }
 
     @Override

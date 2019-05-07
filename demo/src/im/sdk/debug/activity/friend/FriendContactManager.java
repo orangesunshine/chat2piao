@@ -22,7 +22,7 @@ import im.sdk.debug.R;
 /**
  * Created by ${chenyn} on 16/7/20.
  *
- * @desc :好友相关四大功能:添加 删除 获取列表 更新备注
+ * @desc :好友相关四大功能:ic_add ic_clear 获取列表 更新备注
  */
 public class FriendContactManager extends Activity {
 

@@ -17,7 +17,7 @@ public class ActivityLifecycleCallbacksImp extends ActivityLifecycleAdapt {
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
         if (activity instanceof IActivityCreatedNdDestroyCallback) {
-            ((IActivityCreatedNdDestroyCallback) activity).onActivityCreate(activity);
+            ((IActivityCreatedNdDestroyCallback) activity).onActivityCreate(activity, bundle);
         }
     }
 }
