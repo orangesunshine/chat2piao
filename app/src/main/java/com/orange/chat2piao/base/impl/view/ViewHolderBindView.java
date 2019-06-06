@@ -1,6 +1,6 @@
 package com.orange.chat2piao.base.impl.view;
 
-import android.app.Activity;
+import android.view.View;
 
 import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
 
@@ -8,8 +8,8 @@ public class ViewHolderBindView implements IBindView {
     private ViewHolder mViewHolder;
 
     @Override
-    public void bindViews(Activity activity) {
-        mViewHolder = new ViewHolder(activity);
+    public void bindViews(View view) {
+        mViewHolder = new ViewHolder(view);
     }
 
     @Override

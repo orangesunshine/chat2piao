@@ -1,52 +1,42 @@
 package com.orange.chat2piao.base.ui.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.ifc.presenter.IPresenter;
 import com.orange.chat2piao.base.ifc.presenter.callback.IInit;
-import com.orange.chat2piao.base.ifc.presenter.generate.IGeneratePresenter;
-import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.ifc.view.ifc.ILoading;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
-import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildLoadDialogFragment;
-import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
+import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildLoading;
+import com.orange.chat2piao.base.impl.globle.GlobleImp;
+import com.orange.chat2piao.base.impl.presenter.NetPresenter;
+import com.orange.chat2piao.base.impl.view.LoadingImpl;
 import com.orange.chat2piao.utils.Preconditions;
 
-public abstract class NetActivity extends BaseActivity implements IBuildLoadDialogFragment, ILoading, IInit {
+public abstract class NetActivity<A extends NetActivity, T, P extends NetPresenter<A, A, T>> extends PresenterActivity<A, P> implements IBuildLoading, ILoading, IInit {
     //views
-    protected ILoadingDialogFragment mLoadingDialogFragment;
+    protected ILoading mLoading;
 
     @Override
-    public void onActivityCreate(Activity activity, Bundle bundle) {
+    public void onActivityCreate(A activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
-        //loading
-        mLoadingDialogFragment = buildLoadingDialogFragment();
-        if (null == mLoadingDialogFragment)
-            mLoadingDialogFragment = DefaultConfig.getInstance().buildLoadingDialogFragment();
-    }
-
-    @Override
-    public ILoadingDialogFragment buildLoadingDialogFragment() {
-        return null;
+        mLoading = buildLoading();
+        if (null == mLoading)
+            mLoading = new LoadingImpl(activity, GlobleImp.getInstance().buildLoadingDialogFragment());
     }
 
     @Override
     public void showLoading() {
-        Preconditions.checkNotNull(mLoadingDialogFragment);
-        mLoadingDialogFragment.showLoading(getSupportFragmentManager());
+        Preconditions.checkNotNull(mLoading);
+        mLoading.showLoading();
     }
 
     @Override
     public void dismissLoading() {
-        Preconditions.checkNotNull(mLoadingDialogFragment);
-        mLoadingDialogFragment.dismissLoading();
+        Preconditions.checkNotNull(mLoading);
+        mLoading.dismissLoading();
     }
 
-
     @Override
-    public void init(Context context) {
-
+    public ILoading buildLoading() {
+        //loading
+        return null;
     }
 }

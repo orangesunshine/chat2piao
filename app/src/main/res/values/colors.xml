@@ -23,6 +23,7 @@
 
     <!-- rgb -->
     <color name="color_ffffff">#ffffff</color>
+    <color name="color_f2f4f5">#f2f4f5</color>
     <color name="color_f2f2f2">#f2f2f2</color>
     <color name="color_333333">#333333</color>
     <color name="color_666666">#666666</color>

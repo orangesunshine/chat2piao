@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.recyclerview.ContentViewHolder;
-import com.orange.chat2piao.utils.ScreenUtils;
+import com.orange.chat2piao.base.recyclerview.IConvertContentView;
 
 public class CommonPopupWindow<T> {
     protected Context mContext;

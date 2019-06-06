@@ -1,6 +1,4 @@
-package com.orange.chat2piao.base.recyclerview.popupwin;
-
-import com.orange.chat2piao.base.recyclerview.ContentViewHolder;
+package com.orange.chat2piao.base.recyclerview;
 
 public interface IConvertContentView<T> {
     /**

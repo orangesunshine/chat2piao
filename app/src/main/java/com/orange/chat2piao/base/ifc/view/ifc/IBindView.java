@@ -1,14 +1,14 @@
 package com.orange.chat2piao.base.ifc.view.ifc;
 
-import android.app.Activity;
+import android.view.View;
 
 public interface IBindView {
     /**
      * 绑定控件
      *
-     * @param activity
+     * @param view
      */
-    void bindViews(Activity activity);
+    void bindViews(View view);
 
     void unbindView();
 }

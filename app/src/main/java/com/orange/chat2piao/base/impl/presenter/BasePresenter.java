@@ -1,30 +1,36 @@
 package com.orange.chat2piao.base.impl.presenter;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.ifc.presenter.callback.ICreatedNdDestroy;
+import com.orange.chat2piao.base.ifc.presenter.IPresenter;
 import com.orange.chat2piao.base.ifc.presenter.callback.IActvityAlive;
+import com.orange.chat2piao.base.ifc.presenter.callback.ICreatedNdDestroy;
+import com.orange.chat2piao.base.ifc.view.IView;
+import com.orange.chat2piao.base.ui.activity.BaseActivity;
+import com.orange.chat2piao.base.ui.activity.PresenterActivity;
 
-public class BasePresenter implements IActvityAlive, ICreatedNdDestroy {
+public class BasePresenter<A extends PresenterActivity, V extends IView> implements IActvityAlive, ICreatedNdDestroy<A>, IPresenter<V> {
     //vars
-    protected boolean isActivityAlive;
-    protected Activity mActivity;
+    protected A mActivity;
+    protected V mView;
 
     @Override
-    public void onActivityCreate(Activity activity, Bundle bundle) {
-        isActivityAlive = true;
+    public boolean isActivityAlive() {
+        return null != mActivity && mActivity.isActivityAlive();
+    }
+
+    @Override
+    public void onActivityCreate(A activity, Bundle bundle) {
         mActivity = activity;
     }
 
     @Override
-    public void onActivityDestroy(Activity activity) {
-        isActivityAlive = false;
+    public void onActivityDestroy(A context) {
         mActivity = null;
     }
 
     @Override
-    public boolean isActivityAlive() {
-        return null != mActivity && isActivityAlive;
+    public void attachView(V view) {
+        mView = view;
     }
 }

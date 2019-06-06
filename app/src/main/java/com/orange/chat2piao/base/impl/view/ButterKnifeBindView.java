@@ -1,7 +1,8 @@
 package com.orange.chat2piao.base.impl.view;
 
-import android.app.Activity;
+import android.view.View;
 
+import com.blankj.utilcode.util.ActivityUtils;
 import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
 import com.orange.chat2piao.utils.Preconditions;
 
@@ -21,9 +22,9 @@ public class ButterKnifeBindView implements IBindView {
     private Unbinder mUnbinder;
 
     @Override
-    public void bindViews(Activity activity) {
-        Preconditions.checkNotNull(activity);
-        mUnbinder = ButterKnife.bind(activity);
+    public void bindViews(View view) {
+        Preconditions.checkNotNull(view);
+        mUnbinder = ButterKnife.bind(ActivityUtils.getActivityByView(view));
     }
 
     @Override

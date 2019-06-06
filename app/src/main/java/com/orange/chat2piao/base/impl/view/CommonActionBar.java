@@ -93,8 +93,8 @@ public class CommonActionBar implements IActionBar<LinearLayout> {
     }
 
     @Override
-    public void bindViews(Activity activity) {
-        mUnbinder = ButterKnife.bind(this, activity);
+    public void bindViews(View veiw) {
+        mUnbinder = ButterKnife.bind(this, veiw);
     }
 
     @Override

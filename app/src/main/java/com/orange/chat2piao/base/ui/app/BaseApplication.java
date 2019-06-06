@@ -3,13 +3,13 @@ package com.orange.chat2piao.base.ui.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.blankj.utilcode.util.ScreenUtils;
 import com.orange.chat2piao.BuildConfig;
-import com.orange.chat2piao.base.constant.IConst;
+import com.orange.chat2piao.base.constant.IInitConst;
 import com.orange.chat2piao.base.ifc.app.IApp;
 import com.orange.chat2piao.base.ifc.app.IBuildActivityLifecycleCallbacks;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.utils.LogUtil;
-import com.orange.chat2piao.utils.ScreenUtils;
 
 public class BaseApplication extends Application implements IApp, IBuildActivityLifecycleCallbacks {
     private ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
@@ -31,7 +31,8 @@ public class BaseApplication extends Application implements IApp, IBuildActivity
 
     @Override
     public void initGlobleVars(Context context) {
-        IConst.sScreenPoint = ScreenUtils.getScreenSize(context);
+        IInitConst.sScreenWidth = ScreenUtils.getScreenWidth();
+        IInitConst.sScreenHeight = ScreenUtils.getScreenHeight();
     }
 
     @Override

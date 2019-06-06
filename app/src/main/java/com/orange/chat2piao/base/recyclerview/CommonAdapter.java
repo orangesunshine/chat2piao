@@ -214,7 +214,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
             List<T> datas = getDatas();
             int index = datas.indexOf(data);
             if (-1 != index) {
-                datas.remove(data);
+                datas.remove(index);
                 notifyDataSetChanged();
                 notifyEmpty();
             }

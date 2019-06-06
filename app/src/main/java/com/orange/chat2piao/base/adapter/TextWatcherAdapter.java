@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.adapterPattern;
+package com.orange.chat2piao.base.adapter;
 
 import android.text.Editable;
 import android.text.TextWatcher;

@@ -1,9 +1,9 @@
 package com.orange.chat2piao.base.ifc.presenter.callback;
 
-public interface IRefreshNdLoadCallback {
+public interface IPullCallback {
     //刷新
-    void onRefresh();
+    void pullDwon();
 
     //加载更多
-    void onLoadMore();
+    void pullUp();
 }

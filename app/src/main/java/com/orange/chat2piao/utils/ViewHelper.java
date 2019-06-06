@@ -24,11 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.adapterPattern.TextWatcherAdapter;
+import com.orange.chat2piao.base.adapter.TextWatcherAdapter;
 import com.orange.chat2piao.base.ifc.callback.VerifyCallback;
 
 import java.io.InputStream;

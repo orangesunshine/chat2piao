@@ -1,16 +1,16 @@
 package com.orange.chat2piao.base.ui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ifc.presenter.callback.IActvityAlive;
 import com.orange.chat2piao.base.ifc.presenter.callback.IContentView;
 import com.orange.chat2piao.base.ifc.presenter.callback.ICreatedNdDestroy;
+import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.ifc.view.ifc.IActionBar;
 import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
 import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;
@@ -19,14 +19,12 @@ import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildActionBar;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildBindView;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildStatusBar;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildToast;
-import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
+import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.utils.Preconditions;
 
-import androidx.fragment.app.FragmentActivity;
-
-public abstract class BaseActivity extends FragmentActivity implements IContentView, ICreatedNdDestroy, IActvityAlive, IBuildStatusBar, IBuildActionBar, IBuildBindView, IBuildToast {
+public abstract class BaseActivity<T extends BaseActivity> extends FragmentActivity implements IContentView, ICreatedNdDestroy<T>, IActvityAlive, IBuildStatusBar, IBuildActionBar, IBuildBindView, IBuildToast {
     //protected vars
-    protected BaseActivity mActivity;
+    protected T mActivity;
     private boolean mActivityAlive;
 
     //views
@@ -36,8 +34,8 @@ public abstract class BaseActivity extends FragmentActivity implements IContentV
     protected IActionBar mActionBar;
 
     @Override
-    public void onActivityCreate(Activity activity, Bundle bundle) {
-        mActivity = this;
+    public void onActivityCreate(T activity, Bundle bundle) {
+        mActivity = activity;
         mActivityAlive = true;
         FrameLayout content = activity.getWindow().getDecorView().findViewById(android.R.id.content);
         content.removeAllViews();
@@ -46,29 +44,29 @@ public abstract class BaseActivity extends FragmentActivity implements IContentV
         //bindViews
         mBindView = buildBindView();
         if (null == mBindView)
-            mBindView = DefaultConfig.getInstance().buildBindView();
-        mBindView.bindViews(activity);
+            mBindView = GlobleImp.getInstance().buildBindView();
+        mBindView.bindViews(content);
 
         //statusbar
         mStatusBar = buildStatusBar();
         if (null == mStatusBar)
-            mStatusBar = DefaultConfig.getInstance().buildStatusBar();
+            mStatusBar = GlobleImp.getInstance().buildStatusBar();
         mStatusBar.setStatusBar(activity);
 
         //actionbar
         mActionBar = buildActionBar();
         if (null == mActionBar)
-            mActionBar = DefaultConfig.getInstance().buildActionBar();
-        mActionBar.bindViews(activity);
+            mActionBar = GlobleImp.getInstance().buildActionBar();
+        mActionBar.bindViews(content);
 
         //toast
         mToast = buildToast();
         if (null == mToast)
-            mToast = DefaultConfig.getInstance().buildToast();
+            mToast = GlobleImp.getInstance().buildToast();
     }
 
     @Override
-    public void onActivityDestroy(Activity context) {
+    public void onActivityDestroy(T context) {
         mActivityAlive = false;
         Preconditions.checkNotNull(mBindView);
         mBindView.unbindView();
@@ -77,12 +75,12 @@ public abstract class BaseActivity extends FragmentActivity implements IContentV
     }
 
     @Override
-    public IStatusBar buildStatusBar() {
-        return null;
+    public boolean isActivityAlive() {
+        return mActivityAlive;
     }
 
     @Override
-    public IToast buildToast() {
+    public IStatusBar buildStatusBar() {
         return null;
     }
 
@@ -92,12 +90,12 @@ public abstract class BaseActivity extends FragmentActivity implements IContentV
     }
 
     @Override
-    public boolean isActivityAlive() {
-        return mActivityAlive;
+    public IActionBar buildActionBar() {
+        return null;
     }
 
     @Override
-    public IActionBar buildActionBar() {
+    public IToast buildToast() {
         return null;
     }
 }

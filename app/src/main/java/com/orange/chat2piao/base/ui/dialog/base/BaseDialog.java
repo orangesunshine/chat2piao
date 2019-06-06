@@ -20,9 +20,6 @@ import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ifc.presenter.callback.IContentView;
 import com.orange.chat2piao.base.ifc.presenter.callback.IInitVars;
 
-import static com.orange.chat2piao.utils.ScreenUtils.dp2px;
-import static com.orange.chat2piao.utils.ScreenUtils.getScreenWidth;
-
 /**
  * Dialog通用样式
  */
@@ -107,8 +104,8 @@ public abstract class BaseDialog extends DialogFragment implements IContentView,
             } else {
                 params.height = dp2px(getContext(), mHeight);
             }
-            params.width=300;
-            params.height=300;
+            params.width = 300;
+            params.height = 300;
 
             //设置dialog动画
             if (mAnimStyle != 0) {

@@ -17,9 +17,9 @@ public class ViewHolder {
 
     private View mDecorView;
 
-    public ViewHolder(Activity activity) {
-        Preconditions.checkNotNull(activity);
-        mDecorView = activity.getWindow().getDecorView();
+    public ViewHolder(View view) {
+        Preconditions.checkNotNull(view);
+        mDecorView = view;
     }
 
     /**

@@ -2,32 +2,30 @@ package com.orange.chat2piao.base.recyclerview.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
-import com.bdb.lottery.R;
-import com.bdb.lottery.ui.base.recyclerview.ContentViewHolder;
-import com.bdb.lottery.ui.base.recyclerview.popupwin.IConvertContentView;
-import com.bdb.lottery.widget.DailogFullScreenUtils;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
+import com.githang.statusbar.StatusBarCompat;
+import com.orange.chat2piao.R;
+import com.orange.chat2piao.base.recyclerview.ContentViewHolder;
+import com.orange.chat2piao.base.recyclerview.IConvertContentView;
 
 import java.io.Serializable;
-
-import bdb.common.library.utils.PhoneUtils;
-import bdb.common.library.utils.ScreenUtils;
-import bdb.common.library.utils.SizeUtils;
 
 public class CommonDialogFragment<T extends Serializable> extends DialogFragment {
     public static final String ARGUMENT_LAYOUT_ID = "argument_layout_id";
@@ -89,7 +87,6 @@ public class CommonDialogFragment<T extends Serializable> extends DialogFragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View contentView = inflater.inflate(mLayoutId, container);
         ContentViewHolder holder = new ContentViewHolder(contentView);
-        initStatusBar(holder);
         mConvertHolder.convert(holder, mData);
         return contentView;
     }
@@ -97,16 +94,7 @@ public class CommonDialogFragment<T extends Serializable> extends DialogFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        DailogFullScreenUtils.dailogFullScreenUtils2(getDialog().getWindow(), getActivity());
-    }
-
-    private void initStatusBar(ContentViewHolder holder) {
-        View topTitleStatusBar = holder.getView(R.id.top_title_status_bar);
-        if (null != topTitleStatusBar) {
-            LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) topTitleStatusBar.getLayoutParams();
-            linearParams.height = PhoneUtils.getStatusBarHeight(mContext);
-            topTitleStatusBar.setLayoutParams(linearParams);
-        }
+        StatusBarCompat.setTranslucent(getDialog().getWindow(), true);
     }
 
     @Override

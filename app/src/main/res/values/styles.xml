@@ -89,4 +89,17 @@
         <item name="android:textSize">@dimen/texit_size_16sp</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="UserDialog" parent="@style/AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">#f2f4f5</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="winDialogAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/win_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/win_dialog_out</item>
+    </style>
 </resources>
