@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.recyclerview;
+package com.orange.chat2piao.base.ui.recyclerview;
 
 import android.content.Context;
 import android.view.View;

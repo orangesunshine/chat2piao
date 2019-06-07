@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.recyclerview;
+package com.orange.chat2piao.base.ui.recyclerview;
 
 public interface IConvertContentView<T> {
     /**

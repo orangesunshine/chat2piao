@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.recyclerview.popupwin;
+package com.orange.chat2piao.base.ui.recyclerview.popupwin;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,8 +10,8 @@ import android.widget.PopupWindow;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.recyclerview.ContentViewHolder;
-import com.orange.chat2piao.base.recyclerview.IConvertContentView;
+import com.orange.chat2piao.base.ui.recyclerview.ContentViewHolder;
+import com.orange.chat2piao.base.ui.recyclerview.IConvertContentView;
 
 public class CommonPopupWindow<T> {
     protected Context mContext;

@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.recyclerview.dialog;
+package com.orange.chat2piao.base.ui.recyclerview.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,8 +22,8 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.githang.statusbar.StatusBarCompat;
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.recyclerview.ContentViewHolder;
-import com.orange.chat2piao.base.recyclerview.IConvertContentView;
+import com.orange.chat2piao.base.ui.recyclerview.ContentViewHolder;
+import com.orange.chat2piao.base.ui.recyclerview.IConvertContentView;
 
 import java.io.Serializable;
 

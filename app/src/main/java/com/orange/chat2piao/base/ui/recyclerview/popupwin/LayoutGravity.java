@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.recyclerview.popupwin;
+package com.orange.chat2piao.base.ui.recyclerview.popupwin;
 
 import android.view.View;
 import android.widget.PopupWindow;
