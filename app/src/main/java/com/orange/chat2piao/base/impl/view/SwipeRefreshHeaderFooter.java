@@ -60,8 +60,8 @@ public class SwipeRefreshHeaderFooter implements IHeaderNdFooter<SwipeRefreshLay
     }
 
     @Override
-    public void bindViews(Activity activity) {
-        mUnbinder = ButterKnife.bind(this, activity);
+    public void bindViews(View view) {
+        mUnbinder = ButterKnife.bind(this, view);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.ifc.presenter.callback;
+package com.orange.chat2piao.base.ifc.callback;
 
 import android.os.Bundle;
 

@@ -7,10 +7,9 @@ import android.widget.FrameLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.presenter.callback.IActvityAlive;
-import com.orange.chat2piao.base.ifc.presenter.callback.IContentView;
-import com.orange.chat2piao.base.ifc.presenter.callback.ICreatedNdDestroy;
-import com.orange.chat2piao.base.ifc.view.IView;
+import com.orange.chat2piao.base.ifc.callback.IActvityAlive;
+import com.orange.chat2piao.base.ifc.callback.IContentView;
+import com.orange.chat2piao.base.ifc.callback.ICreatedNdDestroy;
 import com.orange.chat2piao.base.ifc.view.ifc.IActionBar;
 import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
 import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;

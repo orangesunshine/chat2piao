@@ -2,7 +2,7 @@ package com.orange.chat2piao.base.ui.activity;
 
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.ifc.presenter.callback.IInit;
+import com.orange.chat2piao.base.ifc.callback.IInit;
 import com.orange.chat2piao.base.ifc.view.ifc.ILoading;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildLoading;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
@@ -38,5 +38,9 @@ public abstract class NetActivity<A extends NetActivity, T, P extends NetPresent
     public ILoading buildLoading() {
         //loading
         return null;
+    }
+
+    public ILoading getLoading() {
+        return mLoading;
     }
 }

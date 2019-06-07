@@ -3,10 +3,9 @@ package com.orange.chat2piao.base.impl.presenter;
 import android.os.Bundle;
 
 import com.orange.chat2piao.base.ifc.presenter.IPresenter;
-import com.orange.chat2piao.base.ifc.presenter.callback.IActvityAlive;
-import com.orange.chat2piao.base.ifc.presenter.callback.ICreatedNdDestroy;
+import com.orange.chat2piao.base.ifc.callback.IActvityAlive;
+import com.orange.chat2piao.base.ifc.callback.ICreatedNdDestroy;
 import com.orange.chat2piao.base.ifc.view.IView;
-import com.orange.chat2piao.base.ui.activity.BaseActivity;
 import com.orange.chat2piao.base.ui.activity.PresenterActivity;
 
 public class BasePresenter<A extends PresenterActivity, V extends IView> implements IActvityAlive, ICreatedNdDestroy<A>, IPresenter<V> {

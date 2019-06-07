@@ -13,11 +13,9 @@ import com.orange.chat2piao.base.constant.IInitConst;
 import com.orange.chat2piao.base.ifc.globle.IGloble;
 import com.orange.chat2piao.base.ifc.img.IImage;
 import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
-import com.orange.chat2piao.base.ifc.presenter.callback.INetCallback;
 import com.orange.chat2piao.base.ifc.view.ifc.IActionBar;
 import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
 import com.orange.chat2piao.base.ifc.view.ifc.IHeaderNdFooter;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoading;
 import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;
 import com.orange.chat2piao.base.ifc.view.ifc.IToast;
@@ -26,7 +24,7 @@ import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.base.impl.img.GlideImageImpl;
 import com.orange.chat2piao.base.ui.app.LypApp;
 
-public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IBindView, IToast, ILoadingDialogFragment, INetCallback, IHeaderNdFooter, Application.ActivityLifecycleCallbacks {
+public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IBindView, IToast, ILoadingDialogFragment, IHeaderNdFooter, Application.ActivityLifecycleCallbacks {
     //static&final
     private static volatile GlobleImp ourInstance = null;
     private IImage mDefaultImage = new GlideImageImpl();
@@ -35,7 +33,6 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     private IBindView mBindView;
     private IToast mToast;
     private ILoadingDialogFragment mLoadingDialogFragment;
-    private INetCallback mNetCallback;
     private IHeaderNdFooter mHeaderNdFooter;
     private Application.ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
 
@@ -104,11 +101,6 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     @Override
-    public INetCallback buildNetCallback() {
-        return null;
-    }
-
-    @Override
     public IStatusBar buildStatusBar() {
         return null;
     }
@@ -170,34 +162,6 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
         if (null == mActivityLifecycleCallbacks)
             mActivityLifecycleCallbacks = DefaultConfig.getInstance().buildActivityLifecycleCallbacks();
         mActivityLifecycleCallbacks.onActivityDestroyed(activity);
-    }
-
-    @Override
-    public void onNetStart(ILoading loading, String netIfc) {
-        if (null == mNetCallback)
-            mNetCallback = DefaultConfig.getInstance().buildNetCallback();
-        mNetCallback.onNetStart(loading, netIfc);
-    }
-
-    @Override
-    public void onSuccess(Object respond) {
-        if (null == mNetCallback)
-            mNetCallback = DefaultConfig.getInstance().buildNetCallback();
-        mNetCallback.onSuccess(respond);
-    }
-
-    @Override
-    public void onFinish(ILoading loading) {
-        if (null == mNetCallback)
-            mNetCallback = DefaultConfig.getInstance().buildNetCallback();
-        mNetCallback.onFinish(loading);
-    }
-
-    @Override
-    public void onError(int code, Throwable error) {
-        if (null == mNetCallback)
-            mNetCallback = DefaultConfig.getInstance().buildNetCallback();
-        mNetCallback.onError(code, error);
     }
 
     @Override

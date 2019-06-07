@@ -2,13 +2,11 @@ package com.orange.chat2piao.base.impl.presenter;
 
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.ifc.presenter.callback.INetCallback;
+import com.orange.chat2piao.base.adapter.LoadingNetCallbackAdapter;
+import com.orange.chat2piao.base.ifc.callback.INetCallback;
 import com.orange.chat2piao.base.ifc.view.IView;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoading;
 import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildNetCallback;
-import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.base.ui.activity.NetActivity;
-import com.orange.chat2piao.base.ui.activity.PresenterActivity;
 import com.orange.chat2piao.utils.Preconditions;
 
 public class NetPresenter<A extends NetActivity, V extends IView, T> extends BasePresenter<A, V> implements IBuildNetCallback, INetCallback<T> {
@@ -18,14 +16,12 @@ public class NetPresenter<A extends NetActivity, V extends IView, T> extends Bas
     public void onActivityCreate(A activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
         mNetCallback = buildNetCallback();
-        if (null == mNetCallback)
-            mNetCallback = DefaultConfig.getInstance().buildNetCallback();
     }
 
     @Override
-    public void onNetStart(ILoading loading, String netIfc) {
+    public void onNetStart(String netIfc) {
         Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onNetStart(loading, netIfc);
+        mNetCallback.onNetStart(netIfc);
     }
 
     @Override
@@ -35,9 +31,9 @@ public class NetPresenter<A extends NetActivity, V extends IView, T> extends Bas
     }
 
     @Override
-    public void onFinish(ILoading loading) {
+    public void onFinish() {
         Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onFinish(loading);
+        mNetCallback.onFinish();
     }
 
     @Override
@@ -48,6 +44,7 @@ public class NetPresenter<A extends NetActivity, V extends IView, T> extends Bas
 
     @Override
     public INetCallback buildNetCallback() {
-        return null;
+        Preconditions.checkNotNull(mActivity);
+        return new LoadingNetCallbackAdapter(mActivity.getLoading());
     }
 }

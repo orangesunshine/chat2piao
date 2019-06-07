@@ -17,8 +17,8 @@ import androidx.annotation.StyleRes;
 import androidx.fragment.app.DialogFragment;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.presenter.callback.IContentView;
-import com.orange.chat2piao.base.ifc.presenter.callback.IInitVars;
+import com.orange.chat2piao.base.ifc.callback.IContentView;
+import com.orange.chat2piao.base.ifc.callback.IInitVars;
 
 /**
  * Dialog通用样式
