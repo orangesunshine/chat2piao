@@ -1,4 +1,4 @@
-package com.orange.chat2piao.base.ifc.view.ifc;
+package com.orange.chat2piao.base.ifc.component;
 
 import androidx.annotation.StringRes;
 
@@ -6,7 +6,7 @@ public interface IToast {
     /**
      * 吐司
      *
-     * @param msg
+     * @param msg 消息
      */
     void showToast(String msg);
 

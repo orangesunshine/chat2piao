@@ -3,18 +3,18 @@ package com.orange.chat2piao.base.impl.defaultImp;
 import android.app.Application;
 
 import com.orange.chat2piao.base.adapter.ActivityLifecycleAdapt;
-import com.orange.chat2piao.base.ifc.view.ifc.IActionBar;
-import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
-import com.orange.chat2piao.base.ifc.view.ifc.IHeaderNdFooter;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
-import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;
-import com.orange.chat2piao.base.ifc.view.ifc.IToast;
-import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildFactory;
+import com.orange.chat2piao.base.ifc.component.IActionBar;
+import com.orange.chat2piao.base.ifc.component.IBindView;
+import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
+import com.orange.chat2piao.base.ifc.component.IStatusBar;
+import com.orange.chat2piao.base.ifc.component.IToast;
+import com.orange.chat2piao.base.ifc.component.build.IBuildFactory;
 import com.orange.chat2piao.base.impl.app.ActivityLifecycleCallbacksImp;
-import com.orange.chat2piao.base.impl.view.ButterKnifeBindView;
-import com.orange.chat2piao.base.impl.view.CommonActionBar;
-import com.orange.chat2piao.base.impl.view.StatusBarTranslucent;
-import com.orange.chat2piao.base.impl.view.SwipeRefreshHeaderFooter;
+import com.orange.chat2piao.base.impl.component.ButterKnifeBindView;
+import com.orange.chat2piao.base.impl.component.CommonActionBar;
+import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
+import com.orange.chat2piao.base.impl.component.SwipeRefreshHeaderFooter;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
 public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildFactory {

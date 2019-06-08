@@ -2,8 +2,7 @@ package com.orange.chat2piao.base.ui.dialog;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.constant.IFinalConst;
-import com.orange.chat2piao.base.constant.IInitConst;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
+import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ui.dialog.base.BaseDialog;
 import com.orange.chat2piao.base.ui.dialog.base.ViewHolder;
 
@@ -28,7 +27,6 @@ public class LoadingDialog extends BaseDialog implements ILoadingDialogFragment 
 
     @Override
     public void dismissLoading() {
-        if (null != mActivity && mActivity.isFinishing())
-            super.dismissAllowingStateLoss();
+        super.dismissAllowingStateLoss();
     }
 }

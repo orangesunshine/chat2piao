@@ -4,6 +4,9 @@ import android.content.Context;
 
 public interface IInit{
 
-    //初始化控件
+    /**
+     * 初始化
+     * @param context
+     */
     void init(Context context);
 }

@@ -17,4 +17,8 @@ public interface IFinalConst {
     //网络请求类型
     int REQUEST_BY_GET = 0x001;
     int REQUEST_BY_POST = 0x002;
+
+    //网络请求结果code
+    int CODE_SUCCESS = 200;
+    int CODE_ERROR = -1;
 }

@@ -4,12 +4,12 @@ import android.os.Bundle;
 
 import com.orange.chat2piao.base.adapter.LoadingNetCallbackAdapter;
 import com.orange.chat2piao.base.ifc.callback.INetCallback;
+import com.orange.chat2piao.base.ifc.component.build.IBuildNetCallback;
 import com.orange.chat2piao.base.ifc.view.IView;
-import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildNetCallback;
 import com.orange.chat2piao.base.ui.activity.NetActivity;
 import com.orange.chat2piao.utils.Preconditions;
 
-public class NetPresenter<A extends NetActivity, V extends IView, T> extends BasePresenter<A, V> implements IBuildNetCallback, INetCallback<T> {
+public class NetPresenter<A extends NetActivity, V extends IView, T> extends BasePresenter<A, V> implements IBuildNetCallback<T>, INetCallback<T> {
     private INetCallback<T> mNetCallback;
 
     @Override
@@ -43,8 +43,8 @@ public class NetPresenter<A extends NetActivity, V extends IView, T> extends Bas
     }
 
     @Override
-    public INetCallback buildNetCallback() {
+    public INetCallback<T> buildNetCallback() {
         Preconditions.checkNotNull(mActivity);
-        return new LoadingNetCallbackAdapter(mActivity.getLoading());
+        return new LoadingNetCallbackAdapter<>(mActivity.getLoading());
     }
 }

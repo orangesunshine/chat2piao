@@ -9,29 +9,28 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private volatile static RetrofitClient sInstance;
-    private Retrofit mRetrofit;
+    private volatile static Retrofit sInstance;
 
-    public static RetrofitClient getInstance() {
+    public static Retrofit getRetrofitInstance() {
         if (null == sInstance) {
             synchronized (RetrofitClient.class) {
                 if (null == sInstance)
-                    sInstance = new RetrofitClient();
+                    sInstance = new Retrofit.Builder()
+                            .baseUrl(IInitConst.sBaseUrl)
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .client(newOkHttpClicentInstance())
+                            .build();
             }
         }
         return sInstance;
     }
 
     private RetrofitClient() {
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl(IInitConst.sBaseUrl)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(newOkHttpClicentInstance())
-                .build();
+
     }
 
-    private OkHttpClient newOkHttpClicentInstance() {
+    private static OkHttpClient newOkHttpClicentInstance() {
         return new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor())
                 .build();

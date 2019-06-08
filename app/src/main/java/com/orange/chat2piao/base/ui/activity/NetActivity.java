@@ -3,11 +3,11 @@ package com.orange.chat2piao.base.ui.activity;
 import android.os.Bundle;
 
 import com.orange.chat2piao.base.ifc.callback.IInit;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoading;
-import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildLoading;
+import com.orange.chat2piao.base.ifc.component.ILoading;
+import com.orange.chat2piao.base.ifc.component.build.IBuildLoading;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.impl.presenter.NetPresenter;
-import com.orange.chat2piao.base.impl.view.LoadingImpl;
+import com.orange.chat2piao.base.impl.component.LoadingImpl;
 import com.orange.chat2piao.utils.Preconditions;
 
 public abstract class NetActivity<A extends NetActivity, T, P extends NetPresenter<A, A, T>> extends PresenterActivity<A, P> implements IBuildLoading, ILoading, IInit {

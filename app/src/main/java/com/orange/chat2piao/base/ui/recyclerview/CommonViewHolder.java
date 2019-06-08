@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.utils.ViewHelper;
 
 public class CommonViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -139,9 +141,9 @@ public class CommonViewHolder extends RecyclerView.ViewHolder implements View.On
      * @param resId  资源Id
      * @return 返回ViewHolder
      */
-    public CommonViewHolder setGifImageResource(int viewId, Context context, int resId) {
+    public CommonViewHolder loadImageResourceAsGif(int viewId, int resId) {
         ImageView iv = getView(viewId);
-        Glide.with(context).load(resId).asGif().into(iv);
+        GlobleImp.getInstance().loadImageResourceAsGif(iv, resId);
         return this;
     }
 

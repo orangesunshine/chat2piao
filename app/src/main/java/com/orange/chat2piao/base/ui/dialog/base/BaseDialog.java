@@ -20,6 +20,9 @@ import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ifc.callback.IContentView;
 import com.orange.chat2piao.base.ifc.callback.IInitVars;
 
+import static com.blankj.utilcode.util.ScreenUtils.getScreenWidth;
+import static com.wangnan.library.util.DimensionUtil.dp2px;
+
 /**
  * Dialog通用样式
  */
@@ -93,7 +96,7 @@ public abstract class BaseDialog extends DialogFragment implements IContentView,
 
             //设置dialog宽度
             if (mWidth == 0) {
-                params.width = getScreenWidth(getContext()) - 2 * dp2px(getContext(), mMargin);
+                params.width = getScreenWidth() - 2 * dp2px(getContext(), mMargin);
             } else {
                 params.width = dp2px(getContext(), mWidth);
             }

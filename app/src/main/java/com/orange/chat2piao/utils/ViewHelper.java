@@ -26,9 +26,11 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.adapter.TextWatcherAdapter;
 import com.orange.chat2piao.base.ifc.callback.VerifyCallback;
+import com.orange.chat2piao.base.impl.globle.GlobleImp;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -133,7 +135,7 @@ public class ViewHelper {
 
     public static void copy2Clipboard(Context context, TextView tv) {
         if (null == tv) {
-            ToastUtils.showShortToast("复制失败！");
+            ToastUtils.showShort("复制失败！");
             return;
         }
         String trim = tv.getText().toString().trim();
@@ -146,9 +148,9 @@ public class ViewHelper {
             ClipData clip = ClipData.newPlainText(TAG_COPY, trim);
             //传入clipdata对象.
             clipboard.setPrimaryClip(clip);
-            ToastUtils.showShortToast("复制成功");
+            ToastUtils.showShort("复制成功");
         } else {
-            ToastUtils.showShortToast("复制内容为空");
+            ToastUtils.showShort("复制内容为空");
         }
     }
 
@@ -205,7 +207,7 @@ public class ViewHelper {
             @Override
             public void afterTextChanged(Editable s) {
                 if (null != callback) {
-                    callback.onVerify(callback.verify(s));
+                    callback.verify(callback.verify(s));
                 }
             }
         });
@@ -235,7 +237,7 @@ public class ViewHelper {
     public static void setCircleImage(final ImageView ivImage, final Context context, final String urlString) {
         if (null == ivImage || null == context) throw new NullPointerException();
         if (TextUtils.isEmpty(urlString)) {
-            setCircleImage(ivImage, context, R.drawable.avatar1);//placeholder
+            setCircleImage(ivImage, context, GlobleImp.getInstance().placeholder());//placeholder
         } else if (Patterns.WEB_URL.matcher(urlString).matches()) {
             new Thread(new Runnable() {
                 @Override

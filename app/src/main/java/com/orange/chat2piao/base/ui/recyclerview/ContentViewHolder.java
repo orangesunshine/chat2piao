@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 
+import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.utils.ViewHelper;
 
 public class ContentViewHolder implements View.OnClickListener {
@@ -132,9 +133,22 @@ public class ContentViewHolder implements View.OnClickListener {
      * @param resId  资源Id
      * @return 返回ViewHolder
      */
-    public ContentViewHolder setGifImageResource(int viewId, Context context, int resId) {
+    public ContentViewHolder loadImageResourceAsGif(int viewId, int resId) {
         ImageView iv = getView(viewId);
-        Glide.with(context).load(resId).asGif().into(iv);
+        GlobleImp.getInstance().loadImageResourceAsGif(iv, resId);
+        return this;
+    }
+
+    /**
+     * 设置ImageView
+     *
+     * @param viewId view的Id
+     * @param url    资源Id
+     * @return 返回ViewHolder
+     */
+    public ContentViewHolder loadImageUrl(int viewId, String url) {
+        ImageView iv = getView(viewId);
+        GlobleImp.getInstance().loadImgUrl(iv, url);
         return this;
     }
 
@@ -154,7 +168,7 @@ public class ContentViewHolder implements View.OnClickListener {
     /**
      * 为文本设置text
      *
-     * @param view  view
+     * @param view    view
      * @param visible
      * @return 返回ViewHolder
      */
@@ -216,5 +230,12 @@ public class ContentViewHolder implements View.OnClickListener {
 
     public interface OnItemClickListener {
         void onItemClick(View v);
+    }
+
+    public void clear() {
+        if (null != mViews) {
+            mViews.clear();
+            mViews = null;
+        }
     }
 }

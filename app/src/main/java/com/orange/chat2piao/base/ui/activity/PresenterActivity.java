@@ -14,6 +14,7 @@ public abstract class PresenterActivity<A extends PresenterActivity, P extends B
     public void onActivityCreate(A activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
         mPresenter = generatePresenter();
-        mPresenter.attachView(activity);
+        if (null != mPresenter)
+            mPresenter.attachView(activity);
     }
 }

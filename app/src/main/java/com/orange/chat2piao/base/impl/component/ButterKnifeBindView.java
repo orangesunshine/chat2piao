@@ -1,9 +1,9 @@
-package com.orange.chat2piao.base.impl.view;
+package com.orange.chat2piao.base.impl.component;
 
 import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;
-import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
+import com.orange.chat2piao.base.ifc.component.IBindView;
 import com.orange.chat2piao.utils.Preconditions;
 
 import butterknife.ButterKnife;

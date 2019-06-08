@@ -1,6 +1,5 @@
-package com.orange.chat2piao.base.impl.view;
+package com.orange.chat2piao.base.impl.component;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -8,7 +7,7 @@ import android.widget.TextView;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
-import com.orange.chat2piao.base.ifc.view.ifc.IActionBar;
+import com.orange.chat2piao.base.ifc.component.IActionBar;
 import com.orange.chat2piao.utils.ViewHelper;
 
 import butterknife.BindView;

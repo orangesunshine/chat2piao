@@ -1,9 +1,9 @@
-package com.orange.chat2piao.base.impl.view;
+package com.orange.chat2piao.base.impl.component;
 
 import android.app.Activity;
 
 import com.githang.statusbar.StatusBarCompat;
-import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;
+import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.utils.Preconditions;
 
 public class StatusBarTranslucent implements IStatusBar {
@@ -19,6 +19,6 @@ public class StatusBarTranslucent implements IStatusBar {
     @Override
     public void setStatusBar(Activity activity) {
         Preconditions.checkNotNull(activity);
-        StatusBarCompat.setTranslucent(activity.getWindow(), true);
+        StatusBarCompat.setTranslucent(activity.getWindow(),false);
     }
 }

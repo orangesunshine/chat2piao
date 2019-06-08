@@ -3,26 +3,32 @@ package com.orange.chat2piao.base.impl.globle;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.orange.chat2piao.base.constant.IInitConst;
 import com.orange.chat2piao.base.ifc.globle.IGloble;
 import com.orange.chat2piao.base.ifc.img.IImage;
 import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
-import com.orange.chat2piao.base.ifc.view.ifc.IActionBar;
-import com.orange.chat2piao.base.ifc.view.ifc.IBindView;
-import com.orange.chat2piao.base.ifc.view.ifc.IHeaderNdFooter;
-import com.orange.chat2piao.base.ifc.view.ifc.ILoadingDialogFragment;
-import com.orange.chat2piao.base.ifc.view.ifc.IStatusBar;
-import com.orange.chat2piao.base.ifc.view.ifc.IToast;
-import com.orange.chat2piao.base.ifc.view.ifc.build.IBuildFactory;
+import com.orange.chat2piao.base.ifc.component.IActionBar;
+import com.orange.chat2piao.base.ifc.component.IBindView;
+import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
+import com.orange.chat2piao.base.ifc.component.IStatusBar;
+import com.orange.chat2piao.base.ifc.component.IToast;
+import com.orange.chat2piao.base.ifc.component.build.IBuildFactory;
+import com.orange.chat2piao.base.impl.component.ButterKnifeBindView;
+import com.orange.chat2piao.base.impl.component.CommonActionBar;
+import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.base.impl.img.GlideImageImpl;
 import com.orange.chat2piao.base.ui.app.LypApp;
+import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
 public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IBindView, IToast, ILoadingDialogFragment, IHeaderNdFooter, Application.ActivityLifecycleCallbacks {
     //static&final
@@ -81,18 +87,23 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     @Override
+    public void loadImageResourceAsGif(ImageView iv, int resId) {
+
+    }
+
+    @Override
     public Application.ActivityLifecycleCallbacks buildActivityLifecycleCallbacks() {
         return null;
     }
 
     @Override
     public IActionBar buildActionBar() {
-        return null;
+        return new CommonActionBar();
     }
 
     @Override
     public IBindView buildBindView() {
-        return null;
+        return ButterKnifeBindView.getInstance();
     }
 
     @Override
@@ -102,7 +113,7 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
 
     @Override
     public IStatusBar buildStatusBar() {
-        return null;
+        return StatusBarTranslucent.getInstance();
     }
 
     @Override
@@ -112,7 +123,7 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
 
     @Override
     public ILoadingDialogFragment buildLoadingDialogFragment() {
-        return null;
+        return new LoadingDialog();
     }
 
     @Override

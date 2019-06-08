@@ -1,33 +1,27 @@
-package com.orange.chat2piao.base.impl.view;
+package com.orange.chat2piao.base.impl.component;
 
-import android.app.Activity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.view.ifc.IHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
+import com.orange.chat2piao.base.ui.recyclerview.ContentViewHolder;
 import com.orange.chat2piao.utils.Preconditions;
 import com.orange.chat2piao.utils.ViewHelper;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class SwipeRefreshHeaderFooter implements IHeaderNdFooter<SwipeRefreshLayout, TextView> {
     //views
-    @BindView(R.id.swiperefreshlayout)
-    SwipeRefreshLayout swiperereshlayout;
-    @BindView(R.id.swiperefreshlayout_footer)
+    SwipeRefreshLayout refreshLayout;
     TextView tvFooter;
 
-    //vars
-    private Unbinder mUnbinder;
+    private ContentViewHolder mViewHolder;
 
     @Override
     public void header(SwipeRefreshLayout header) {
         Preconditions.checkNotNull(header);
-        swiperereshlayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+        header.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light, android.R.color.holo_orange_light);
     }
 
@@ -39,8 +33,8 @@ public class SwipeRefreshHeaderFooter implements IHeaderNdFooter<SwipeRefreshLay
 
     @Override
     public void showHeader() {
-        Preconditions.checkNotNull(swiperereshlayout);
-        swiperereshlayout.setRefreshing(true);
+        Preconditions.checkNotNull(refreshLayout);
+        refreshLayout.setRefreshing(true);
     }
 
     @Override
@@ -50,8 +44,8 @@ public class SwipeRefreshHeaderFooter implements IHeaderNdFooter<SwipeRefreshLay
 
     @Override
     public void hideHeader() {
-        Preconditions.checkNotNull(swiperereshlayout);
-        swiperereshlayout.setRefreshing(false);
+        Preconditions.checkNotNull(refreshLayout);
+        refreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -61,12 +55,15 @@ public class SwipeRefreshHeaderFooter implements IHeaderNdFooter<SwipeRefreshLay
 
     @Override
     public void bindViews(View view) {
-        mUnbinder = ButterKnife.bind(this, view);
+        mViewHolder = new ContentViewHolder(view);
+        refreshLayout = mViewHolder.getView(R.id.refreshlayout);
+        tvFooter = mViewHolder.getView(R.id.refreshlayout_footer);
     }
 
     @Override
     public void unbindView() {
-        if (null != mUnbinder)
-            mUnbinder.unbind();
+        if (null != mViewHolder) {
+            mViewHolder.clear();
+        }
     }
 }

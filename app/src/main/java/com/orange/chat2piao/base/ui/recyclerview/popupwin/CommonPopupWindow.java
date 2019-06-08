@@ -43,7 +43,7 @@ public class CommonPopupWindow<T> {
         mInstance.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mInstance.setOutsideTouchable(true);
         mInstance.setTouchable(true);
-        mInstance.setAnimationStyle(R.style.popwin_anim_style);
+        mInstance.setAnimationStyle(R.style.winDialogAnim);
     }
 
     public void showBashOfAnchor(View anchor, LayoutGravity layoutGravity, int xmerge, int ymerge) {
