@@ -9,7 +9,7 @@ import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
-import com.orange.chat2piao.base.ifc.component.build.IBuildFactory;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildFactory;
 import com.orange.chat2piao.base.impl.app.ActivityLifecycleCallbacksImp;
 import com.orange.chat2piao.base.impl.component.ButterKnifeBindView;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;

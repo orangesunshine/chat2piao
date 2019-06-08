@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.orange.chat2piao.base.ifc.callback.IInit;
 import com.orange.chat2piao.base.ifc.component.ILoading;
-import com.orange.chat2piao.base.ifc.component.build.IBuildLoading;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildLoading;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.impl.presenter.NetPresenter;
 import com.orange.chat2piao.base.impl.component.LoadingImpl;

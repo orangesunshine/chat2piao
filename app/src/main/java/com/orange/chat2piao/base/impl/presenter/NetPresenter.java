@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.orange.chat2piao.base.adapter.LoadingNetCallbackAdapter;
 import com.orange.chat2piao.base.ifc.callback.INetCallback;
-import com.orange.chat2piao.base.ifc.component.build.IBuildNetCallback;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildNetCallback;
 import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.ui.activity.NetActivity;
 import com.orange.chat2piao.utils.Preconditions;

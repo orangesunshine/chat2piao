@@ -14,10 +14,10 @@ import com.orange.chat2piao.base.ifc.component.IActionBar;
 import com.orange.chat2piao.base.ifc.component.IBindView;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
-import com.orange.chat2piao.base.ifc.component.build.IBuildActionBar;
-import com.orange.chat2piao.base.ifc.component.build.IBuildBindView;
-import com.orange.chat2piao.base.ifc.component.build.IBuildStatusBar;
-import com.orange.chat2piao.base.ifc.component.build.IBuildToast;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildActionBar;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildBindView;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildStatusBar;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildToast;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.utils.Preconditions;
 

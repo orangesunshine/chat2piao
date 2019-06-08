@@ -3,7 +3,7 @@ package com.orange.chat2piao.base.ui.activity;
 import android.os.Bundle;
 
 import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
-import com.orange.chat2piao.base.ifc.component.build.IBuildHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildHeaderNdFooter;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.impl.presenter.NetPresenter;
 

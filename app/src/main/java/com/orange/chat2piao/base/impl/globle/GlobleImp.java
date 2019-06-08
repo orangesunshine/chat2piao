@@ -3,12 +3,10 @@ package com.orange.chat2piao.base.impl.globle;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.orange.chat2piao.base.constant.IInitConst;
@@ -21,7 +19,7 @@ import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
-import com.orange.chat2piao.base.ifc.component.build.IBuildFactory;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildFactory;
 import com.orange.chat2piao.base.impl.component.ButterKnifeBindView;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
 import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
