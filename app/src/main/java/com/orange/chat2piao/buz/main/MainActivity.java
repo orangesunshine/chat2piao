@@ -1,8 +1,8 @@
 package com.orange.chat2piao.buz.main;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.demo.activity.BaseActivityDemo;
-import com.orange.chat2piao.base.ui.activity.BaseActivity;
+import com.orange.chat2piao.base.demo.activity.BaseActivityDemoLoading;
+import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.utils.ActivityUtils;
 
 import butterknife.OnClick;
@@ -15,6 +15,6 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.tv_base)
     public void onViewClicked() {
-        ActivityUtils.launchActivity(mActivity, BaseActivityDemo.class);
+        ActivityUtils.launchActivity(mActivity, BaseActivityDemoLoading.class);
     }
 }

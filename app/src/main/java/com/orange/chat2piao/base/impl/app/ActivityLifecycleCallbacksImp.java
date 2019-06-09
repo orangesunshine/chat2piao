@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.orange.chat2piao.base.adapter.ActivityLifecycleAdapt;
 import com.orange.chat2piao.base.ifc.callback.ICreatedNdDestroy;
-import com.orange.chat2piao.base.ui.activity.BaseActivity;
+import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 
 public class ActivityLifecycleCallbacksImp extends ActivityLifecycleAdapt {
     @Override

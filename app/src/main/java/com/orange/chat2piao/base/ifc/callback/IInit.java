@@ -1,12 +1,9 @@
 package com.orange.chat2piao.base.ifc.callback;
 
-import android.content.Context;
-
-public interface IInit{
+public interface IInit {
 
     /**
-     * 初始化
-     * @param context
+     * 初始化（控件相关）
      */
-    void init(Context context);
+    void init();
 }

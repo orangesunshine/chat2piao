@@ -2,19 +2,21 @@ package com.orange.chat2piao.base.ifc.callback;
 
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.ui.activity.BaseActivity;
+import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 
-public interface ICreatedNdDestroy<T extends BaseActivity> {
+public interface ICreatedNdDestroy<ACT extends BaseActivity> {
     /**
-     * 逻辑
+     * 创建生命周期回调
+     *
      * @param activity
      * @param bundle
      */
-    void onActivityCreate(T activity, Bundle bundle);
+    void onActivityCreate(ACT activity, Bundle bundle);
 
     /**
-     * 销毁
+     * 销毁生命周期回调
+     *
      * @param context
      */
-    void onActivityDestroy(T context);
+    void onActivityDestroy(ACT context);
 }

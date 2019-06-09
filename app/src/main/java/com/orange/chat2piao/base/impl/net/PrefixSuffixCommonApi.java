@@ -8,13 +8,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.TypeAdapter;
 import com.orange.chat2piao.base.constant.IFinalConst;
 import com.orange.chat2piao.base.ifc.callback.INetCallback;
-import com.orange.chat2piao.base.ifc.net.retrofit.ICommonApi;
-import com.orange.chat2piao.base.ifc.net.retrofit.ICommonApiConvert;
+import com.orange.chat2piao.base.ifc.net.retrofit.IRetrofitCommonApi;
+import com.orange.chat2piao.base.ifc.net.retrofit.IPrefixSuffixCommonApi;
 import com.orange.chat2piao.base.ifc.net.retrofit.RetrofitClient;
-import com.orange.chat2piao.base.reponse.BaseResponse;
 import com.orange.chat2piao.utils.Preconditions;
 
 import java.lang.reflect.ParameterizedType;
@@ -28,14 +26,14 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class CommonApi implements ICommonApiConvert {
-    private volatile static CommonApi sInstance;
+public class PrefixSuffixCommonApi implements IPrefixSuffixCommonApi {
+    private volatile static PrefixSuffixCommonApi sInstance;
 
-    public static CommonApi getInstance() {
+    public static PrefixSuffixCommonApi getInstance() {
         if (null == sInstance) {
-            synchronized (CommonApi.class) {
+            synchronized (PrefixSuffixCommonApi.class) {
                 if (null == sInstance)
-                    sInstance = new CommonApi();
+                    sInstance = new PrefixSuffixCommonApi();
             }
         }
         return sInstance;
@@ -45,22 +43,22 @@ public class CommonApi implements ICommonApiConvert {
 
     @Override
     public <T> void get(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        convert(RetrofitClient.getRetrofitInstance().create(ICommonApi.class).get(prefix, suffix, params), callback);
+        convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(prefix, suffix, params), callback);
     }
 
     @Override
     public <T> void get(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        convert(RetrofitClient.getRetrofitInstance().create(ICommonApi.class).get(headers, prefix, suffix, params), callback);
+        convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(headers, prefix, suffix, params), callback);
     }
 
     @Override
     public <T> void post(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        convert(RetrofitClient.getRetrofitInstance().create(ICommonApi.class).post(prefix, suffix, params), callback);
+        convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(prefix, suffix, params), callback);
     }
 
     @Override
     public <T> void post(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        convert(RetrofitClient.getRetrofitInstance().create(ICommonApi.class).post(headers, prefix, suffix, params), callback);
+        convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, prefix, suffix, params), callback);
     }
 
     private <T> void convert(Observable<ResponseBody> observable, INetCallback<T> callback) {
@@ -70,8 +68,8 @@ public class CommonApi implements ICommonApiConvert {
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        if(null != callback)
-                            callback.onNetStart("");
+                        if (null != callback)
+                            callback.onNetStart();
                     }
 
                     @Override
@@ -132,14 +130,26 @@ public class CommonApi implements ICommonApiConvert {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (null != callback)
+                        StringBuffer errorMsg = new StringBuffer();
+                        if (null != e) {
+                            Throwable cause = e.getCause();
+                            while (null != cause) {
+                                errorMsg.append(cause.getMessage());
+                                cause = cause.getCause();
+                            }
+                        }
+                        if (!TextUtils.isEmpty(errorMsg))
+                            ToastUtils.showShort(errorMsg);
+                        if (null != callback) {
                             callback.onError(IFinalConst.CODE_ERROR, e);
+                            callback.onComplete();
+                        }
                     }
 
                     @Override
                     public void onComplete() {
                         if (null != callback)
-                            callback.onFinish();
+                            callback.onComplete();
                     }
                 });
     }

@@ -10,25 +10,23 @@ import android.widget.ImageView;
 import androidx.fragment.app.FragmentManager;
 
 import com.orange.chat2piao.base.constant.IInitConst;
-import com.orange.chat2piao.base.ifc.globle.IGloble;
-import com.orange.chat2piao.base.ifc.img.IImage;
-import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
 import com.orange.chat2piao.base.ifc.component.IBindView;
-import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
 import com.orange.chat2piao.base.ifc.component.generate.IBuildFactory;
-import com.orange.chat2piao.base.impl.component.ButterKnifeBindView;
+import com.orange.chat2piao.base.ifc.globle.IGloble;
+import com.orange.chat2piao.base.ifc.img.IImage;
+import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
-import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.base.impl.img.GlideImageImpl;
 import com.orange.chat2piao.base.ui.app.LypApp;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
-public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IBindView, IToast, ILoadingDialogFragment, IHeaderNdFooter, Application.ActivityLifecycleCallbacks {
+public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IBindView, IToast, ILoadingDialogFragment, IRefreshNdLoadmore, Application.ActivityLifecycleCallbacks {
     //static&final
     private static volatile GlobleImp ourInstance = null;
     private IImage mDefaultImage = new GlideImageImpl();
@@ -37,7 +35,7 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     private IBindView mBindView;
     private IToast mToast;
     private ILoadingDialogFragment mLoadingDialogFragment;
-    private IHeaderNdFooter mHeaderNdFooter;
+    private IRefreshNdLoadmore mHeaderNdFooter;
     private Application.ActivityLifecycleCallbacks mActivityLifecycleCallbacks;
 
     public static GlobleImp getInstance() {
@@ -52,7 +50,6 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     private GlobleImp() {
-        DefaultConfig instance = DefaultConfig.getInstance();
     }
 
     @Override
@@ -86,12 +83,12 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
 
     @Override
     public void loadImageResourceAsGif(ImageView iv, int resId) {
-
+        GlobleImp.getInstance().loadImageResourceAsGif(iv, resId);
     }
 
     @Override
     public Application.ActivityLifecycleCallbacks buildActivityLifecycleCallbacks() {
-        return null;
+        return DefaultConfig.getInstance().buildActivityLifecycleCallbacks();
     }
 
     @Override
@@ -101,22 +98,22 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
 
     @Override
     public IBindView buildBindView() {
-        return ButterKnifeBindView.getInstance();
+        return DefaultConfig.getInstance().buildBindView();
     }
 
     @Override
-    public IHeaderNdFooter buildHeaderNdFooter() {
-        return null;
+    public IRefreshNdLoadmore buildHeaderNdFooter() {
+        return DefaultConfig.getInstance().buildHeaderNdFooter();
     }
 
     @Override
     public IStatusBar buildStatusBar() {
-        return StatusBarTranslucent.getInstance();
+        return DefaultConfig.getInstance().buildStatusBar();
     }
 
     @Override
     public IToast buildToast() {
-        return null;
+        return DefaultConfig.getInstance().buildToast();
     }
 
     @Override
@@ -216,45 +213,31 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     @Override
-    public void header(View header) {
+    public void refresh() {
         if (null == mHeaderNdFooter)
             mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.header(header);
+        mHeaderNdFooter.refresh();
     }
 
     @Override
-    public void footer(View footer) {
+    public void loadmore() {
         if (null == mHeaderNdFooter)
             mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.footer(footer);
+        mHeaderNdFooter.loadmore();
     }
 
     @Override
-    public void showHeader() {
+    public void finishRefresh() {
         if (null == mHeaderNdFooter)
             mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.showHeader();
+        mHeaderNdFooter.finishRefresh();
     }
 
     @Override
-    public void showFooter() {
+    public void finishLoadmore() {
         if (null == mHeaderNdFooter)
             mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.showFooter();
-    }
-
-    @Override
-    public void hideHeader() {
-        if (null == mHeaderNdFooter)
-            mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.hideHeader();
-    }
-
-    @Override
-    public void hideFooter() {
-        if (null == mHeaderNdFooter)
-            mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.hideFooter();
+        mHeaderNdFooter.finishLoadmore();
     }
 
     @Override
@@ -293,10 +276,10 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     @Override
-    public void showToast(String msg) {
+    public void showToast(CharSequence text) {
         if (null == mToast)
             mToast = DefaultConfig.getInstance().buildToast();
-        mToast.showToast(msg);
+        mToast.showToast(text);
     }
 
     @Override
@@ -304,12 +287,5 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
         if (null == mToast)
             mToast = DefaultConfig.getInstance().buildToast();
         mToast.showToast(stringId);
-    }
-
-    @Override
-    public void showToast(String msg, int duration) {
-        if (null == mToast)
-            mToast = DefaultConfig.getInstance().buildToast();
-        mToast.showToast(msg, duration);
     }
 }

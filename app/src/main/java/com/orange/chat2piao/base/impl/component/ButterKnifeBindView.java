@@ -10,14 +10,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class ButterKnifeBindView implements IBindView {
-    private static final ButterKnifeBindView ourInstance = new ButterKnifeBindView();
-
-    public static ButterKnifeBindView getInstance() {
-        return ourInstance;
-    }
-
-    private ButterKnifeBindView() {
-    }
 
     private Unbinder mUnbinder;
 

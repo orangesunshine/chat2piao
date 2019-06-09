@@ -5,16 +5,17 @@ import android.app.Application;
 import com.orange.chat2piao.base.adapter.ActivityLifecycleAdapt;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
 import com.orange.chat2piao.base.ifc.component.IBindView;
-import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
 import com.orange.chat2piao.base.ifc.component.generate.IBuildFactory;
 import com.orange.chat2piao.base.impl.app.ActivityLifecycleCallbacksImp;
-import com.orange.chat2piao.base.impl.component.ButterKnifeBindView;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
 import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
-import com.orange.chat2piao.base.impl.component.SwipeRefreshHeaderFooter;
+import com.orange.chat2piao.base.impl.component.SwipeRefreshNdLoadmore;
+import com.orange.chat2piao.base.impl.component.ToastImpl;
+import com.orange.chat2piao.base.impl.component.ViewHolderBindView;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
 public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildFactory {
@@ -41,12 +42,12 @@ public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildFacto
 
     @Override
     public IBindView buildBindView() {
-        return ButterKnifeBindView.getInstance();
+        return new ViewHolderBindView();
     }
 
     @Override
-    public IHeaderNdFooter buildHeaderNdFooter() {
-        return new SwipeRefreshHeaderFooter();
+    public IRefreshNdLoadmore buildHeaderNdFooter() {
+        return new SwipeRefreshNdLoadmore();
     }
 
 
@@ -62,7 +63,7 @@ public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildFacto
 
     @Override
     public IToast buildToast() {
-        return null;
+        return new ToastImpl();
     }
 
     @Override

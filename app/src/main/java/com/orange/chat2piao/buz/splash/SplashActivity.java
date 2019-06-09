@@ -1,6 +1,5 @@
 package com.orange.chat2piao.buz.splash;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -10,9 +9,8 @@ import android.view.animation.ScaleAnimation;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.adapter.AnimationListenerAdapter;
-import com.orange.chat2piao.base.demo.activity.BaseActivityDemo;
-import com.orange.chat2piao.base.ui.activity.BaseActivity;
-import com.orange.chat2piao.buz.main.MainActivity;
+import com.orange.chat2piao.base.demo.activity.BaseActivityDemoLoading;
+import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.utils.ActivityUtils;
 
 import butterknife.BindView;
@@ -53,7 +51,7 @@ public class SplashActivity extends BaseActivity {
             mSplashAnim.setAnimationListener(new AnimationListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    ActivityUtils.launchActivity(mActivity, BaseActivityDemo.class);
+                    ActivityUtils.launchActivity(mActivity, BaseActivityDemoLoading.class);
                 }
             });
         }

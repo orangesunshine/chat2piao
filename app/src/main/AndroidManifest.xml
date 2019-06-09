@@ -39,7 +39,7 @@
         <activity
             android:name=".buz.main.MainActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".base.demo.activity.BaseActivityDemo">
+        <activity android:name=".base.demo.activity.BaseActivityDemoLoading">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />

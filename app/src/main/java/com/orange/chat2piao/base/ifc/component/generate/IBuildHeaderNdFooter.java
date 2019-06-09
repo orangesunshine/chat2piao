@@ -1,7 +1,7 @@
 package com.orange.chat2piao.base.ifc.component.generate;
 
-import com.orange.chat2piao.base.ifc.component.IHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 
 public interface IBuildHeaderNdFooter {
-    IHeaderNdFooter buildHeaderNdFooter();
+    IRefreshNdLoadmore buildHeaderNdFooter();
 }

@@ -18,7 +18,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ifc.callback.IContentView;
-import com.orange.chat2piao.base.ifc.callback.IInitVars;
 
 import static com.blankj.utilcode.util.ScreenUtils.getScreenWidth;
 import static com.wangnan.library.util.DimensionUtil.dp2px;
@@ -26,7 +25,7 @@ import static com.wangnan.library.util.DimensionUtil.dp2px;
 /**
  * Dialog通用样式
  */
-public abstract class BaseDialog extends DialogFragment implements IContentView, IInitVars {
+public abstract class BaseDialog extends DialogFragment implements IContentView {
 
     @LayoutRes
     protected int mLayoutResId;
@@ -68,19 +67,9 @@ public abstract class BaseDialog extends DialogFragment implements IContentView,
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initVars(savedInstanceState);
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         initParams();
-    }
-
-    @Override
-    public void initVars(Bundle savedInstanceState) {
     }
 
     private void initParams() {

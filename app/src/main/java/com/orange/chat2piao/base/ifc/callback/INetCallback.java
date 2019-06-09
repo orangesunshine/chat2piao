@@ -8,9 +8,8 @@ package com.orange.chat2piao.base.ifc.callback;
 public interface INetCallback<T> {
     /**
      * 网络请求开始
-     * @param netIfc 网络地址
      */
-    void onNetStart(String netIfc);
+    void onNetStart();
 
     /**
      * 成功
@@ -21,7 +20,7 @@ public interface INetCallback<T> {
     /**
      * 完成
      */
-    void onFinish();
+    void onComplete();
 
     /**
      * 失败

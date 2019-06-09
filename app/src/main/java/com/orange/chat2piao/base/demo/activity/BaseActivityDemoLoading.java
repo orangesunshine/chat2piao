@@ -6,30 +6,37 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.blankj.utilcode.util.DeviceUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.adapter.LoadingNetCallbackAdapter;
+import com.orange.chat2piao.base.adapter.NetCallbackAdapterByLoading;
 import com.orange.chat2piao.base.constant.IInitConst;
-import com.orange.chat2piao.base.impl.net.CommonApi;
-import com.orange.chat2piao.base.impl.presenter.BasePresenter;
-import com.orange.chat2piao.base.impl.presenter.NetPresenter;
-import com.orange.chat2piao.base.ui.activity.BaseActivity;
-import com.orange.chat2piao.base.ui.activity.NetActivity;
+import com.orange.chat2piao.base.ifc.net.retrofit.IUrlCommonApi;
+import com.orange.chat2piao.base.ifc.presenter.IPresenter;
+import com.orange.chat2piao.base.impl.net.PrefixSuffixCommonApi;
+import com.orange.chat2piao.base.impl.net.UrlCommonApi;
+import com.orange.chat2piao.base.impl.presenter.LoadingNetPresenter;
+import com.orange.chat2piao.base.ui.activity.LoadingNetActivity;
+import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.buz.test.response.ConfigResponse;
 
 import java.util.HashMap;
 
-public class BaseActivityDemo extends NetActivity<NetActivity, ConfigResponse, NetPresenter<NetActivity,NetActivity,ConfigResponse>> {
+public class BaseActivityDemoLoading extends LoadingNetActivity {
     @Override
     public int getContentLayoutId() {
         return R.layout.demo_base;
     }
 
+    /**
+     * 创建生命周期回调，默认loading
+     *
+     * @param activity
+     * @param bundle
+     */
     @Override
-    public void onActivityCreate(NetActivity activity, Bundle bundle) {
+    public void onActivityCreate(BaseActivity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
-        IInitConst.sBaseUrl = "http://172.168.70.35:8091";
+        //        IInitConst.sBaseUrl = "http://192.168.254.103:8080";
+//        IInitConst.sBaseUrl = "http://192.168.254.103:8080";
         HashMap<String, String> headers = new HashMap<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
@@ -46,10 +53,11 @@ public class BaseActivityDemo extends NetActivity<NetActivity, ConfigResponse, N
         headers.put("D", "13b50a9f-73b6-406d-a562-7652c238c969");
         headers.put("C", "a");
         HashMap<String, String> params = new HashMap<>();
-        CommonApi.getInstance().post(headers, "system-config", "front.mvc", params, new LoadingNetCallbackAdapter<ConfigResponse>(getLoading()) {
+        UrlCommonApi.getInstance().post(headers, "http://192.168.254.103:8080/ifc/hello", params, new NetCallbackAdapterByLoading<String>(this) {
             @Override
-            public void onSuccess(ConfigResponse response) {
+            public void onSuccess(String response) {
                 super.onSuccess(response);
+                showToast(response);
             }
 
             @Override
@@ -60,12 +68,7 @@ public class BaseActivityDemo extends NetActivity<NetActivity, ConfigResponse, N
     }
 
     @Override
-    public void init(Context context) {
-
-    }
-
-    @Override
-    public NetPresenter generatePresenter() {
+    public IPresenter generatePresenter() {
         return null;
     }
 }
