@@ -2,6 +2,8 @@ package com.orange.chat2piao.base.ui.activity.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
@@ -13,24 +15,22 @@ import com.orange.chat2piao.base.ifc.callback.ICreatedNdDestroy;
 import com.orange.chat2piao.base.ifc.callback.IInit;
 import com.orange.chat2piao.base.ifc.callback.IInitVars;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
-import com.orange.chat2piao.base.ifc.component.IBindView;
+import com.orange.chat2piao.base.ifc.component.IAttachHolder;
+import com.orange.chat2piao.base.ifc.component.IHolder;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
 import com.orange.chat2piao.base.ifc.component.generate.IBuildActionBar;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildBindView;
+import com.orange.chat2piao.base.ifc.component.generate.IBuildHolder;
 import com.orange.chat2piao.base.ifc.component.generate.IBuildStatusBar;
 import com.orange.chat2piao.base.ifc.component.generate.IBuildToast;
 import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
+import com.orange.chat2piao.base.impl.component.DefaultHolder;
 import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.component.ToastImpl;
-import com.orange.chat2piao.base.impl.component.ViewHolderBindView;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
-import com.orange.chat2piao.utils.Preconditions;
 
-public abstract class BaseActivity<V extends IView> extends FragmentActivity implements IContentView, ICreatedNdDestroy, IActvityAlive, IBuildStatusBar, IBuildActionBar, IBuildBindView, IBuildToast, IInitVars, IInit {
-
-
+public abstract class BaseActivity<V extends IView> extends FragmentActivity implements IContentView, ICreatedNdDestroy, IActvityAlive, IBuildStatusBar, IBuildActionBar, IBuildHolder, IBuildToast, IInitVars, IInit {
     // <editor-fold defaultstate="collapsed" desc="生命周期回调方法">
 
     /**
@@ -43,16 +43,14 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
     public void onActivityCreate(BaseActivity activity, Bundle bundle) {
         FrameLayout content = getWindow().getDecorView().findViewById(android.R.id.content);
         content.removeAllViews();
-        FrameLayout flContent = LayoutInflater.from(activity).inflate(R.layout.activity_base, content, true).findViewById(R.id.fl_content);
-        LayoutInflater.from(activity).inflate(getContentLayoutId(), flContent, true);
+        LayoutInflater.from(activity).inflate(getContentLayoutId(), content, true);
 
         //初始化操作
-        initVars(bundle);
+        initVars(content, bundle);
 
         //bindViews
-        if (null == mBindView)
-            mBindView = GlobleImp.getInstance().buildBindView();
-        mBindView.bindViews(content);
+        if (null == mHolder)
+            mHolder = GlobleImp.getInstance().buildHolder(content);
 
         //statusbar
         if (null == mStatusBar)
@@ -62,7 +60,8 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
         //actionbar
         if (null == mActionBar)
             mActionBar = GlobleImp.getInstance().buildActionBar();
-        mActionBar.bindViews(content);
+        if (mActionBar instanceof IAttachHolder)
+            ((IAttachHolder) mActionBar).attachHolder(mHolder);
 
         //toast
         if (null == mToast)
@@ -81,10 +80,8 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
     @Override
     public void onActivityDestroy(BaseActivity context) {
         mActivityAlive = false;
-        Preconditions.checkNotNull(mBindView);
-        mBindView.unbindView();
-        Preconditions.checkNotNull(mActionBar);
-        mActionBar.unbindView();
+        if (null != mHolder)
+            mHolder.clear();
     }
     // </editor-fold>
 
@@ -117,7 +114,7 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="绑定控件">
-    protected IBindView mBindView;
+    protected IHolder mHolder;
 
     /**
      * 绑定控件
@@ -125,8 +122,8 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
      * @return
      */
     @Override
-    public IBindView buildBindView() {
-        return new ViewHolderBindView();
+    public IHolder buildHolder(View view) {
+        return new DefaultHolder(view);
     }
     // </editor-fold>
 
@@ -164,13 +161,14 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
     /**
      * 初始化
      *
+     * @param content
      * @param bundle
      */
     @Override
-    public void initVars(Bundle bundle) {
+    public void initVars(View content, Bundle bundle) {
         mActivity = this;
         mActivityAlive = true;
-        mBindView = buildBindView();
+        mHolder = buildHolder(content);
         mStatusBar = buildStatusBar();
         mActionBar = buildActionBar();
         mToast = buildToast();

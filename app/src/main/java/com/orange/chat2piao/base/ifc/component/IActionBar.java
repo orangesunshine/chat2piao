@@ -6,9 +6,10 @@ import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
 
 import androidx.annotation.DrawableRes;
 
-public interface IActionBar<T extends ViewGroup> extends IBindView {
+public interface IActionBar<T extends ViewGroup>{
     /**
      * 设置左侧图标
+     *
      * @param imgResId
      */
     void setLeftImg(@DrawableRes int imgResId);
@@ -19,6 +20,7 @@ public interface IActionBar<T extends ViewGroup> extends IBindView {
 
     /**
      * 设置右侧图标
+     *
      * @param imgResId
      */
     void setRightImg(@DrawableRes int imgResId);
@@ -27,6 +29,7 @@ public interface IActionBar<T extends ViewGroup> extends IBindView {
 
     /**
      * 标题栏事件回调
+     *
      * @param actionBarCallback
      */
     void setActionBarCallback(IActionBarCallback actionBarCallback);

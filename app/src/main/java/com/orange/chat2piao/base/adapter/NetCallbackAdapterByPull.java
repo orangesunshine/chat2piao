@@ -2,12 +2,7 @@ package com.orange.chat2piao.base.adapter;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.orange.chat2piao.base.ifc.callback.INetCallback;
-import com.orange.chat2piao.base.ifc.callback.IPullCallback;
-import com.orange.chat2piao.base.ifc.callback.IPullNetRequest;
-import com.orange.chat2piao.base.ifc.component.ILoading;
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
-import com.orange.chat2piao.base.ifc.view.IPullView;
-import com.orange.chat2piao.utils.Preconditions;
 
 public class NetCallbackAdapterByPull<T> implements INetCallback<T> {
     private IRefreshNdLoadmore refreshNdLoadmore;
@@ -36,12 +31,13 @@ public class NetCallbackAdapterByPull<T> implements INetCallback<T> {
     }
 
     @Override
-    public void onComplete() {
+    public void onComplete(boolean noData) {
         log.append("onComplete: ");
         LogUtils.e(log.toString());
-        Preconditions.checkNotNull(refreshNdLoadmore, "null == refreshNdLoadmore");
-        refreshNdLoadmore.finishRefresh();
-        refreshNdLoadmore.finishLoadmore();
+        if (null != refreshNdLoadmore) {
+            refreshNdLoadmore.finishRefresh(noData);
+            refreshNdLoadmore.finishLoadmore(noData);
+        }
     }
 
     @Override

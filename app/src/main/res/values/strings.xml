@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Chat2Piao</string>
     <string name="net_error">网络异常，请稍后再试！</string>
-    <string name="loadmore_text">正在加载</string>
-    <string name="loading_text">加载中</string>
+    <string name="loadmore_footer">正在加载</string>
+    <string name="loading_dialog">加载中</string>
+    <string name="no_more_data">没有更多数据</string>
 </resources>

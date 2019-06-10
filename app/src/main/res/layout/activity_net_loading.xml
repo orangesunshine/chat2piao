@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".buz.main.MainActivity">
+    android:orientation="vertical">
+
+    <include layout="@layout/actbar_common" />
 
     <Button
-        android:id="@+id/btn_base"
+        android:id="@+id/btn_toast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="BASE" />
+        android:text="测试吐司" />
 
     <Button
-        android:id="@+id/btn_presenter"
+        android:id="@+id/btn_actbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PRESENTER" />
+        android:text="测试标题栏" />
 
     <Button
-        android:id="@+id/btn_net_loading"
+        android:id="@+id/btn_statusbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LOADING" />
+        android:text="测试状态栏" />
 
     <Button
-        android:id="@+id/btn_net_pull"
+        android:id="@+id/btn_bindview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PULL" />
-
+        android:text="测试绑定控件" />
 </LinearLayout>

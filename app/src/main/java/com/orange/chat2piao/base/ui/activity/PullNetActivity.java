@@ -1,6 +1,7 @@
 package com.orange.chat2piao.base.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.ifc.component.generate.IBuildHeaderNdFooter;
@@ -15,13 +16,14 @@ public abstract class PullNetActivity<P extends PullNetPresenter> extends Presen
     protected IRefreshNdLoadmore mHeaderNdFooter;
 
     /**
-     * 初始化创建
+     * 初始化
      *
+     * @param content
      * @param bundle
      */
     @Override
-    public void initVars(Bundle bundle) {
-        super.initVars(bundle);
+    public void initVars(View content, Bundle bundle) {
+        super.initVars(content, bundle);
         mHeaderNdFooter = buildHeaderNdFooter();
     }
 
@@ -59,18 +61,18 @@ public abstract class PullNetActivity<P extends PullNetPresenter> extends Presen
      * 隐藏header
      */
     @Override
-    public void finishRefresh() {
+    public void finishRefresh(boolean noData) {
         if (null != mHeaderNdFooter)
-            mHeaderNdFooter.finishRefresh();
+            mHeaderNdFooter.finishRefresh(noData);
     }
 
     /**
      * 隐藏footer
      */
     @Override
-    public void finishLoadmore() {
+    public void finishLoadmore(boolean noData) {
         if (null != mHeaderNdFooter)
-            mHeaderNdFooter.finishLoadmore();
+            mHeaderNdFooter.finishLoadmore(noData);
     }
     // </editor-fold>
 }

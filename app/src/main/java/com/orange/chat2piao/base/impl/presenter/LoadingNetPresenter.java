@@ -8,7 +8,6 @@ import com.orange.chat2piao.base.ifc.callback.INetRequest;
 import com.orange.chat2piao.base.ifc.component.generate.IBuildNetCallback;
 import com.orange.chat2piao.base.ifc.view.INetView;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
-import com.orange.chat2piao.utils.Preconditions;
 
 public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePresenter<V> implements IBuildNetCallback<T>, INetCallback<T>, INetRequest<T> {
     private INetCallback<T> mNetCallback;
@@ -25,8 +24,8 @@ public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePre
      */
     @Override
     public void onNetStart() {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onNetStart();
+        if (null != mNetCallback)
+            mNetCallback.onNetStart();
     }
 
     /**
@@ -36,17 +35,17 @@ public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePre
      */
     @Override
     public void onSuccess(T t) {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onSuccess(t);
+        if (null != mNetCallback)
+            mNetCallback.onSuccess(t);
     }
 
     /**
      * 完成
      */
     @Override
-    public void onComplete() {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onComplete();
+    public void onComplete(boolean noData) {
+        if (null != mNetCallback)
+            mNetCallback.onComplete(noData);
     }
 
     /**
@@ -57,14 +56,13 @@ public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePre
      */
     @Override
     public void onError(int code, Throwable error) {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onError(code, error);
+        if (null != mNetCallback)
+            mNetCallback.onError(code, error);
     }
 
     // <editor-fold defaultstate="collapsed" desc="创建网络回调">
     @Override
     public INetCallback<T> buildNetCallback() {
-        Preconditions.checkNotNull(mView);
         return new NetCallbackAdapterByLoading<>(mView);
     }
     // </editor-fold>

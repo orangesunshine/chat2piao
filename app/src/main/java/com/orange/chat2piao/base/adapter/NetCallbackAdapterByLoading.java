@@ -22,8 +22,8 @@ public class NetCallbackAdapterByLoading<T> implements INetCallback<T> {
     public void onNetStart() {
         startTimeMills = SystemClock.elapsedRealtime();
         log.append("onNetStart: ").append(lineSeprrate);
-        Preconditions.checkNotNull(loading);
-        loading.showLoading();
+        if (null != loading)
+            loading.showLoading();
     }
 
     @Override
@@ -35,12 +35,12 @@ public class NetCallbackAdapterByLoading<T> implements INetCallback<T> {
     }
 
     @Override
-    public void onComplete() {
+    public void onComplete(boolean noData) {
         log.append("onComplete: ");
         log.append(lineSeprrate).append(indentation).append("period: ").append(SystemClock.elapsedRealtime() - startTimeMills).append("ms");
         LogUtils.e(log.toString());
-        Preconditions.checkNotNull(loading);
-        loading.dismissLoading();
+        if (null != loading)
+            loading.dismissLoading();
     }
 
     @Override

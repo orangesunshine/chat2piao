@@ -12,7 +12,7 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
-public interface IRetrofitCommonApi {
+public interface IRetrofitCommonApi extends INoData {
     @GET("/{prefix}/{suffix}")
     Observable<ResponseBody> get(@Path("prefix") String prefix, @Path("suffix") String suffix, @QueryMap Map<String, String> params);
 

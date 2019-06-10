@@ -34,8 +34,8 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void onNetStart() {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onNetStart();
+        if (null != mNetCallback)
+            mNetCallback.onNetStart();
     }
 
     /**
@@ -45,17 +45,17 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void onSuccess(T t) {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onSuccess(t);
+        if (null != mNetCallback)
+            mNetCallback.onSuccess(t);
     }
 
     /**
      * 完成
      */
     @Override
-    public void onComplete() {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onComplete();
+    public void onComplete(boolean noData) {
+        if (null != mNetCallback)
+            mNetCallback.onComplete(noData);
     }
 
     /**
@@ -66,8 +66,8 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void onError(int code, Throwable error) {
-        Preconditions.checkNotNull(mNetCallback);
-        mNetCallback.onError(code, error);
+        if (null != mNetCallback)
+            mNetCallback.onError(code, error);
     }
 
     /**
@@ -90,7 +90,6 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
 
     @Override
     public INetCallback<T> buildNetCallback() {
-        Preconditions.checkNotNull(mView);
         return new NetCallbackAdapterByPull<T>(mView);
     }
 

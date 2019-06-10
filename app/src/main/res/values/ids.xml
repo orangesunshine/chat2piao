@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="fl_content" type="id" />
+    <item name="stub_content" type="id" />
     <item name="refreshlayout" type="id" />
+    <item name="refreshlayout_header" type="id" />
     <item name="refreshlayout_footer" type="id" />
 
     <item name="fl_left_actbar" type="id" />

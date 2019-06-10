@@ -14,6 +14,7 @@ import com.orange.chat2piao.base.ifc.net.retrofit.IRetrofitCommonApi;
 import com.orange.chat2piao.base.ifc.net.retrofit.IUrlCommonApi;
 import com.orange.chat2piao.base.ifc.net.retrofit.RetrofitClient;
 import com.orange.chat2piao.utils.Preconditions;
+import com.orange.chat2piao.utils.ReflectionUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -62,10 +63,11 @@ public class UrlCommonApi implements IUrlCommonApi {
     }
 
     private <T> void convert(Observable<ResponseBody> observable, INetCallback<T> callback) {
-        Preconditions.checkNotNull(callback, "null == observable");
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
+                    boolean noData = false;
+
                     @Override
                     public void onSubscribe(Disposable d) {
                         if (null != callback)
@@ -100,7 +102,7 @@ public class UrlCommonApi implements IUrlCommonApi {
 
                             JsonElement data = jsonObject.get("data");
                             if (null != data) {
-                                result = gson.fromJson(data, getGenericSuperclassActualTypeArgClass(callback));
+                                result = gson.fromJson(data, ReflectionUtils.getGenericSuperclassActualTypeArgClass(callback));
                             }
                         } catch (Exception e) {
                             Throwable cause = e.getCause();
@@ -110,6 +112,7 @@ public class UrlCommonApi implements IUrlCommonApi {
                                 errorMsg.append(System.getProperty("line.separator"));
                             }
                         } finally {
+                            noData = noData(result);
                             if (null != callback && null != result) {
                                 if (checkCodeSuccess(code)) {
                                     if (!TextUtils.isEmpty(responseMsg))
@@ -132,30 +135,31 @@ public class UrlCommonApi implements IUrlCommonApi {
                     public void onError(Throwable e) {
                         if (null != callback) {
                             callback.onError(IFinalConst.CODE_ERROR, e);
-                            callback.onComplete();
+                            callback.onComplete(true);
                         }
                     }
 
                     @Override
                     public void onComplete() {
                         if (null != callback)
-                            callback.onComplete();
+                            callback.onComplete(noData);
                     }
                 });
     }
 
-    private <T> Type getGenericSuperclassActualTypeArgClass(INetCallback<T> callback) {
-        Preconditions.checkNotNull(callback, "null == callback");
-        Type genericSuperclass = callback.getClass().getGenericSuperclass();
-        if (null != genericSuperclass && genericSuperclass instanceof ParameterizedType) {
-            Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
-            if (null != actualTypeArguments && actualTypeArguments.length > 0)
-                return actualTypeArguments[0];
-        }
-        return null;
-    }
-
     private boolean checkCodeSuccess(int code) {
         return IFinalConst.CODE_SUCCESS == code;
+    }
+
+    /**
+     * 判断返回data列表是不是有没有更多数据
+     *
+     * @param data
+     * @return
+     */
+    @Override
+    public <T> boolean noData(T data) {
+        if (null == data) return false;
+        return false;
     }
 }

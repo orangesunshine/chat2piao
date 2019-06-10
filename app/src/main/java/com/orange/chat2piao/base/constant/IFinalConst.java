@@ -2,6 +2,10 @@ package com.orange.chat2piao.base.constant;
 
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
+
+import com.orange.chat2piao.R;
+
 public interface IFinalConst {
     String sBaseUrl = "";
     String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";//loadingDilog TAG

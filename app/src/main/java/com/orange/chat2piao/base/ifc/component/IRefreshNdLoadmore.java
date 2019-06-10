@@ -15,10 +15,10 @@ public interface IRefreshNdLoadmore {
     /**
      * 刷新完成
      */
-    void finishRefresh();
+    void finishRefresh(boolean noData);
 
     /**
      * 加载完成
      */
-    void finishLoadmore();
+    void finishLoadmore(boolean noData);
 }

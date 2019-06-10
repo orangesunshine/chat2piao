@@ -2,15 +2,15 @@ package com.orange.chat2piao.base.impl.component;
 
 import android.view.View;
 
-import com.orange.chat2piao.base.ifc.callback.INetCallback;
-import com.orange.chat2piao.base.ifc.component.IBindView;
+import com.orange.chat2piao.R;
+import com.orange.chat2piao.base.ifc.component.IAttachHolder;
+import com.orange.chat2piao.base.ifc.component.IHolder;
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
-import com.orange.chat2piao.base.ui.recyclerview.ContentViewHolder;
 
-public class RefreshNdLoadmoreImpl<H extends View, F extends View> implements IRefreshNdLoadmore, IBindView {
-    protected H header;
+public class RefreshNdLoadmoreImpl<REFRESH extends View, F extends View> implements IRefreshNdLoadmore, IAttachHolder {
+    protected REFRESH refreshLayout;
     protected F footer;
-    protected ContentViewHolder mHolder;
+    protected IHolder mHolder;
 
     @Override
     public void refresh() {
@@ -23,23 +23,24 @@ public class RefreshNdLoadmoreImpl<H extends View, F extends View> implements IR
     }
 
     @Override
-    public void finishRefresh() {
+    public void finishRefresh(boolean noData) {
 
     }
 
     @Override
-    public void finishLoadmore() {
+    public void finishLoadmore(boolean noData) {
 
     }
 
+    /**
+     * 跟视图
+     *
+     * @param holder
+     */
     @Override
-    public void bindViews(View view) {
-        mHolder = new ContentViewHolder(view);
-    }
-
-    @Override
-    public void unbindView() {
-        if (null != mHolder)
-            mHolder.clear();
+    public void attachHolder(IHolder holder) {
+        mHolder = holder;
+        refreshLayout = holder.getView(R.id.refreshlayout);
+        footer = holder.getView(R.id.refreshlayout_footer);
     }
 }

@@ -1,29 +1,23 @@
 package com.orange.chat2piao.base.demo.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.adapter.NetCallbackAdapterByLoading;
-import com.orange.chat2piao.base.constant.IInitConst;
-import com.orange.chat2piao.base.ifc.net.retrofit.IUrlCommonApi;
 import com.orange.chat2piao.base.ifc.presenter.IPresenter;
-import com.orange.chat2piao.base.impl.net.PrefixSuffixCommonApi;
 import com.orange.chat2piao.base.impl.net.UrlCommonApi;
-import com.orange.chat2piao.base.impl.presenter.LoadingNetPresenter;
 import com.orange.chat2piao.base.ui.activity.LoadingNetActivity;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
-import com.orange.chat2piao.buz.test.response.ConfigResponse;
 
 import java.util.HashMap;
 
-public class BaseActivityDemoLoading extends LoadingNetActivity {
+public class BaseLoadingNetActivityDemo extends LoadingNetActivity {
     @Override
     public int getContentLayoutId() {
-        return R.layout.demo_base;
+        return R.layout.activity_net_loading;
     }
 
     /**

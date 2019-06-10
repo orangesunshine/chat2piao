@@ -19,7 +19,7 @@ public class Preconditions {
 
     public static <T> void checkNotNull(T reference) {
         if (reference == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("null == reference: " + reference.getClass().getSimpleName());
         }
     }
 }

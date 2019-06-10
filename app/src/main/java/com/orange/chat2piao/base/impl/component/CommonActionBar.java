@@ -1,38 +1,24 @@
 package com.orange.chat2piao.base.impl.component;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
-import com.orange.chat2piao.utils.ViewHelper;
+import com.orange.chat2piao.base.ifc.component.IAttachHolder;
+import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
+import com.orange.chat2piao.utils.Preconditions;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  *
  */
-public class CommonActionBar implements IActionBar<LinearLayout> {
-    //views
-    @BindView(R.id.iv_left_actbar)
-    ImageView ivLeftActbar;
-    @BindView(R.id.tv_left_actbar)
-    TextView tvLeftActbar;
-    @BindView(R.id.tv_title_actbar)
-    TextView tvTitleActbar;
-    @BindView(R.id.iv_right_actbar)
-    ImageView ivRightActbar;
-    @BindView(R.id.tv_right_actbar)
-    TextView tvRightActbar;
+public class CommonActionBar implements IActionBar<LinearLayout>, IAttachHolder {
 
     //vars
-    private Unbinder mUnbinder;
+    private IHolder mHolder;
     private IActionBarCallback mActionBarCallback;
 
     @Override
@@ -42,35 +28,44 @@ public class CommonActionBar implements IActionBar<LinearLayout> {
 
     @Override
     public void setLeftImg(int imgResId) {
-        ViewHelper.setVisible(ivLeftActbar, true);
-        ViewHelper.setVisible(tvLeftActbar, false);
-        ViewHelper.setImageResource(ivLeftActbar, imgResId);
+        if (null != mHolder) {
+            mHolder.setVisible(R.id.iv_left_actbar, true);
+            mHolder.setVisible(R.id.tv_left_actbar, false);
+            mHolder.setImageResource(R.id.iv_left_actbar, imgResId);
+        }
     }
 
     @Override
     public void setLeftText(String leftText) {
-        ViewHelper.setVisible(ivLeftActbar, false);
-        ViewHelper.setVisible(tvLeftActbar, true);
-        ViewHelper.setText(tvLeftActbar, leftText);
+        if (null != mHolder) {
+            mHolder.setVisible(R.id.iv_left_actbar, false);
+            mHolder.setVisible(R.id.tv_left_actbar, true);
+            mHolder.setText(R.id.tv_left_actbar, leftText);
+        }
     }
 
     @Override
     public void setTitle(String title) {
-        ViewHelper.setText(tvTitleActbar, title);
+        if (null != mHolder)
+            mHolder.setText(R.id.tv_title_actbar, title);
     }
 
     @Override
     public void setRightImg(int imgResId) {
-        ViewHelper.setVisible(ivRightActbar, true);
-        ViewHelper.setVisible(tvRightActbar, false);
-        ViewHelper.setImageResource(ivRightActbar, imgResId);
+        if (null != mHolder) {
+            mHolder.setVisible(R.id.iv_right_actbar, true);
+            mHolder.setVisible(R.id.tv_right_actbar, false);
+            mHolder.setImageResource(R.id.iv_right_actbar, imgResId);
+        }
     }
 
     @Override
     public void setRightText(String rightText) {
-        ViewHelper.setVisible(ivRightActbar, false);
-        ViewHelper.setVisible(tvRightActbar, true);
-        ViewHelper.setText(tvRightActbar, rightText);
+        if (null != mHolder) {
+            mHolder.setVisible(R.id.iv_right_actbar, false);
+            mHolder.setVisible(R.id.tv_right_actbar, true);
+            mHolder.setText(R.id.tv_right_actbar, rightText);
+        }
     }
 
     @OnClick({R.id.fl_left_actbar, R.id.fl_right_actbar, R.id.fl_title_actbar})
@@ -91,14 +86,13 @@ public class CommonActionBar implements IActionBar<LinearLayout> {
         }
     }
 
+    /**
+     * 跟视图
+     *
+     * @param holder
+     */
     @Override
-    public void bindViews(View veiw) {
-        mUnbinder = ButterKnife.bind(this, veiw);
-    }
-
-    @Override
-    public void unbindView() {
-        if (null != mUnbinder)
-            mUnbinder.unbind();
+    public void attachHolder(IHolder holder) {
+        mHolder = holder;
     }
 }

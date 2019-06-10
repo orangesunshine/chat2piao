@@ -7,7 +7,7 @@ import java.util.Map;
 import retrofit2.http.Body;
 import retrofit2.http.HeaderMap;
 
-public interface IPrefixSuffixCommonApi {
+public interface IPrefixSuffixCommonApi extends INoData {
     <T> void get(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback);
 
     <T> void get(@HeaderMap Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback);

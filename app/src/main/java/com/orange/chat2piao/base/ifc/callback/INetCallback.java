@@ -13,6 +13,7 @@ public interface INetCallback<T> {
 
     /**
      * 成功
+     *
      * @param t
      */
     void onSuccess(T t);
@@ -20,10 +21,11 @@ public interface INetCallback<T> {
     /**
      * 完成
      */
-    void onComplete();
+    void onComplete(boolean noData);
 
     /**
      * 失败
+     *
      * @param code
      * @param error
      */

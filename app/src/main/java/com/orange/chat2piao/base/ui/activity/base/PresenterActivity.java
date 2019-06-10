@@ -1,6 +1,7 @@
 package com.orange.chat2piao.base.ui.activity.base;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.orange.chat2piao.base.ifc.presenter.IGeneratePresenter;
 import com.orange.chat2piao.base.ifc.view.IView;
@@ -19,9 +20,15 @@ public abstract class PresenterActivity<P extends BasePresenter> extends BaseAct
             mPresenter.attachView(this);
     }
 
+    /**
+     * 初始化
+     *
+     * @param content
+     * @param bundle
+     */
     @Override
-    public void initVars(Bundle bundle) {
-        super.initVars(bundle);
+    public void initVars(View content, Bundle bundle) {
+        super.initVars(content, bundle);
         mPresenter = generatePresenter();
     }
     // </editor-fold>
@@ -29,13 +36,13 @@ public abstract class PresenterActivity<P extends BasePresenter> extends BaseAct
     // <editor-fold defaultstate="collapsed" desc="吐司方法">
     @Override
     public void showToast(CharSequence text) {
-        if(null != mToast)
+        if (null != mToast)
             mToast.showToast(text);
     }
 
     @Override
     public void showToast(int stringId) {
-        if(null != mToast)
+        if (null != mToast)
             mToast.showToast(stringId);
     }
     // </editor-fold>

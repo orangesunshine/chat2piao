@@ -11,7 +11,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.orange.chat2piao.base.constant.IInitConst;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
-import com.orange.chat2piao.base.ifc.component.IBindView;
+import com.orange.chat2piao.base.ifc.component.IAttachHolder;
+import com.orange.chat2piao.base.ifc.component.IHolder;
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
@@ -21,18 +22,18 @@ import com.orange.chat2piao.base.ifc.globle.IGloble;
 import com.orange.chat2piao.base.ifc.img.IImage;
 import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
+import com.orange.chat2piao.base.impl.component.DefaultHolder;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.base.impl.img.GlideImageImpl;
 import com.orange.chat2piao.base.ui.app.LypApp;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
-public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IBindView, IToast, ILoadingDialogFragment, IRefreshNdLoadmore, Application.ActivityLifecycleCallbacks {
+public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IToast, ILoadingDialogFragment, IRefreshNdLoadmore, Application.ActivityLifecycleCallbacks {
     //static&final
     private static volatile GlobleImp ourInstance = null;
     private IImage mDefaultImage = new GlideImageImpl();
     private IStatusBar mStatusBar;
     private IActionBar mActionBar;
-    private IBindView mBindView;
     private IToast mToast;
     private ILoadingDialogFragment mLoadingDialogFragment;
     private IRefreshNdLoadmore mHeaderNdFooter;
@@ -97,8 +98,8 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     @Override
-    public IBindView buildBindView() {
-        return DefaultConfig.getInstance().buildBindView();
+    public IHolder buildHolder(View view) {
+        return new DefaultHolder(view);
     }
 
     @Override
@@ -227,31 +228,17 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     @Override
-    public void finishRefresh() {
+    public void finishRefresh(boolean noData) {
         if (null == mHeaderNdFooter)
             mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.finishRefresh();
+        mHeaderNdFooter.finishRefresh(noData);
     }
 
     @Override
-    public void finishLoadmore() {
+    public void finishLoadmore(boolean noData) {
         if (null == mHeaderNdFooter)
             mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
-        mHeaderNdFooter.finishLoadmore();
-    }
-
-    @Override
-    public void bindViews(View view) {
-        if (null == mBindView)
-            mBindView = DefaultConfig.getInstance().buildBindView();
-        mBindView.bindViews(view);
-    }
-
-    @Override
-    public void unbindView() {
-        if (null == mBindView)
-            mBindView = DefaultConfig.getInstance().buildBindView();
-        mBindView.unbindView();
+        mHeaderNdFooter.finishLoadmore(noData);
     }
 
     @Override

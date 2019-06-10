@@ -15,8 +15,8 @@ public class ButterKnifeBindView implements IBindView {
 
     @Override
     public void bindViews(View view) {
-        Preconditions.checkNotNull(view);
-        mUnbinder = ButterKnife.bind(ActivityUtils.getActivityByView(view));
+        if (null != view)
+            mUnbinder = ButterKnife.bind(ActivityUtils.getActivityByView(view));
     }
 
     @Override

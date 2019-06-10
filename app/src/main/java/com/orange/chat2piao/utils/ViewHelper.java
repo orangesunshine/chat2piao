@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.orange.chat2piao.R;
@@ -38,6 +39,17 @@ import java.net.URL;
 
 public class ViewHelper {
     public static final String TAG_COPY = "tag_copy";
+
+    /**
+     * 设置文本
+     *
+     * @param tv
+     * @param stringRes
+     */
+    public static void setText(TextView tv, @StringRes int stringRes) {
+        if (null == tv) throw new NullPointerException();
+        tv.setText(stringRes);
+    }
 
     /**
      * 设置文本

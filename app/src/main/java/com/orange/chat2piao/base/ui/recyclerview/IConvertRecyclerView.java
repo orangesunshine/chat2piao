@@ -4,5 +4,5 @@ public interface IConvertRecyclerView<T> {
     /**
      * 对外提供的方法
      */
-    void convert(CommonViewHolder holder, T t, boolean selected);
+    void convert(RecyclerViewHolder holder, T t, boolean selected);
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.chat2piao.utils.ViewHelper;
@@ -17,7 +16,7 @@ import java.util.List;
  *
  * @param <T> 项数据类型
  */
-public class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
+public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
     public static final int SELECTED_NONE = -1;//所有item都未选中
     private Context mContext;
     private int mLayoutId;//item布局文件
@@ -64,7 +63,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
         return newInstance(context, rv, null, adapter, layout, datas, loadmore, convertViewHolder);
     }
 
-    public static <T> CommonAdapter<T> newInstance(Context context, RecyclerView rv, View empty,CommonAdapter<T> adapter, int layout, List<T> datas, IConvertRecyclerView<T> convertViewHolder) {
+    public static <T> CommonAdapter<T> newInstance(Context context, RecyclerView rv, View empty, CommonAdapter<T> adapter, int layout, List<T> datas, IConvertRecyclerView<T> convertViewHolder) {
         return newInstance(context, rv, empty, adapter, layout, datas, false, convertViewHolder);
     }
 
@@ -77,7 +76,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
      * @param adapter
      * @param layout
      * @param datas
-     * @param loadmore 是否加载更多
+     * @param loadmore          是否加载更多
      * @param convertViewHolder
      * @param <T>
      * @return
@@ -135,9 +134,8 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
      * @return
      */
     @Override
-    public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        CommonViewHolder viewHolder = CommonViewHolder.getRecyclerHolder(mContext, parent, mLayoutId);
-        return viewHolder;
+    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return RecyclerViewHolder.getRecyclerViewHolder(mContext, parent, mLayoutId);
     }
 
     /**
@@ -147,7 +145,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
      * @param position
      */
     @Override
-    public void onBindViewHolder(CommonViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         if (null != mConvertViewHolder) {
             mConvertViewHolder.convert(holder, mDatas.get(position), mSelectedIndex == position);
         }

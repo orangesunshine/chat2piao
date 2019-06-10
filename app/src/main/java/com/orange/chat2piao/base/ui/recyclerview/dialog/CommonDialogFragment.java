@@ -22,7 +22,8 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.githang.statusbar.StatusBarCompat;
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ui.recyclerview.ContentViewHolder;
+import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.impl.component.DefaultHolder;
 import com.orange.chat2piao.base.ui.recyclerview.IConvertContentView;
 
 import java.io.Serializable;
@@ -86,7 +87,7 @@ public class CommonDialogFragment<T extends Serializable> extends DialogFragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View contentView = inflater.inflate(mLayoutId, container);
-        ContentViewHolder holder = new ContentViewHolder(contentView);
+        IHolder holder = new DefaultHolder(contentView);
         mConvertHolder.convert(holder, mData);
         return contentView;
     }

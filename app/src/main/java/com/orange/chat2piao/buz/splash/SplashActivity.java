@@ -9,7 +9,7 @@ import android.view.animation.ScaleAnimation;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.adapter.AnimationListenerAdapter;
-import com.orange.chat2piao.base.demo.activity.BaseActivityDemoLoading;
+import com.orange.chat2piao.base.demo.activity.BaseLoadingNetActivityDemo;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.utils.ActivityUtils;
 
@@ -51,7 +51,7 @@ public class SplashActivity extends BaseActivity {
             mSplashAnim.setAnimationListener(new AnimationListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    ActivityUtils.launchActivity(mActivity, BaseActivityDemoLoading.class);
+                    ActivityUtils.launchActivity(mActivity, BaseLoadingNetActivityDemo.class);
                 }
             });
         }

@@ -10,7 +10,7 @@ import android.widget.PopupWindow;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ui.recyclerview.ContentViewHolder;
+import com.orange.chat2piao.base.impl.component.DefaultHolder;
 import com.orange.chat2piao.base.ui.recyclerview.IConvertContentView;
 
 public class CommonPopupWindow<T> {
@@ -24,7 +24,7 @@ public class CommonPopupWindow<T> {
         mInstance = new PopupWindow(mContentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
         initWindow();
         if (null != convertViewHolder)
-            convertViewHolder.convert(new ContentViewHolder(mContentView), data);
+            convertViewHolder.convert(new DefaultHolder(mContentView), data);
     }
 
     public View getContentView() {

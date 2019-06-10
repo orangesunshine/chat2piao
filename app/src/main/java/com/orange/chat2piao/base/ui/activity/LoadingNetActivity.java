@@ -1,6 +1,7 @@
 package com.orange.chat2piao.base.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.orange.chat2piao.base.ifc.component.ILoading;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
@@ -20,6 +21,7 @@ public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends 
 
     /**
      * 创建生命周期回调，默认loading
+     *
      * @param activity
      * @param bundle
      */
@@ -31,13 +33,14 @@ public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends 
     }
 
     /**
-     * 初始化创建
+     * 初始化
      *
+     * @param content
      * @param bundle
      */
     @Override
-    public void initVars(Bundle bundle) {
-        super.initVars(bundle);
+    public void initVars(View content, Bundle bundle) {
+        super.initVars(content, bundle);
         mLoading = buildLoading();
     }
 
@@ -46,8 +49,8 @@ public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends 
      */
     @Override
     public void showLoading() {
-        Preconditions.checkNotNull(mLoading);
-        mLoading.showLoading();
+        if (null != mLoading)
+            mLoading.showLoading();
     }
 
     /**
@@ -55,8 +58,8 @@ public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends 
      */
     @Override
     public void dismissLoading() {
-        Preconditions.checkNotNull(mLoading);
-        mLoading.dismissLoading();
+        if (null != mLoading)
+            mLoading.dismissLoading();
     }
 
     /**
