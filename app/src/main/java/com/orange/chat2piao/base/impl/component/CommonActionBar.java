@@ -5,10 +5,9 @@ import android.widget.LinearLayout;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
-import com.orange.chat2piao.base.ifc.component.IAttachHolder;
-import com.orange.chat2piao.base.ifc.component.IHolder;
-import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
-import com.orange.chat2piao.utils.Preconditions;
+import com.orange.chat2piao.base.ifc.call.IAttachHolder;
+import com.orange.chat2piao.base.ifc.call.IHolder;
+import com.orange.chat2piao.base.ifc.callback.IActionBarCallback;
 
 import butterknife.OnClick;
 

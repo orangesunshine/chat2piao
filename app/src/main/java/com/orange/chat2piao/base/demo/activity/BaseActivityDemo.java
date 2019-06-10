@@ -1,7 +1,7 @@
 package com.orange.chat2piao.base.demo.activity;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
+import com.orange.chat2piao.base.ifc.callback.IActionBarCallback;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 
 import java.util.Random;

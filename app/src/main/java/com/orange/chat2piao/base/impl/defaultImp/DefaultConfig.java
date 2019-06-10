@@ -5,22 +5,21 @@ import android.view.View;
 
 import com.orange.chat2piao.base.adapter.ActivityLifecycleAdapt;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
-import com.orange.chat2piao.base.ifc.component.IAttachHolder;
-import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.ifc.call.IHolder;
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildFactory;
+import com.orange.chat2piao.base.ifc.generate.IBuildLoadingFactory;
 import com.orange.chat2piao.base.impl.app.ActivityLifecycleCallbacksImp;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
 import com.orange.chat2piao.base.impl.component.DefaultHolder;
-import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
+import com.orange.chat2piao.thirdParty.statusbar.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.component.SwipeRefreshNdLoadmore;
 import com.orange.chat2piao.base.impl.component.ToastImpl;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
-public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildFactory {
+public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildLoadingFactory {
     private static volatile DefaultConfig sInstance;
 
     private DefaultConfig() {

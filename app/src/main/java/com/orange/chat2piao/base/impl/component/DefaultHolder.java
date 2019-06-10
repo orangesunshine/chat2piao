@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.StringRes;
 
-import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.ifc.call.IHolder;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.ui.recyclerview.RecyclerViewHolder;
-import com.orange.chat2piao.utils.ViewHelper;
+import com.orange.chat2piao.utils.ViewUtils;
 
 public class DefaultHolder implements IHolder {
 
@@ -62,28 +62,6 @@ public class DefaultHolder implements IHolder {
     }
 
     /**
-     * 通过ViewId获取TextView控件
-     *
-     * @param viewId
-     * @return
-     */
-    @Override
-    public TextView getTextView(int viewId) {
-        return getView(viewId);
-    }
-
-    /**
-     * 通过ViewId获取ImageView控件
-     *
-     * @param viewId
-     * @return
-     */
-    @Override
-    public ImageView getImageView(int viewId) {
-        return getView(viewId);
-    }
-
-    /**
      * 设置文本
      *
      * @param viewId
@@ -105,7 +83,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setText(TextView tv, CharSequence text) {
-        ViewHelper.setText(tv, text);
+        ViewUtils.setText(tv, text);
         return this;
     }
 
@@ -129,7 +107,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setText(TextView tv, @StringRes int stringRes) {
-        ViewHelper.setText(tv, stringRes);
+        ViewUtils.setText(tv, stringRes);
         return this;
     }
 
@@ -155,7 +133,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setTextSize(TextView tv, float size) {
-        ViewHelper.setTextSize(tv, size);
+        ViewUtils.setTextSize(tv, size);
         return this;
     }
 
@@ -181,7 +159,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setTextColor(TextView tv, @ColorInt int color) {
-        ViewHelper.setTextColor(tv, color);
+        ViewUtils.setTextColor(tv, color);
         return this;
     }
 
@@ -207,7 +185,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setImageResource(ImageView iv, int resId) {
-        ViewHelper.setImageResource(iv, resId);
+        ViewUtils.setImageResource(iv, resId);
         return this;
     }
 
@@ -233,7 +211,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setBackgroundResource(View view, int resId) {
-        ViewHelper.setBackgroundResource(view, resId);
+        ViewUtils.setBackgroundResource(view, resId);
         return this;
     }
 
@@ -285,7 +263,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setVisible(View view, boolean visible) {
-        ViewHelper.setVisible(view, visible);
+        ViewUtils.setVisible(view, visible);
         return this;
     }
 
@@ -311,7 +289,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setSelect(View view, boolean selected) {
-        ViewHelper.setSelect(view, selected);
+        ViewUtils.setSelect(view, selected);
         return this;
     }
 

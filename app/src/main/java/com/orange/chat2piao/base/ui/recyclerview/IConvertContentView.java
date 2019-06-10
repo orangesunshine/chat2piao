@@ -1,6 +1,6 @@
 package com.orange.chat2piao.base.ui.recyclerview;
 
-import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.ifc.call.IHolder;
 
 public interface IConvertContentView<T> {
     /**

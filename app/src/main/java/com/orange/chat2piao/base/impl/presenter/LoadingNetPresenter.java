@@ -2,20 +2,20 @@ package com.orange.chat2piao.base.impl.presenter;
 
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.adapter.NetCallbackAdapterByLoading;
-import com.orange.chat2piao.base.ifc.callback.INetCallback;
-import com.orange.chat2piao.base.ifc.callback.INetRequest;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildNetCallback;
+import com.orange.chat2piao.base.impl.callback.LoadingNetCallback;
+import com.orange.chat2piao.base.ifc.callback.ILoadingNetCallback;
+import com.orange.chat2piao.base.ifc.generate.IBuildLoadingNetCallback;
+import com.orange.chat2piao.base.ifc.net.ILoadingNetRequest;
 import com.orange.chat2piao.base.ifc.view.INetView;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 
-public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePresenter<V> implements IBuildNetCallback<T>, INetCallback<T>, INetRequest<T> {
-    private INetCallback<T> mNetCallback;
+public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePresenter<V> implements IBuildLoadingNetCallback<T>, ILoadingNetCallback<T>, ILoadingNetRequest<T> {
+    private ILoadingNetCallback<T> mNetCallback;
 
     @Override
     public void onActivityCreate(BaseActivity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
-        mNetCallback = buildNetCallback();
+        mNetCallback = buildLoadingNetCallback();
         reqeust(mNetCallback);
     }
 
@@ -43,9 +43,9 @@ public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePre
      * 完成
      */
     @Override
-    public void onComplete(boolean noData) {
+    public void onComplete() {
         if (null != mNetCallback)
-            mNetCallback.onComplete(noData);
+            mNetCallback.onComplete();
     }
 
     /**
@@ -62,8 +62,8 @@ public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePre
 
     // <editor-fold defaultstate="collapsed" desc="创建网络回调">
     @Override
-    public INetCallback<T> buildNetCallback() {
-        return new NetCallbackAdapterByLoading<>(mView);
+    public ILoadingNetCallback<T> buildLoadingNetCallback() {
+        return new LoadingNetCallback<>(mView);
     }
     // </editor-fold>
 }

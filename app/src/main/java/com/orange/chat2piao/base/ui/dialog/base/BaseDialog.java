@@ -17,7 +17,7 @@ import androidx.annotation.StyleRes;
 import androidx.fragment.app.DialogFragment;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.callback.IContentView;
+import com.orange.chat2piao.base.ifc.call.IContentView;
 
 import static com.blankj.utilcode.util.ScreenUtils.getScreenWidth;
 import static com.wangnan.library.util.DimensionUtil.dp2px;

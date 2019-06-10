@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.ifc.call.IHolder;
 import com.orange.chat2piao.base.impl.component.DefaultHolder;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHolder, View.OnClickListener {
@@ -43,28 +43,6 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
     @Override
     public <T extends View> T getView(int viewId) {
         return null == mHolder ? null : mHolder.getView(viewId);
-    }
-
-    /**
-     * 通过ViewId获取TextView控件
-     *
-     * @param viewId
-     * @return
-     */
-    @Override
-    public TextView getTextView(int viewId) {
-        return null == mHolder ? null : mHolder.getTextView(viewId);
-    }
-
-    /**
-     * 通过ViewId获取ImageView控件
-     *
-     * @param viewId
-     * @return
-     */
-    @Override
-    public ImageView getImageView(int viewId) {
-        return null == mHolder ? null : mHolder.getImageView(viewId);
     }
 
     /**

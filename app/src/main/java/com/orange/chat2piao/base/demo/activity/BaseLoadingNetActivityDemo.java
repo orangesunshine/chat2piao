@@ -6,9 +6,9 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.adapter.NetCallbackAdapterByLoading;
+import com.orange.chat2piao.base.impl.callback.LoadingNetCallback;
 import com.orange.chat2piao.base.ifc.presenter.IPresenter;
-import com.orange.chat2piao.base.impl.net.UrlCommonApi;
+import com.orange.chat2piao.base.impl.net.RetrofitUrlApi;
 import com.orange.chat2piao.base.ui.activity.LoadingNetActivity;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 
@@ -47,7 +47,7 @@ public class BaseLoadingNetActivityDemo extends LoadingNetActivity {
         headers.put("D", "13b50a9f-73b6-406d-a562-7652c238c969");
         headers.put("C", "a");
         HashMap<String, String> params = new HashMap<>();
-        UrlCommonApi.getInstance().post(headers, "http://192.168.254.103:8080/ifc/hello", params, new NetCallbackAdapterByLoading<String>(this) {
+        RetrofitUrlApi.getInstance().post(headers, "http://192.168.254.103:8080/ifc/hello", params, new LoadingNetCallback<String>(this) {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);

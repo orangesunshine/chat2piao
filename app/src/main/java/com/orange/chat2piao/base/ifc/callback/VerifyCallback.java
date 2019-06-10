@@ -7,5 +7,5 @@ public interface VerifyCallback<T> {
      *
      * @return
      */
-    boolean verify(T sequence);
+    boolean verify(T data);
 }

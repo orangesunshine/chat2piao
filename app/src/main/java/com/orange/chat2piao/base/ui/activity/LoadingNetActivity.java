@@ -3,17 +3,16 @@ package com.orange.chat2piao.base.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.orange.chat2piao.base.ifc.component.ILoading;
+import com.orange.chat2piao.base.ifc.call.ILoading;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildLoading;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildLoadingDialogFragment;
+import com.orange.chat2piao.base.ifc.generate.IBuildLoading;
+import com.orange.chat2piao.base.ifc.generate.IBuildLoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.view.INetView;
 import com.orange.chat2piao.base.impl.component.LoadingImpl;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.impl.presenter.LoadingNetPresenter;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.base.ui.activity.base.PresenterActivity;
-import com.orange.chat2piao.utils.Preconditions;
 
 public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends PresenterActivity<P> implements IBuildLoading, IBuildLoadingDialogFragment, INetView {
     // <editor-fold defaultstate="collapsed" desc="loading">

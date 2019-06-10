@@ -27,7 +27,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name=".base.ui.app.LypApp"
+        android:name=".buz.app.LypApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -37,7 +37,7 @@
 
         <activity android:name=".buz.splash.SplashActivity"></activity>
         <activity
-            android:name=".buz.main.MainActivity"
+            android:name=".base.demo.activity.MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,6 +1,6 @@
 package com.orange.chat2piao.base.impl.component;
 
-import com.orange.chat2piao.base.ifc.component.ILoading;
+import com.orange.chat2piao.base.ifc.call.ILoading;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;

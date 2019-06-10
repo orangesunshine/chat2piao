@@ -3,34 +3,32 @@ package com.orange.chat2piao.base.ui.activity.base;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.callback.IActvityAlive;
-import com.orange.chat2piao.base.ifc.callback.IContentView;
-import com.orange.chat2piao.base.ifc.callback.ICreatedNdDestroy;
-import com.orange.chat2piao.base.ifc.callback.IInit;
-import com.orange.chat2piao.base.ifc.callback.IInitVars;
+import com.orange.chat2piao.base.ifc.call.IAttachHolder;
+import com.orange.chat2piao.base.ifc.call.IContentView;
+import com.orange.chat2piao.base.ifc.call.IHolder;
+import com.orange.chat2piao.base.ifc.call.activity.IActvityAlive;
+import com.orange.chat2piao.base.ifc.call.activity.ICreatedNdDestroy;
+import com.orange.chat2piao.base.ifc.call.activity.IInit;
+import com.orange.chat2piao.base.ifc.call.activity.IInitVars;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
-import com.orange.chat2piao.base.ifc.component.IAttachHolder;
-import com.orange.chat2piao.base.ifc.component.IHolder;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildActionBar;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildHolder;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildStatusBar;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildToast;
+import com.orange.chat2piao.base.ifc.generate.IBuildActionBar;
+import com.orange.chat2piao.base.ifc.generate.IBuildHolder;
+import com.orange.chat2piao.base.ifc.generate.IBuildStatusBar;
+import com.orange.chat2piao.base.ifc.generate.IBuildToast;
 import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
 import com.orange.chat2piao.base.impl.component.DefaultHolder;
-import com.orange.chat2piao.base.impl.component.StatusBarTranslucent;
+import com.orange.chat2piao.thirdParty.statusbar.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.component.ToastImpl;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 
-public abstract class BaseActivity<V extends IView> extends FragmentActivity implements IContentView, ICreatedNdDestroy, IActvityAlive, IBuildStatusBar, IBuildActionBar, IBuildHolder, IBuildToast, IInitVars, IInit {
+public abstract class BaseActivity<V extends IView> extends FragmentActivity implements IContentView, ICreatedNdDestroy, IActvityAlive, IInitVars, IInit, IBuildStatusBar, IBuildActionBar, IBuildHolder, IBuildToast {
     // <editor-fold defaultstate="collapsed" desc="生命周期回调方法">
 
     /**

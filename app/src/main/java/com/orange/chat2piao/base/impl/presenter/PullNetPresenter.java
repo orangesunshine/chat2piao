@@ -2,29 +2,28 @@ package com.orange.chat2piao.base.impl.presenter;
 
 import android.os.Bundle;
 
-import com.orange.chat2piao.base.adapter.NetCallbackAdapterByPull;
-import com.orange.chat2piao.base.adapter.PullNetRequestAdapter;
-import com.orange.chat2piao.base.ifc.callback.INetCallback;
-import com.orange.chat2piao.base.ifc.callback.INetRequest;
+import com.orange.chat2piao.base.ifc.callback.IPullNetCallback;
+import com.orange.chat2piao.base.ifc.generate.IBuildPullNetCallback;
+import com.orange.chat2piao.base.ifc.net.IPageNetRequest;
+import com.orange.chat2piao.base.impl.callback.PullNetCallback;
+import com.orange.chat2piao.base.impl.net.PullNetRequestImpl;
 import com.orange.chat2piao.base.ifc.callback.IPullCallback;
-import com.orange.chat2piao.base.ifc.callback.IPullNetRequest;
-import com.orange.chat2piao.base.ifc.callback.generate.IBuildPullNetRequest;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildNetCallback;
+import com.orange.chat2piao.base.ifc.generate.IBuildPullNetRequest;
+import com.orange.chat2piao.base.ifc.net.IPullNetRequest;
 import com.orange.chat2piao.base.ifc.view.IPullView;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
-import com.orange.chat2piao.utils.Preconditions;
 
-import static com.orange.chat2piao.base.ifc.callback.IPullNetRequest.TYPE_LOADMORE;
-import static com.orange.chat2piao.base.ifc.callback.IPullNetRequest.TYPE_REFRESH;
+import static com.orange.chat2piao.base.ifc.net.IPullNetRequest.TYPE_LOADMORE;
+import static com.orange.chat2piao.base.ifc.net.IPullNetRequest.TYPE_REFRESH;
 
-public abstract class PullNetPresenter<V extends IPullView, T> extends BasePresenter<V> implements IBuildPullNetRequest<T>, IBuildNetCallback<T>, INetCallback<T>, INetRequest<T>, IPullCallback {
-    private INetCallback<T> mNetCallback;
+public abstract class PullNetPresenter<V extends IPullView, T> extends BasePresenter<V> implements IBuildPullNetCallback<T>, IPullNetCallback<T>, IBuildPullNetRequest<T>, IPageNetRequest<T>, IPullCallback {
+    private IPullNetCallback<T> mPullNetCallback;
     private IPullNetRequest<T> mPullNetRequest;
 
     @Override
     public void onActivityCreate(BaseActivity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
-        mNetCallback = buildNetCallback();
+        mPullNetCallback = buildPullNetCallback();
         mPullNetRequest = buildPullNetRequest();
         if (null != mView) mView.refresh();
     }
@@ -34,8 +33,8 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void onNetStart() {
-        if (null != mNetCallback)
-            mNetCallback.onNetStart();
+        if (null != mPullNetCallback)
+            mPullNetCallback.onNetStart();
     }
 
     /**
@@ -45,8 +44,8 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void onSuccess(T t) {
-        if (null != mNetCallback)
-            mNetCallback.onSuccess(t);
+        if (null != mPullNetCallback)
+            mPullNetCallback.onSuccess(t);
     }
 
     /**
@@ -54,8 +53,8 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void onComplete(boolean noData) {
-        if (null != mNetCallback)
-            mNetCallback.onComplete(noData);
+        if (null != mPullNetCallback)
+            mPullNetCallback.onComplete(noData);
     }
 
     /**
@@ -66,8 +65,8 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void onError(int code, Throwable error) {
-        if (null != mNetCallback)
-            mNetCallback.onError(code, error);
+        if (null != mPullNetCallback)
+            mPullNetCallback.onError(code, error);
     }
 
     /**
@@ -76,7 +75,7 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
     @Override
     public void onRefresh() {
         if (null != mPullNetRequest)
-            mPullNetRequest.reqeust(TYPE_REFRESH, mNetCallback);
+            mPullNetRequest.pullReqeust(TYPE_REFRESH, mPullNetCallback);
     }
 
     /**
@@ -85,16 +84,16 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
     @Override
     public void onLoadmore() {
         if (null != mPullNetRequest)
-            mPullNetRequest.reqeust(TYPE_LOADMORE, mNetCallback);
+            mPullNetRequest.pullReqeust(TYPE_LOADMORE, mPullNetCallback);
     }
 
     @Override
-    public INetCallback<T> buildNetCallback() {
-        return new NetCallbackAdapterByPull<T>(mView);
+    public IPullNetCallback<T> buildPullNetCallback() {
+        return new PullNetCallback<T>(mView);
     }
 
     @Override
     public IPullNetRequest<T> buildPullNetRequest() {
-        return new PullNetRequestAdapter<>(this);
+        return new PullNetRequestImpl<>();
     }
 }

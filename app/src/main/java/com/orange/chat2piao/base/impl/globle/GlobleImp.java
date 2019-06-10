@@ -11,26 +11,27 @@ import androidx.fragment.app.FragmentManager;
 
 import com.orange.chat2piao.base.constant.IInitConst;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
-import com.orange.chat2piao.base.ifc.component.IAttachHolder;
-import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.ifc.call.IHolder;
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildFactory;
+import com.orange.chat2piao.base.ifc.generate.IBuildLoadingFactory;
 import com.orange.chat2piao.base.ifc.globle.IGloble;
 import com.orange.chat2piao.base.ifc.img.IImage;
-import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
+import com.orange.chat2piao.base.ifc.callback.IActionBarCallback;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
 import com.orange.chat2piao.base.impl.component.DefaultHolder;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.base.impl.img.GlideImageImpl;
-import com.orange.chat2piao.base.ui.app.LypApp;
+import com.orange.chat2piao.buz.app.LypApp;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
-public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IActionBar, IToast, ILoadingDialogFragment, IRefreshNdLoadmore, Application.ActivityLifecycleCallbacks {
+public class GlobleImp implements IGloble, IBuildLoadingFactory, IImage, IStatusBar, IActionBar, IToast, ILoadingDialogFragment, IRefreshNdLoadmore, Application.ActivityLifecycleCallbacks {
     //static&final
     private static volatile GlobleImp ourInstance = null;
+
+    private IBuildLoadingFactory mDefaultConfig = DefaultConfig.getInstance();
     private IImage mDefaultImage = new GlideImageImpl();
     private IStatusBar mStatusBar;
     private IActionBar mActionBar;
@@ -51,6 +52,7 @@ public class GlobleImp implements IGloble, IBuildFactory, IImage, IStatusBar, IA
     }
 
     private GlobleImp() {
+
     }
 
     @Override

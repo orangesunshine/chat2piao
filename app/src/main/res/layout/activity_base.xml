@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/actbar_common" />
+    <include
+        android:id="@+id/layout_actbar"
+        layout="@layout/actbar_common" />
 
     <ViewStub
         android:id="@+id/stub_content"

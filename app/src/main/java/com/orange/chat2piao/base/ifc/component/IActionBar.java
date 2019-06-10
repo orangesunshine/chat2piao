@@ -2,7 +2,7 @@ package com.orange.chat2piao.base.ifc.component;
 
 import android.view.ViewGroup;
 
-import com.orange.chat2piao.base.ifc.listener.IActionBarCallback;
+import com.orange.chat2piao.base.ifc.callback.IActionBarCallback;
 
 import androidx.annotation.DrawableRes;
 

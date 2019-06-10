@@ -9,7 +9,7 @@ import com.blankj.utilcode.util.ProcessUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.orange.chat2piao.base.constant.IInitConst;
 import com.orange.chat2piao.base.ifc.app.IApp;
-import com.orange.chat2piao.base.ifc.app.IBuildActivityLifecycleCallbacks;
+import com.orange.chat2piao.base.ifc.generate.IBuildActivityLifecycleCallbacks;
 import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 
 public class BaseApplication extends Application implements IApp, IBuildActivityLifecycleCallbacks {

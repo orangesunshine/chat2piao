@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
-import com.orange.chat2piao.base.ifc.component.generate.IBuildHeaderNdFooter;
+import com.orange.chat2piao.base.ifc.generate.IBuildHeaderNdFooter;
 import com.orange.chat2piao.base.ifc.view.IPullView;
 import com.orange.chat2piao.base.impl.globle.GlobleImp;
 import com.orange.chat2piao.base.impl.presenter.PullNetPresenter;

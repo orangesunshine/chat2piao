@@ -5,9 +5,8 @@ import android.widget.TextView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.component.IHolder;
-import com.orange.chat2piao.utils.Preconditions;
-import com.orange.chat2piao.utils.ViewHelper;
+import com.orange.chat2piao.base.ifc.call.IHolder;
+import com.orange.chat2piao.utils.ViewUtils;
 
 public class SwipeRefreshNdLoadmore extends RefreshNdLoadmoreImpl<SwipeRefreshLayout, TextView> {
     private boolean noData;
@@ -54,7 +53,7 @@ public class SwipeRefreshNdLoadmore extends RefreshNdLoadmoreImpl<SwipeRefreshLa
     @Override
     public void finishLoadmore(boolean noData) {
         noData(noData);
-        ViewHelper.setVisible(footer, false);
+        ViewUtils.setVisible(footer, false);
     }
 
     /**

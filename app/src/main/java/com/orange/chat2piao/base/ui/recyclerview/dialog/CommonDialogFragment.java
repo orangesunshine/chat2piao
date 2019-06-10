@@ -22,7 +22,7 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.SizeUtils;
 import com.githang.statusbar.StatusBarCompat;
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ifc.component.IHolder;
+import com.orange.chat2piao.base.ifc.call.IHolder;
 import com.orange.chat2piao.base.impl.component.DefaultHolder;
 import com.orange.chat2piao.base.ui.recyclerview.IConvertContentView;
 

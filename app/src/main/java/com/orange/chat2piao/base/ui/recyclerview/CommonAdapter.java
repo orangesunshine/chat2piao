@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.orange.chat2piao.utils.ViewHelper;
+import com.orange.chat2piao.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -345,8 +345,8 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
 
         @Override
         public void empty(boolean empty) {
-            ViewHelper.setVisible(rv, !empty);
-            ViewHelper.setVisible(emtpy, empty);
+            ViewUtils.setVisible(rv, !empty);
+            ViewUtils.setVisible(emtpy, empty);
         }
     }
 }
