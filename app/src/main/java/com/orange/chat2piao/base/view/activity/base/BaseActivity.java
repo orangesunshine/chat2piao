@@ -22,7 +22,7 @@ import com.orange.chat2piao.base.statusbar.IStatusBar;
 import com.orange.chat2piao.base.toast.IToast;
 import com.orange.chat2piao.thirdParty.statusbar.StatusBarTranslucent;
 
-public abstract class BaseActivity<V extends IView> extends FragmentActivity implements IContentView, IBuildActionBar, IBuildToast {
+public abstract class BaseActivity<V extends IView> extends FragmentActivity implements IContentView, IBuildActionBar {
     // <editor-fold defaultstate="collapsed" desc="初始化变量">
     protected BaseActivity mActivity;
     protected IToast mToast;
@@ -43,7 +43,7 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
         mHolder = new DefaultHolder(getWindow().getDecorView().findViewById(android.R.id.content));
         mStatusBar = StatusBarTranslucent.getInstance();
         mActionBar = buildActionBar();
-        mToast = buildToast();
+        mToast = new ToastImpl();
     }
     // </editor-fold>
 
@@ -115,19 +115,6 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
     @Override
     public IActionBar buildActionBar() {
         return new CommonActionBar();
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="创建toast">
-
-    /**
-     * 创建toast
-     *
-     * @return
-     */
-    @Override
-    public IToast buildToast() {
-        return new ToastImpl();
     }
     // </editor-fold>
 
