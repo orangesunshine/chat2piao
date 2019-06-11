@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ui.app.BaseApplication;
+import com.orange.chat2piao.base.app.BaseApplication;
 import com.orange.chat2piao.thirdParty.smartfreshlayout.DynamicTimeFormat;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;

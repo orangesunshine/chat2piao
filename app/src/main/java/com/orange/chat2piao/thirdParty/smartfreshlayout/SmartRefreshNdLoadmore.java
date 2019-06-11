@@ -2,7 +2,7 @@ package com.orange.chat2piao.thirdParty.smartfreshlayout;
 
 import android.view.View;
 
-import com.orange.chat2piao.base.impl.component.RefreshNdLoadmoreImpl;
+import com.orange.chat2piao.base.pull.RefreshNdLoadmoreImpl;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 public class SmartRefreshNdLoadmore extends RefreshNdLoadmoreImpl<SmartRefreshLayout, View> {

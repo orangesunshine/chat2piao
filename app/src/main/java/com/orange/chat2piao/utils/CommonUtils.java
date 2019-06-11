@@ -1,6 +1,6 @@
 package com.orange.chat2piao.utils;
 
-import com.orange.chat2piao.base.constant.IFinalConst;
+import com.orange.chat2piao.constant.IFinalConst;
 
 public class CommonUtils {
     /**

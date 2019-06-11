@@ -6,11 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.impl.callback.LoadingNetCallback;
-import com.orange.chat2piao.base.ifc.presenter.IPresenter;
-import com.orange.chat2piao.base.impl.net.RetrofitUrlApi;
-import com.orange.chat2piao.base.ui.activity.LoadingNetActivity;
-import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
+import com.orange.chat2piao.base.net.LoadingNetCallback;
+import com.orange.chat2piao.base.net.RetrofitUrlApi;
+import com.orange.chat2piao.base.view.activity.LoadingNetActivity;
+import com.orange.chat2piao.base.view.activity.base.BaseActivity;
 
 import java.util.HashMap;
 

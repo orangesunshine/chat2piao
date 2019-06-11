@@ -8,8 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.orange.chat2piao.base.constant.IFinalConst;
-import com.orange.chat2piao.base.ifc.callback.ILoadingNetCallback;
+import com.orange.chat2piao.constant.IFinalConst;
 import com.orange.chat2piao.utils.CommonUtils;
 import com.orange.chat2piao.utils.ReflectionUtils;
 

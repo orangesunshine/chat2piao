@@ -1,42 +1,21 @@
 package com.orange.chat2piao.utils;
 
-import com.orange.chat2piao.base.demo.activity.BasePullNetActivityDemo;
-import com.orange.chat2piao.base.ifc.callback.ILoadingNetCallback;
-import com.orange.chat2piao.base.ifc.callback.IPullNetCallback;
-import com.orange.chat2piao.base.impl.presenter.BasePresenter;
-import com.orange.chat2piao.base.ui.activity.base.PresenterActivity;
+import com.orange.chat2piao.base.net.INetCallback;
+import com.orange.chat2piao.base.presenter.BasePresenter;
+import com.orange.chat2piao.base.view.activity.PresenterActivity;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 
 public class ReflectionUtils {
     /**
-     * 获取父类（IPullNetCallback）泛型实参类型
+     * 获取父类（INetCallback）泛型实参类型
      *
      * @param callback
      * @param <T>
      * @return
      */
-    public static <T> Type getGenericSuperclassActualTypeArgClass(IPullNetCallback<T> callback) {
-        Preconditions.checkNotNull(callback, "null == callback");
-        Type genericSuperclass = callback.getClass().getGenericSuperclass();
-        if (null != genericSuperclass && genericSuperclass instanceof ParameterizedType) {
-            Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
-            if (null != actualTypeArguments && actualTypeArguments.length > 0)
-                return actualTypeArguments[0];
-        }
-        return null;
-    }
-
-    /**
-     * 获取父类（ILoadingNetCallback）泛型实参类型
-     *
-     * @param callback
-     * @param <T>
-     * @return
-     */
-    public static <T> Type getGenericSuperclassActualTypeArgClass(ILoadingNetCallback<T> callback) {
+    public static <T> Type getGenericSuperclassActualTypeArgClass(INetCallback<T> callback) {
         Preconditions.checkNotNull(callback, "null == callback");
         Type genericSuperclass = callback.getClass().getGenericSuperclass();
         if (null != genericSuperclass && genericSuperclass instanceof ParameterizedType) {

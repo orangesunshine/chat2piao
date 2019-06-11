@@ -3,7 +3,7 @@ package com.orange.chat2piao.thirdParty.statusbar;
 import android.app.Activity;
 
 import com.githang.statusbar.StatusBarCompat;
-import com.orange.chat2piao.base.ifc.component.IStatusBar;
+import com.orange.chat2piao.base.statusbar.IStatusBar;
 import com.orange.chat2piao.utils.Preconditions;
 
 public class StatusBarTranslucent implements IStatusBar {

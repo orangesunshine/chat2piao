@@ -30,8 +30,8 @@ import androidx.annotation.StringRes;
 import com.blankj.utilcode.util.ToastUtils;
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.adapter.TextWatcherAdapter;
-import com.orange.chat2piao.base.ifc.callback.VerifyCallback;
-import com.orange.chat2piao.base.impl.globle.GlobleImpl;
+import com.orange.chat2piao.base.common.VerifyCallback;
+import com.orange.chat2piao.base.globle.GlobleImpl;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;

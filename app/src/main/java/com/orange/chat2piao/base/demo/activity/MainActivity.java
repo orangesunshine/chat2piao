@@ -1,7 +1,7 @@
 package com.orange.chat2piao.base.demo.activity;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
+import com.orange.chat2piao.base.view.activity.base.BaseActivity;
 import com.orange.chat2piao.utils.ActivityUtils;
 
 public class MainActivity extends BaseActivity {

@@ -1,17 +1,17 @@
 package com.orange.chat2piao.base.demo.presenter;
 
-import com.orange.chat2piao.base.constant.IFinalConst;
+import com.orange.chat2piao.constant.IFinalConst;
 import com.orange.chat2piao.base.demo.response.BetRecordPage;
 import com.orange.chat2piao.base.demo.response.BetRecordSearch;
-import com.orange.chat2piao.base.ifc.callback.IPullNetCallback;
-import com.orange.chat2piao.base.ifc.view.IPullView;
-import com.orange.chat2piao.base.impl.net.RetrofitPrefixSuffixApi;
-import com.orange.chat2piao.base.impl.presenter.PullNetPresenter;
+import com.orange.chat2piao.base.net.INetCallback;
+import com.orange.chat2piao.base.view.IPulNetlView;
+import com.orange.chat2piao.base.net.RetrofitPrefixSuffixApi;
+import com.orange.chat2piao.base.presenter.PullNetPresenter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PullDemoPresenter extends PullNetPresenter<IPullView, BetRecordSearch> {
+public class PullDemoPresenter extends PullNetPresenter<IPulNetlView, BetRecordSearch> {
     /**
      * 请求参数curPage网络
      *
@@ -19,7 +19,7 @@ public class PullDemoPresenter extends PullNetPresenter<IPullView, BetRecordSear
      * @param callback
      */
     @Override
-    public void reqeust(int curPage, IPullNetCallback<BetRecordSearch> callback) {
+    public void reqeust(int curPage, INetCallback<BetRecordSearch> callback) {
         Map<String, String> params = new HashMap<>();
         params.put("gametype", "-1");
         params.put("pageSize", String.valueOf(curPage));

@@ -8,9 +8,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.orange.chat2piao.base.constant.IFinalConst;
-import com.orange.chat2piao.base.ifc.callback.INoDataCallback;
-import com.orange.chat2piao.base.ifc.callback.IPullNetCallback;
+import com.orange.chat2piao.constant.IFinalConst;
+import com.orange.chat2piao.base.net.INetCallback;
 import com.orange.chat2piao.utils.CommonUtils;
 import com.orange.chat2piao.utils.ReflectionUtils;
 
@@ -22,17 +21,17 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
 public class PullResponseBodyObserver<T> implements Observer<ResponseBody> {
-    private IPullNetCallback<T> callback;
+    private INetCallback<T> callback;
     private INoDataCallback noDataCallback;
     private boolean noData = false;
     private Gson gson = new Gson();
 
-    public PullResponseBodyObserver(IPullNetCallback<T> callback, INoDataCallback noDataCallback) {
+    public PullResponseBodyObserver(INetCallback<T> callback, INoDataCallback noDataCallback) {
         this.callback = callback;
         this.noDataCallback = noDataCallback;
     }
 
-    public static <T> void convert(Observable<ResponseBody> observable, IPullNetCallback<T> callback, INoDataCallback noDataCallback) {
+    public static <T> void convert(Observable<ResponseBody> observable, INetCallback<T> callback, INoDataCallback noDataCallback) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PullResponseBodyObserver<>(callback, noDataCallback));

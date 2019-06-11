@@ -10,7 +10,7 @@ import android.view.animation.ScaleAnimation;
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.adapter.AnimationListenerAdapter;
 import com.orange.chat2piao.base.demo.activity.BaseLoadingNetActivityDemo;
-import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
+import com.orange.chat2piao.base.view.activity.base.BaseActivity;
 import com.orange.chat2piao.utils.ActivityUtils;
 
 import butterknife.BindView;

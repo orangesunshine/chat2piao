@@ -4,9 +4,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.demo.presenter.PullDemoPresenter;
-import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
-import com.orange.chat2piao.base.ui.activity.PullNetActivity;
-import com.orange.chat2piao.base.ui.recyclerview.CommonAdapter;
+import com.orange.chat2piao.base.pull.IRefreshNdLoadmore;
+import com.orange.chat2piao.base.view.activity.PullNetActivity;
+import com.orange.chat2piao.ui.recyclerview.CommonAdapter;
 import com.orange.chat2piao.thirdParty.smartfreshlayout.SmartRefreshNdLoadmore;
 
 public class BasePullNetActivityDemo extends PullNetActivity<PullDemoPresenter> {

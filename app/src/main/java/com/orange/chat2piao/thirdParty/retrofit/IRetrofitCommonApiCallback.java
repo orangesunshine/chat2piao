@@ -1,7 +1,5 @@
 package com.orange.chat2piao.thirdParty.retrofit;
 
-import com.orange.chat2piao.base.ifc.callback.INoDataCallback;
-
 import java.util.Map;
 
 import io.reactivex.Observable;
