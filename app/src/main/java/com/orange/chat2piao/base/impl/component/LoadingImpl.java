@@ -2,7 +2,8 @@ package com.orange.chat2piao.base.impl.component;
 
 import com.orange.chat2piao.base.ifc.call.ILoading;
 import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
-import com.orange.chat2piao.base.impl.globle.GlobleImp;
+import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
+import com.orange.chat2piao.base.impl.globle.GlobleImpl;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 
 import java.lang.ref.WeakReference;
@@ -13,7 +14,7 @@ public class LoadingImpl implements ILoading {
 
     public LoadingImpl(BaseActivity activity) {
         mReference = new WeakReference<>(activity);
-        mFragment = GlobleImp.getInstance().buildLoadingDialogFragment();
+        mFragment = DefaultConfig.getInstance().buildLoadingDialogFragment();
     }
 
     public LoadingImpl(BaseActivity activity,ILoadingDialogFragment fragment) {

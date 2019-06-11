@@ -31,7 +31,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.adapter.TextWatcherAdapter;
 import com.orange.chat2piao.base.ifc.callback.VerifyCallback;
-import com.orange.chat2piao.base.impl.globle.GlobleImp;
+import com.orange.chat2piao.base.impl.globle.GlobleImpl;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -249,7 +249,7 @@ public class ViewUtils {
     public static void setCircleImage(final ImageView ivImage, final Context context, final String urlString) {
         if (null == ivImage || null == context) throw new NullPointerException();
         if (TextUtils.isEmpty(urlString)) {
-            setCircleImage(ivImage, context, GlobleImp.getInstance().placeholder());//placeholder
+            setCircleImage(ivImage, context, GlobleImpl.getInstance().placeholder());//placeholder
         } else if (Patterns.WEB_URL.matcher(urlString).matches()) {
             new Thread(new Runnable() {
                 @Override

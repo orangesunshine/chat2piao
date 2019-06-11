@@ -3,25 +3,30 @@ package com.orange.chat2piao.base.impl.img;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.ifc.img.IImage;
-import com.orange.chat2piao.base.impl.globle.GlobleImp;
-import com.orange.chat2piao.base.ui.app.BaseApplication;
+import com.orange.chat2piao.base.impl.globle.GlobleImpl;
 
 public class GlideImageImpl implements IImage {
 
+    /**
+     * 设置网络图片
+     *
+     * @param iv
+     * @param url
+     */
     @Override
     public void loadImgUrl(ImageView iv, String url) {
-        Glide.with(GlobleImp.getInstance().getAppContext()).load(url).placeholder(placeholder()).into(iv);
+        Glide.with(GlobleImpl.getInstance().getAppContext()).load(url).placeholder(GlobleImpl.getInstance().placeholder()).into(iv);
     }
 
-    @Override
-    public int placeholder() {
-        return R.mipmap.ic_setting;
-    }
-
+    /**
+     * 设置gif图片
+     *
+     * @param iv
+     * @param resId
+     */
     @Override
     public void loadImageResourceAsGif(ImageView iv, int resId) {
-        Glide.with(GlobleImp.getInstance().getAppContext()).asGif().load(resId).into(iv);
+        Glide.with(GlobleImpl.getInstance().getAppContext()).asGif().load(resId).into(iv);
     }
 }

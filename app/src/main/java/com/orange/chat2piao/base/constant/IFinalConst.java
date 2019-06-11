@@ -26,4 +26,7 @@ public interface IFinalConst {
     //网络请求结果code
     int CODE_SUCCESS = 200;
     int CODE_ERROR = -1;
+
+    //pull每次请求数据条数
+    int PULL_ITEM_COUNT = 10;
 }

@@ -6,7 +6,8 @@ import android.view.View;
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.ifc.generate.IBuildHeaderNdFooter;
 import com.orange.chat2piao.base.ifc.view.IPullView;
-import com.orange.chat2piao.base.impl.globle.GlobleImp;
+import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
+import com.orange.chat2piao.base.impl.globle.GlobleImpl;
 import com.orange.chat2piao.base.impl.presenter.PullNetPresenter;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.base.ui.activity.base.PresenterActivity;
@@ -18,12 +19,12 @@ public abstract class PullNetActivity<P extends PullNetPresenter> extends Presen
     /**
      * 初始化
      *
-     * @param content
+     * @param activity
      * @param bundle
      */
     @Override
-    public void initVars(View content, Bundle bundle) {
-        super.initVars(content, bundle);
+    public void initVars(BaseActivity activity, Bundle bundle) {
+        super.initVars(activity, bundle);
         mHeaderNdFooter = buildHeaderNdFooter();
     }
 
@@ -31,12 +32,12 @@ public abstract class PullNetActivity<P extends PullNetPresenter> extends Presen
     public void onActivityCreate(BaseActivity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
         if (null == mHeaderNdFooter)
-            mHeaderNdFooter = GlobleImp.getInstance().buildHeaderNdFooter();
+            mHeaderNdFooter = DefaultConfig.getInstance().buildHeaderNdFooter();
     }
 
     @Override
     public IRefreshNdLoadmore buildHeaderNdFooter() {
-        return GlobleImp.getInstance().buildHeaderNdFooter();
+        return DefaultConfig.getInstance().buildHeaderNdFooter();
     }
 
     /**

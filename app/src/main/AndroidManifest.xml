@@ -45,6 +45,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".base.demo.activity.BaseLoadingNetActivityDemo"></activity>
+        <activity android:name=".base.demo.activity.BasePullNetActivityDemo"></activity>
         <activity android:name=".base.demo.activity.BaseActivityDemo"></activity>
     </application>
 

@@ -76,7 +76,7 @@ public interface IPrefixSuffixApi {
      * @param noDataCallback 根据返回结果判断是不是有更多数据
      * @param <T>            网络返回实体
      */
-    <T> void post(String prefix, String suffix, Map<String, String> params, IPullNetCallback<T> callback, INoDataCallback noDataCallback);
+    <T> void post(String prefix, String suffix, Map<String, String> params, IPullNetCallback<T> callback, INoDataCallback<T> noDataCallback);
 
     /**
      * loading方式post网络请求，带请求头

@@ -6,7 +6,7 @@ import android.view.View;
 import com.orange.chat2piao.base.ifc.presenter.IGeneratePresenter;
 import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.impl.presenter.BasePresenter;
-import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
+import com.orange.chat2piao.utils.ReflectionUtils;
 
 public abstract class PresenterActivity<P extends BasePresenter> extends BaseActivity implements IGeneratePresenter<P>, IView {
     // <editor-fold defaultstate="collapsed" desc="presenter">
@@ -23,14 +23,20 @@ public abstract class PresenterActivity<P extends BasePresenter> extends BaseAct
     /**
      * 初始化
      *
-     * @param content
+     * @param activity
      * @param bundle
      */
     @Override
-    public void initVars(View content, Bundle bundle) {
-        super.initVars(content, bundle);
+    public void initVars(BaseActivity activity, Bundle bundle) {
+        super.initVars(activity, bundle);
         mPresenter = generatePresenter();
     }
+
+    @Override
+    public P generatePresenter() {
+        return ReflectionUtils.getGenericSuperclassActualTypeArgInstance(this);
+    }
+
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="吐司方法">

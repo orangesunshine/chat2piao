@@ -9,7 +9,8 @@ import com.orange.chat2piao.base.ifc.generate.IBuildLoading;
 import com.orange.chat2piao.base.ifc.generate.IBuildLoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.view.INetView;
 import com.orange.chat2piao.base.impl.component.LoadingImpl;
-import com.orange.chat2piao.base.impl.globle.GlobleImp;
+import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
+import com.orange.chat2piao.base.impl.globle.GlobleImpl;
 import com.orange.chat2piao.base.impl.presenter.LoadingNetPresenter;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.base.ui.activity.base.PresenterActivity;
@@ -40,7 +41,7 @@ public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends 
     @Override
     public void initVars(View content, Bundle bundle) {
         super.initVars(content, bundle);
-        mLoading = buildLoading();
+        mLoading = buildLoading(mActivity, buildLoadingDialogFragment());
     }
 
     /**
@@ -67,8 +68,8 @@ public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends 
      * @return
      */
     @Override
-    public ILoading buildLoading() {
-        return new LoadingImpl(mActivity, buildLoadingDialogFragment());
+    public ILoading buildLoading(BaseActivity activity, ILoadingDialogFragment fragment) {
+        return new LoadingImpl(activity, fragment);
     }
     // </editor-fold>
 
@@ -81,7 +82,7 @@ public abstract class LoadingNetActivity<P extends LoadingNetPresenter> extends 
      */
     @Override
     public ILoadingDialogFragment buildLoadingDialogFragment() {
-        return GlobleImp.getInstance().buildLoadingDialogFragment();
+        return DefaultConfig.getInstance().buildLoadingDialogFragment();
     }
     // </editor-fold>
 }

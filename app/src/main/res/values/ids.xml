@@ -8,6 +8,9 @@
     <item name="refreshlayout_header" type="id" />
     <item name="refreshlayout_footer" type="id" />
 
+    <!-- recyclerview -->
+    <item name="recyclerview" type="id" />
+
     <!-- actbar -->
     <item name="layout_actbar" type="id" />
     <item name="fl_left_actbar" type="id" />

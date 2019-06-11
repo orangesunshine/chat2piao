@@ -4,6 +4,8 @@ import android.app.Application;
 import android.view.View;
 
 import com.orange.chat2piao.base.adapter.ActivityLifecycleAdapt;
+import com.orange.chat2piao.base.ifc.call.ILoading;
+import com.orange.chat2piao.base.ifc.callback.ILoadingNetCallback;
 import com.orange.chat2piao.base.ifc.component.IActionBar;
 import com.orange.chat2piao.base.ifc.call.IHolder;
 import com.orange.chat2piao.base.ifc.component.IRefreshNdLoadmore;
@@ -11,15 +13,22 @@ import com.orange.chat2piao.base.ifc.component.ILoadingDialogFragment;
 import com.orange.chat2piao.base.ifc.component.IStatusBar;
 import com.orange.chat2piao.base.ifc.component.IToast;
 import com.orange.chat2piao.base.ifc.generate.IBuildLoadingFactory;
-import com.orange.chat2piao.base.impl.app.ActivityLifecycleCallbacksImp;
+import com.orange.chat2piao.base.ifc.img.IImage;
+import com.orange.chat2piao.base.ifc.net.IPullNetRequest;
+import com.orange.chat2piao.base.impl.app.ActivityLifecycleCallbacksImpl;
+import com.orange.chat2piao.base.impl.callback.LoadingNetCallback;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
 import com.orange.chat2piao.base.impl.component.DefaultHolder;
+import com.orange.chat2piao.base.impl.component.LoadingImpl;
+import com.orange.chat2piao.base.impl.img.GlideImageImpl;
+import com.orange.chat2piao.base.impl.net.PullNetRequestImpl;
+import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
 import com.orange.chat2piao.thirdParty.statusbar.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.component.SwipeRefreshNdLoadmore;
 import com.orange.chat2piao.base.impl.component.ToastImpl;
 import com.orange.chat2piao.base.ui.dialog.LoadingDialog;
 
-public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildLoadingFactory {
+public class DefaultConfig implements IBuildLoadingFactory {
     private static volatile DefaultConfig sInstance;
 
     private DefaultConfig() {
@@ -36,6 +45,11 @@ public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildLoadi
         return sInstance;
     }
 
+    /**
+     * 三方
+     *
+     * @return
+     */
     @Override
     public IStatusBar buildStatusBar() {
         return StatusBarTranslucent.getInstance();
@@ -49,7 +63,7 @@ public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildLoadi
 
     @Override
     public Application.ActivityLifecycleCallbacks buildActivityLifecycleCallbacks() {
-        return new ActivityLifecycleCallbacksImp();
+        return new ActivityLifecycleCallbacksImpl();
     }
 
     @Override
@@ -70,5 +84,30 @@ public class DefaultConfig extends ActivityLifecycleAdapt implements IBuildLoadi
     @Override
     public IHolder buildHolder(View view) {
         return new DefaultHolder(view);
+    }
+
+    /**
+     * 三方
+     *
+     * @return
+     */
+    @Override
+    public IImage buildImage() {
+        return new GlideImageImpl();
+    }
+
+    @Override
+    public ILoadingNetCallback buildLoadingNetCallback(ILoading loading) {
+        return new LoadingNetCallback(loading);
+    }
+
+    @Override
+    public IPullNetRequest buildPullNetRequest() {
+        return new PullNetRequestImpl();
+    }
+
+    @Override
+    public ILoading buildLoading(BaseActivity activity, ILoadingDialogFragment fragment) {
+        return new LoadingImpl(activity, fragment);
     }
 }

@@ -1,45 +1,32 @@
 package com.orange.chat2piao.base.impl.presenter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import com.orange.chat2piao.base.ifc.call.activity.IInitVars;
-import com.orange.chat2piao.base.ifc.callback.IPullCallback;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.orange.chat2piao.base.ifc.callback.IListAdapterCallback;
 import com.orange.chat2piao.base.ifc.callback.IPullNetCallback;
-import com.orange.chat2piao.base.ifc.generate.IBuildPullNetCallback;
-import com.orange.chat2piao.base.ifc.generate.IBuildPullNetRequest;
-import com.orange.chat2piao.base.ifc.net.IPageNetRequest;
+import com.orange.chat2piao.base.ifc.callback.IRecyclerViewPullDataCallback;
+import com.orange.chat2piao.base.ifc.generate.IBuildRecyclerViewPullDataCallback;
 import com.orange.chat2piao.base.ifc.net.IPullNetRequest;
 import com.orange.chat2piao.base.ifc.view.IPullView;
 import com.orange.chat2piao.base.impl.callback.PullNetCallback;
+import com.orange.chat2piao.base.impl.callback.RecyclerViewPullDataCallbackImpl;
 import com.orange.chat2piao.base.impl.net.PullNetRequestImpl;
 import com.orange.chat2piao.base.ui.activity.base.BaseActivity;
+import com.orange.chat2piao.base.ui.recyclerview.CommonAdapter;
+import com.orange.chat2piao.base.ui.recyclerview.IConvertRecyclerView;
 
 import static com.orange.chat2piao.base.ifc.net.IPullNetRequest.TYPE_LOADMORE;
 import static com.orange.chat2piao.base.ifc.net.IPullNetRequest.TYPE_REFRESH;
 
-public abstract class PullNetPresenter<V extends IPullView, T> extends BasePresenter<V> implements IBuildPullNetCallback<T>, IPullNetCallback<T>, IBuildPullNetRequest<T>, IPageNetRequest<T>, IPullCallback {
+public abstract class RecyclerViewPullNetPresenter<V extends IPullView, T> extends PullNetPresenter<V, T> implements IBuildRecyclerViewPullDataCallback, IRecyclerViewPullDataCallback {
     protected IPullNetCallback<T> mPullNetCallback;
     protected IPullNetRequest<T> mPullNetRequest;
-
-    @Override
-    public void onActivityCreate(BaseActivity activity, Bundle bundle) {
-        super.onActivityCreate(activity, bundle);
-        initVars(activity, bundle);
-        if (null != mView) mView.refresh();
-    }
-
-    /**
-     * 请求参数curPage网络
-     *
-     * @param curPage
-     * @param callback
-     */
-    @Override
-    public void reqeust(int curPage, IPullNetCallback<T> callback) {
-        mPullNetCallback = buildPullNetCallback();
-        mPullNetRequest = buildPullNetRequest();
-    }
+    protected CommonAdapter<T> mCommonAdapter;
+    protected IRecyclerViewPullDataCallback mIRecyclerViewPullDataCallback;
 
     /**
      * 初始化变量
@@ -49,7 +36,13 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
      */
     @Override
     public void initVars(BaseActivity activity, Bundle saveInstance) {
+        super.initVars(activity, saveInstance);
+        mIRecyclerViewPullDataCallback = buildRecyclerViewPullDataCallback();
+    }
 
+    @Override
+    public void onActivityCreate(BaseActivity activity, Bundle bundle) {
+        super.onActivityCreate(activity, bundle);
     }
 
     /**
@@ -70,6 +63,9 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
     public void onSuccess(T t) {
         if (null != mPullNetCallback)
             mPullNetCallback.onSuccess(t);
+        if (null == mIRecyclerViewPullDataCallback)
+            mIRecyclerViewPullDataCallback = new RecyclerViewPullDataCallbackImpl();
+        mIRecyclerViewPullDataCallback.adapterRecyclerViewPullData(mActivity, null, null, mCommonAdapter, 1, false, t, null, null);
     }
 
     /**
@@ -119,5 +115,15 @@ public abstract class PullNetPresenter<V extends IPullView, T> extends BasePrese
     @Override
     public IPullNetRequest<T> buildPullNetRequest() {
         return new PullNetRequestImpl<>();
+    }
+
+    @Override
+    public <DATA, ITEM> CommonAdapter<ITEM> adapterRecyclerViewPullData(Context context, RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, int layout, boolean loadmore, DATA data, IListAdapterCallback<DATA, ITEM> listAdapterCallback, IConvertRecyclerView<ITEM> convertViewHolder) {
+        return null;
+    }
+
+    @Override
+    public IRecyclerViewPullDataCallback buildRecyclerViewPullDataCallback() {
+        return new RecyclerViewPullDataCallbackImpl();
     }
 }

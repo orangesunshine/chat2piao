@@ -103,7 +103,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      * @param noDataCallback 根据返回结果判断是不是有更多数据
      */
     @Override
-    public <T> void post(String prefix, String suffix, Map<String, String> params, IPullNetCallback<T> callback, INoDataCallback noDataCallback) {
+    public <T> void post(String prefix, String suffix, Map<String, String> params, IPullNetCallback<T> callback, INoDataCallback<T> noDataCallback) {
         PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(prefix, suffix, params), callback, noDataCallback);
     }
 

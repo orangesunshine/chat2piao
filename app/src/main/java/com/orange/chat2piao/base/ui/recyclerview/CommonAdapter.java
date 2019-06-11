@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.orange.chat2piao.base.ifc.callback.IListAdapterCallback;
 import com.orange.chat2piao.utils.ViewUtils;
 
 import java.util.ArrayList;
@@ -14,16 +15,16 @@ import java.util.List;
 /**
  * 通用recyclerview适配器
  *
- * @param <T> 项数据类型
+ * @param <ITEM> 项数据类型
  */
-public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
+public class CommonAdapter<ITEM> extends RecyclerView.Adapter<RecyclerViewHolder> {
     public static final int SELECTED_NONE = -1;//所有item都未选中
     private Context mContext;
     private int mLayoutId;//item布局文件
     private int mSelectedIndex = SELECTED_NONE;//默认未选中
-    private List<T> mDatas;//数据源
+    private List<ITEM> mDatas;//数据源
     private EmptyCallback mEmptyCallback;//数据为空回调
-    private IConvertRecyclerView<T> mConvertViewHolder;//UI回调
+    private IConvertRecyclerView<ITEM> mConvertViewHolder;//UI回调
 
     /**
      * 构造方法
@@ -33,7 +34,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      * @param datas
      * @param convertViewHolder
      */
-    public CommonAdapter(Context context, int layoutId, List<T> datas, IConvertRecyclerView<T> convertViewHolder) {
+    public CommonAdapter(Context context, int layoutId, List<ITEM> datas, IConvertRecyclerView<ITEM> convertViewHolder) {
         this.mContext = context;
         this.mLayoutId = layoutId;
         this.mDatas = new ArrayList<>();
@@ -50,21 +51,21 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      * @param convertViewHolder
      * @param emptyCallback
      */
-    public CommonAdapter(Context context, int layoutId, List<T> datas, IConvertRecyclerView<T> convertViewHolder, EmptyCallback emptyCallback) {
+    public CommonAdapter(Context context, int layoutId, List<ITEM> datas, IConvertRecyclerView<ITEM> convertViewHolder, EmptyCallback emptyCallback) {
         this(context, layoutId, datas, convertViewHolder);
         mEmptyCallback = emptyCallback;
     }
 
-    public static <T> CommonAdapter<T> newInstance(Context context, RecyclerView rv, CommonAdapter<T> adapter, int layout, List<T> datas, IConvertRecyclerView<T> convertViewHolder) {
-        return newInstance(context, rv, null, adapter, layout, datas, false, convertViewHolder);
+    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, CommonAdapter<ITEM> adapter, int layout, List<ITEM> data, IConvertRecyclerView<ITEM> convertViewHolder) {
+        return newInstance(context, rv, null, adapter, layout, false, data, convertViewHolder);
     }
 
-    public static <T> CommonAdapter<T> newInstance(Context context, RecyclerView rv, CommonAdapter<T> adapter, int layout, List<T> datas, boolean loadmore, IConvertRecyclerView<T> convertViewHolder) {
-        return newInstance(context, rv, null, adapter, layout, datas, loadmore, convertViewHolder);
+    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, CommonAdapter<ITEM> adapter, int layout, List<ITEM> datas, boolean loadmore, IConvertRecyclerView<ITEM> convertViewHolder) {
+        return newInstance(context, rv, null, adapter, layout, loadmore, datas, convertViewHolder);
     }
 
-    public static <T> CommonAdapter<T> newInstance(Context context, RecyclerView rv, View empty, CommonAdapter<T> adapter, int layout, List<T> datas, IConvertRecyclerView<T> convertViewHolder) {
-        return newInstance(context, rv, empty, adapter, layout, datas, false, convertViewHolder);
+    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, int layout, List<ITEM> datas, IConvertRecyclerView<ITEM> convertViewHolder) {
+        return newInstance(context, rv, empty, adapter, layout, false, datas, convertViewHolder);
     }
 
     /**
@@ -75,25 +76,25 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      * @param empty
      * @param adapter
      * @param layout
-     * @param datas
+     * @param data
      * @param loadmore          是否加载更多
      * @param convertViewHolder
-     * @param <T>
+     * @param <ITEM>
      * @return
      */
-    public static <T> CommonAdapter<T> newInstance(Context context, RecyclerView rv, View empty, CommonAdapter<T> adapter, int layout, List<T> datas, boolean loadmore, IConvertRecyclerView<T> convertViewHolder) {
+    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, int layout, boolean loadmore, List<ITEM> data, IConvertRecyclerView<ITEM> convertViewHolder) {
         if (loadmore) {
             if (null == adapter || null == rv || adapter != rv.getTag())
                 throw new IllegalArgumentException();
-            adapter.addItems(datas);
+            adapter.addItems(data);
         } else {
             if (null == adapter) {
-                adapter = setRvAdapter(context, rv, empty, layout, datas, convertViewHolder);
+                adapter = setRvAdapter(context, rv, empty, layout, data, convertViewHolder);
             } else {
                 if (adapter == rv.getTag()) {
-                    adapter.setDatas(datas);
+                    adapter.setDatas(data);
                 } else {
-                    adapter = setRvAdapter(context, rv, empty, layout, datas, convertViewHolder);
+                    adapter = setRvAdapter(context, rv, empty, layout, data, convertViewHolder);
                 }
             }
         }
@@ -107,20 +108,20 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      * @param rv
      * @param empty
      * @param layout
-     * @param datas
+     * @param data
      * @param convertViewHolder
-     * @param <T>
+     * @param <ITEM>
      * @return
      */
-    private static <T> CommonAdapter<T> setRvAdapter(Context context, RecyclerView rv, View empty, int layout, List<T> datas, IConvertRecyclerView<T> convertViewHolder) {
-        CommonAdapter<T> adapter;
+    private static <ITEM> CommonAdapter<ITEM> setRvAdapter(Context context, RecyclerView rv, View empty, int layout, List<ITEM> data, IConvertRecyclerView<ITEM> convertViewHolder) {
+        CommonAdapter<ITEM> adapter;
         EmptyCallbackAdapter emptyCallback = null;
         if (null == rv) throw new NullPointerException();
         if (null != empty) {
             emptyCallback = new EmptyCallbackAdapter(empty, rv);
-            emptyCallback.empty(null == datas || datas.isEmpty());
+            emptyCallback.empty(null == data || data.isEmpty());
         }
-        adapter = new CommonAdapter<T>(context, layout, datas, convertViewHolder, emptyCallback);
+        adapter = new CommonAdapter<ITEM>(context, layout, data, convertViewHolder, emptyCallback);
         rv.setTag(adapter);
         rv.setAdapter(adapter);
         return adapter;
@@ -161,7 +162,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      *
      * @param datas
      */
-    public void setDatas(List<T> datas) {
+    public void setDatas(List<ITEM> datas) {
         getDatas().clear();
         if (null != datas && !datas.isEmpty())
             getDatas().addAll(datas);
@@ -174,7 +175,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      *
      * @param datas
      */
-    public void addItems(List<T> datas) {
+    public void addItems(List<ITEM> datas) {
         if (null != datas && !datas.isEmpty()) {
             getDatas().addAll(datas);
             notifyDataSetChanged();
@@ -186,7 +187,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      *
      * @param data
      */
-    public void addItem(T data) {
+    public void addItem(ITEM data) {
         if (null != data) {
             getDatas().add(data);
             notifyItemChanged(getDatas().size());
@@ -207,9 +208,9 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      *
      * @param data
      */
-    public void deleteItem(T data) {
+    public void deleteItem(ITEM data) {
         if (null != data) {
-            List<T> datas = getDatas();
+            List<ITEM> datas = getDatas();
             int index = datas.indexOf(data);
             if (-1 != index) {
                 datas.remove(index);
@@ -225,7 +226,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      * @param position
      */
     public void deleteItem(int position) {
-        List<T> datas = getDatas();
+        List<ITEM> datas = getDatas();
         if (position < datas.size()) {
             datas.remove(position);
             notifyDataSetChanged();
@@ -269,7 +270,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      *
      * @return
      */
-    private List<T> getDatas() {
+    private List<ITEM> getDatas() {
         if (null == mDatas)
             mDatas = new ArrayList<>();
         return mDatas;
@@ -281,7 +282,7 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      * @param position
      * @return
      */
-    public T getItemData(int position) {
+    public ITEM getItemData(int position) {
         if (position < getDatas().size())
             return getDatas().get(position);
         return null;
@@ -294,10 +295,10 @@ public class CommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
      */
     public void filter(CharSequence charSequence, Filter filter) {
         if (null == filter) throw new NullPointerException();
-        List<T> datas = getDatas();
+        List<ITEM> datas = getDatas();
         if (datas.isEmpty()) return;
-        List<T> mFilterDatas = new ArrayList<>();
-        for (T t : datas) {
+        List<ITEM> mFilterDatas = new ArrayList<>();
+        for (ITEM t : datas) {
             if (filter.filter(t, charSequence))
                 mFilterDatas.add(t);
         }

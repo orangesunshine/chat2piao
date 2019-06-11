@@ -2,6 +2,7 @@ package com.orange.chat2piao.base.impl.presenter;
 
 import android.os.Bundle;
 
+import com.orange.chat2piao.base.ifc.call.ILoading;
 import com.orange.chat2piao.base.impl.callback.LoadingNetCallback;
 import com.orange.chat2piao.base.ifc.callback.ILoadingNetCallback;
 import com.orange.chat2piao.base.ifc.generate.IBuildLoadingNetCallback;
@@ -15,7 +16,7 @@ public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePre
     @Override
     public void onActivityCreate(BaseActivity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
-        mNetCallback = buildLoadingNetCallback();
+        mNetCallback = buildLoadingNetCallback(mView);
         reqeust(mNetCallback);
     }
 
@@ -62,8 +63,8 @@ public abstract class LoadingNetPresenter<V extends INetView, T> extends BasePre
 
     // <editor-fold defaultstate="collapsed" desc="创建网络回调">
     @Override
-    public ILoadingNetCallback<T> buildLoadingNetCallback() {
-        return new LoadingNetCallback<>(mView);
+    public ILoadingNetCallback<T> buildLoadingNetCallback(ILoading loading) {
+        return new LoadingNetCallback<>(loading);
     }
     // </editor-fold>
 }

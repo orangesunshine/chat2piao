@@ -11,7 +11,7 @@ public class BaseActivityDemo extends BaseActivity {
 
     @Override
     public int getContentLayoutId() {
-        return R.layout.activity_base;
+        return R.layout.activity_template_actbar;
     }
 
     @Override

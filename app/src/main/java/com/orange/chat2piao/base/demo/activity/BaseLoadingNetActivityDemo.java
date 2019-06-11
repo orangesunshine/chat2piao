@@ -60,9 +60,4 @@ public class BaseLoadingNetActivityDemo extends LoadingNetActivity {
             }
         });
     }
-
-    @Override
-    public IPresenter generatePresenter() {
-        return null;
-    }
 }

@@ -12,7 +12,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.StringRes;
 
 import com.orange.chat2piao.base.ifc.call.IHolder;
-import com.orange.chat2piao.base.impl.globle.GlobleImp;
+import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
+import com.orange.chat2piao.base.impl.globle.GlobleImpl;
 import com.orange.chat2piao.base.ui.recyclerview.RecyclerViewHolder;
 import com.orange.chat2piao.utils.ViewUtils;
 
@@ -237,7 +238,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder loadImageResourceAsGif(ImageView iv, int resId) {
-        GlobleImp.getInstance().loadImageResourceAsGif(iv, resId);
+        DefaultConfig.getInstance().buildImage().loadImageResourceAsGif(iv, resId);
         return this;
     }
 

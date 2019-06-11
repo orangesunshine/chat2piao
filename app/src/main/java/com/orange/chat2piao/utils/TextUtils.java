@@ -3,7 +3,6 @@ package com.orange.chat2piao.utils;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.widget.TextView;
@@ -11,6 +10,16 @@ import android.widget.TextView;
 import java.util.Map;
 
 public class TextUtils {
+    /**
+     * 判断text是不是空的
+     *
+     * @param text
+     * @return
+     */
+    public static boolean isEmpty(String text) {
+        return null == text || text.length() == 0;
+    }
+
     /**
      * 返回格式化字符串，格式或者被格式字符串为空直接返回""
      *
@@ -53,7 +62,8 @@ public class TextUtils {
      * @param text
      */
     public static String placeHoldText(String text, String placeHold) {
-        if (android.text.TextUtils.isEmpty(text) && android.text.TextUtils.isEmpty(placeHold)) return "";
+        if (android.text.TextUtils.isEmpty(text) && android.text.TextUtils.isEmpty(placeHold))
+            return "";
         if (android.text.TextUtils.isEmpty(placeHold)) placeHold = "";
         if (android.text.TextUtils.isEmpty(text)) return placeHold;
         return text;

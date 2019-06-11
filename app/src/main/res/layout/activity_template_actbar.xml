@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/layout_actbar"
-        layout="@layout/actbar_common" />
+        layout="@layout/stub_actbar" />
 
     <ViewStub
         android:id="@+id/stub_content"

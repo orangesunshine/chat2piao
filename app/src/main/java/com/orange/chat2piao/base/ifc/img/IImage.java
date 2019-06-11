@@ -12,9 +12,6 @@ public interface IImage {
      */
     void loadImgUrl(ImageView iv, String url);
 
-    @DrawableRes
-    int placeholder();
-
     /**
      * 设置gif图片
      * @param iv

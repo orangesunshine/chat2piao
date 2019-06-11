@@ -24,9 +24,10 @@ import com.orange.chat2piao.base.ifc.generate.IBuildToast;
 import com.orange.chat2piao.base.ifc.view.IView;
 import com.orange.chat2piao.base.impl.component.CommonActionBar;
 import com.orange.chat2piao.base.impl.component.DefaultHolder;
+import com.orange.chat2piao.base.impl.defaultImp.DefaultConfig;
 import com.orange.chat2piao.thirdParty.statusbar.StatusBarTranslucent;
 import com.orange.chat2piao.base.impl.component.ToastImpl;
-import com.orange.chat2piao.base.impl.globle.GlobleImp;
+import com.orange.chat2piao.base.impl.globle.GlobleImpl;
 
 public abstract class BaseActivity<V extends IView> extends FragmentActivity implements IContentView, ICreatedNdDestroy, IActvityAlive, IInitVars, IInit, IBuildStatusBar, IBuildActionBar, IBuildHolder, IBuildToast {
     // <editor-fold defaultstate="collapsed" desc="生命周期回调方法">
@@ -44,26 +45,26 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
         LayoutInflater.from(activity).inflate(getContentLayoutId(), content, true);
 
         //初始化操作
-        initVars(content, bundle);
+        initVars(activity, bundle);
 
         //bindViews
         if (null == mHolder)
-            mHolder = GlobleImp.getInstance().buildHolder(content);
+            mHolder = DefaultConfig.getInstance().buildHolder(content);
 
         //statusbar
         if (null == mStatusBar)
-            mStatusBar = GlobleImp.getInstance().buildStatusBar();
+            mStatusBar = DefaultConfig.getInstance().buildStatusBar();
         mStatusBar.setStatusBar(activity);
 
         //actionbar
         if (null == mActionBar)
-            mActionBar = GlobleImp.getInstance().buildActionBar();
+            mActionBar = DefaultConfig.getInstance().buildActionBar();
         if (mActionBar instanceof IAttachHolder)
             ((IAttachHolder) mActionBar).attachHolder(mHolder);
 
         //toast
         if (null == mToast)
-            mToast = GlobleImp.getInstance().buildToast();
+            mToast = DefaultConfig.getInstance().buildToast();
 
         //初始化
         init();
@@ -159,14 +160,14 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
     /**
      * 初始化
      *
-     * @param content
+     * @param activity
      * @param bundle
      */
     @Override
-    public void initVars(View content, Bundle bundle) {
+    public void initVars(BaseActivity activity, Bundle bundle) {
         mActivity = this;
         mActivityAlive = true;
-        mHolder = buildHolder(content);
+        mHolder = buildHolder(getWindow().getDecorView().findViewById(android.R.id.content));
         mStatusBar = buildStatusBar();
         mActionBar = buildActionBar();
         mToast = buildToast();
