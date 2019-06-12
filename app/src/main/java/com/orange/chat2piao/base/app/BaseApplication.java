@@ -11,7 +11,7 @@ import com.blankj.utilcode.util.ProcessUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.orange.chat2piao.base.adapter.ActivityLifecycleAdapt;
 import com.orange.chat2piao.constant.IInitConst;
-import com.orange.chat2piao.base.view.activity.base.BaseActivity;
+import com.orange.chat2piao.base.mvp.view.activity.base.BaseActivity;
 
 public class BaseApplication extends Application implements IApp {
     @Override

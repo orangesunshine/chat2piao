@@ -25,4 +25,7 @@ public interface IFinalConst {
 
     //pull每次请求数据条数
     int PULL_ITEM_COUNT = 10;
+
+    //换行符
+    String LINE_SEPARATOR = System.getProperty("line.separator");
 }

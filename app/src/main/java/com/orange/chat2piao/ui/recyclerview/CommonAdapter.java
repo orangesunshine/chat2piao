@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.orange.chat2piao.utils.Preconditions;
 import com.orange.chat2piao.utils.ViewUtils;
 
 import java.util.ArrayList;
@@ -22,8 +23,22 @@ public class CommonAdapter<ITEM> extends RecyclerView.Adapter<RecyclerViewHolder
     private int mLayoutId;//item布局文件
     private int mSelectedIndex = SELECTED_NONE;//默认未选中
     private List<ITEM> mDatas;//数据源
-    private EmptyCallback mEmptyCallback;//数据为空回调
+    private static EmptyCallback mEmptyCallback;//数据为空回调
     private IConvertRecyclerView<ITEM> mConvertViewHolder;//UI回调
+
+    /**
+     * 构造方法用于pull，数据由静态方法参数
+     *
+     * @param context
+     * @param layoutId
+     * @param convertViewHolder
+     */
+    public CommonAdapter(Context context, int layoutId, IConvertRecyclerView<ITEM> convertViewHolder) {
+        this.mContext = context;
+        this.mLayoutId = layoutId;
+        this.mDatas = new ArrayList<>();
+        mConvertViewHolder = convertViewHolder;
+    }
 
     /**
      * 构造方法
@@ -42,7 +57,7 @@ public class CommonAdapter<ITEM> extends RecyclerView.Adapter<RecyclerViewHolder
     }
 
     /**
-     * 列表为空回调构造
+     * 构造方法：增加空回调
      *
      * @param context
      * @param layoutId
@@ -55,75 +70,63 @@ public class CommonAdapter<ITEM> extends RecyclerView.Adapter<RecyclerViewHolder
         mEmptyCallback = emptyCallback;
     }
 
-    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, CommonAdapter<ITEM> adapter, int layout, List<ITEM> data, IConvertRecyclerView<ITEM> convertViewHolder) {
-        return newInstance(context, rv, null, adapter, layout, false, data, convertViewHolder);
+    public static <ITEM> void adaptDatas(RecyclerView rv, CommonAdapter<ITEM> adapter, List<ITEM> datas) {
+        adaptDatas(rv, null, adapter, false, datas);
     }
 
-    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, CommonAdapter<ITEM> adapter, int layout, List<ITEM> datas, boolean loadmore, IConvertRecyclerView<ITEM> convertViewHolder) {
-        return newInstance(context, rv, null, adapter, layout, loadmore, datas, convertViewHolder);
+    public static <ITEM> void adaptDatas(RecyclerView rv, CommonAdapter<ITEM> adapter, List<ITEM> datas, boolean loadmore) {
+        adaptDatas(rv, null, adapter, loadmore, datas);
     }
 
-    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, int layout, List<ITEM> datas, IConvertRecyclerView<ITEM> convertViewHolder) {
-        return newInstance(context, rv, empty, adapter, layout, false, datas, convertViewHolder);
+    public static <ITEM> void adaptDatas(RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, List<ITEM> datas) {
+        adaptDatas(rv, empty, adapter, false, datas);
     }
 
     /**
      * 静态new实例空回调
      *
-     * @param context
      * @param rv
      * @param empty
      * @param adapter
-     * @param layout
-     * @param data
-     * @param loadmore          是否加载更多
-     * @param convertViewHolder
+     * @param datas
+     * @param loadmore 是否加载更多
      * @param <ITEM>
      * @return
      */
-    public static <ITEM> CommonAdapter<ITEM> newInstance(Context context, RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, int layout, boolean loadmore, List<ITEM> data, IConvertRecyclerView<ITEM> convertViewHolder) {
+    public static <ITEM> void adaptDatas(RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, boolean loadmore, List<ITEM> datas) {
+        Preconditions.checkNotNull(adapter);
+        if (null == rv || adapter != rv.getTag())
+            throw new IllegalArgumentException();
         if (loadmore) {
-            if (null == adapter || null == rv || adapter != rv.getTag())
-                throw new IllegalArgumentException();
-            adapter.addItems(data);
+            adapter.addItems(datas);
         } else {
-            if (null == adapter) {
-                adapter = setRvAdapter(context, rv, empty, layout, data, convertViewHolder);
+            if (adapter != rv.getTag()) {
+                setRvAdapter(rv, empty, adapter, datas);
             } else {
-                if (adapter == rv.getTag()) {
-                    adapter.setDatas(data);
-                } else {
-                    adapter = setRvAdapter(context, rv, empty, layout, data, convertViewHolder);
-                }
+                adapter.setDatas(datas);
             }
         }
-        return adapter;
     }
 
     /**
      * new adapter实例并给recycler设置adapter，空回调
      *
-     * @param context
      * @param rv
      * @param empty
-     * @param layout
-     * @param data
-     * @param convertViewHolder
+     * @param datas
      * @param <ITEM>
      * @return
      */
-    private static <ITEM> CommonAdapter<ITEM> setRvAdapter(Context context, RecyclerView rv, View empty, int layout, List<ITEM> data, IConvertRecyclerView<ITEM> convertViewHolder) {
-        CommonAdapter<ITEM> adapter;
-        EmptyCallbackAdapter emptyCallback = null;
-        if (null == rv) throw new NullPointerException();
+    private static <ITEM> void setRvAdapter(RecyclerView rv, View empty, CommonAdapter<ITEM> adapter, List<ITEM> datas) {
+        Preconditions.checkNotNull(rv, adapter);
         if (null != empty) {
-            emptyCallback = new EmptyCallbackAdapter(empty, rv);
-            emptyCallback.empty(null == data || data.isEmpty());
+            if (null == mEmptyCallback)
+                mEmptyCallback = new EmptyCallbackAdapter(empty, rv);
+            mEmptyCallback.empty(null == datas || datas.isEmpty());
         }
-        adapter = new CommonAdapter<ITEM>(context, layout, data, convertViewHolder, emptyCallback);
+        adapter.setDatas(datas);
         rv.setTag(adapter);
         rv.setAdapter(adapter);
-        return adapter;
     }
 
     /**

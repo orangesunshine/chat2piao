@@ -2,7 +2,7 @@ package com.orange.chat2piao.base.demo.activity;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.actbar.IActionBarCallback;
-import com.orange.chat2piao.base.view.activity.base.BaseActivity;
+import com.orange.chat2piao.base.mvp.view.activity.base.BaseActivity;
 
 import java.util.Random;
 

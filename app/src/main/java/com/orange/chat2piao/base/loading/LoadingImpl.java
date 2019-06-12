@@ -1,6 +1,6 @@
 package com.orange.chat2piao.base.loading;
 
-import com.orange.chat2piao.base.view.activity.base.BaseActivity;
+import com.orange.chat2piao.base.mvp.view.activity.base.BaseActivity;
 import com.orange.chat2piao.ui.dialog.LoadingDialog;
 
 import java.lang.ref.WeakReference;

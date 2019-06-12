@@ -12,7 +12,7 @@ import com.orange.chat2piao.base.loading.ILoadingDialogFragment;
 import com.orange.chat2piao.base.pull.IRefreshNdLoadmore;
 import com.orange.chat2piao.base.toast.IToast;
 import com.orange.chat2piao.base.image.IImage;
-import com.orange.chat2piao.base.view.activity.base.BaseActivity;
+import com.orange.chat2piao.base.mvp.view.activity.base.BaseActivity;
 import com.orange.chat2piao.ui.dialog.LoadingDialog;
 
 public class DefaultConfig implements IBuildFactory {
@@ -47,11 +47,6 @@ public class DefaultConfig implements IBuildFactory {
         return new ToastImpl();
     }
 
-    @Override
-    public ILoadingDialogFragment buildLoadingDialogFragment() {
-        return new LoadingDialog();
-    }
-
     /**
      * 三方
      *
@@ -60,10 +55,5 @@ public class DefaultConfig implements IBuildFactory {
     @Override
     public IImage buildImage() {
         return new GlideImageImpl();
-    }
-
-    @Override
-    public ILoading buildLoading(BaseActivity activity, ILoadingDialogFragment fragment) {
-        return new LoadingImpl(activity, fragment);
     }
 }

@@ -1,62 +1,38 @@
 package com.orange.chat2piao.base.demo.activity;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.app.Activity;
 import android.os.Bundle;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.net.LoadingNetCallback;
-import com.orange.chat2piao.base.net.RetrofitUrlApi;
-import com.orange.chat2piao.base.view.activity.LoadingNetActivity;
-import com.orange.chat2piao.base.view.activity.base.BaseActivity;
+import com.orange.chat2piao.base.loading.ILoading;
+import com.orange.chat2piao.base.mvp.model.net.INetRequest;
+import com.orange.chat2piao.base.mvp.model.net.RetrofitUrlApi;
+import com.orange.chat2piao.base.mvp.model.net.callback.LoadingNetCallback;
+import com.orange.chat2piao.base.mvp.presenter.LoadingPresenter;
+import com.orange.chat2piao.base.mvp.view.activity.LoadingNetActivity;
+import com.orange.chat2piao.buz.test.response.ConfigResponse;
+import com.orange.chat2piao.utils.ReflectionUtils;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class BaseLoadingNetActivityDemo extends LoadingNetActivity {
+public class BaseLoadingNetActivityDemo extends LoadingNetActivity<LoadingPresenter> implements ILoading {
     @Override
     public int getContentLayoutId() {
         return R.layout.activity_net_loading;
     }
 
-    /**
-     * 创建生命周期回调，默认loading
-     *
-     * @param activity
-     * @param bundle
-     */
     @Override
-    public void onActivityCreate(BaseActivity activity, Bundle bundle) {
+    public void onActivityCreate(Activity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
-        //        IInitConst.sBaseUrl = "http://192.168.254.103:8080";
-//        IInitConst.sBaseUrl = "http://192.168.254.103:8080";
-        HashMap<String, String> headers = new HashMap<>();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    Activity#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for Activity#requestPermissions for more details.
-                return;
-            }
-        }
-        headers.put("D", "13b50a9f-73b6-406d-a562-7652c238c969");
-        headers.put("C", "a");
-        HashMap<String, String> params = new HashMap<>();
-        RetrofitUrlApi.getInstance().post(headers, "http://192.168.254.103:8080/ifc/hello", params, new LoadingNetCallback<String>(this) {
-            @Override
-            public void onSuccess(String response) {
-                super.onSuccess(response);
-                showToast(response);
-            }
-
-            @Override
-            public void onError(int code, Throwable error) {
-                super.onError(code, error);
-            }
-        });
+        LoadingNetCallback configResponseLoadingNetCallback = new LoadingNetCallback<ConfigResponse>(this);
+        Type genericSuperclassActualTypeArgClass = ReflectionUtils.getGenericSuperclassActualTypeArgClass(configResponseLoadingNetCallback);
+        mPresenter.concactLoadingNet(new LoadingNetCallback<ConfigResponse>(this),
+                (INetRequest<ConfigResponse>) callback -> {
+                    HashMap<String, String> headers = new HashMap<>();
+                    headers.put("D", "1fd3c28a-66f3-417e-b46e-3221a8ad6975");
+                    headers.put("C", "a");
+                    RetrofitUrlApi.getInstance().post(headers, "http://172.168.70.35:8091//system-config/front.mvc", new HashMap<>(), callback);
+                });
     }
 }

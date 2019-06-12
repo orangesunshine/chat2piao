@@ -1,7 +1,7 @@
 package com.orange.chat2piao.base.demo.activity;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.view.activity.base.BaseActivity;
+import com.orange.chat2piao.base.mvp.view.activity.base.BaseActivity;
 import com.orange.chat2piao.utils.ActivityUtils;
 
 public class MainActivity extends BaseActivity {
@@ -29,10 +29,10 @@ public class MainActivity extends BaseActivity {
                     ActivityUtils.launchActivity(MainActivity.this, BaseActivityDemo.class);
                     break;
                 case R.id.btn_net_loading:
-                    ActivityUtils.launchActivity(MainActivity.this, BaseActivityDemo.class);
+                    ActivityUtils.launchActivity(MainActivity.this, BaseLoadingNetActivityDemo.class);
                     break;
                 case R.id.btn_net_pull:
-                    ActivityUtils.launchActivity(MainActivity.this, BasePullNetActivityDemo.class);
+//                    ActivityUtils.launchActivity(MainActivity.this, BasePullNetActivityDemo.class);
                     break;
             }
         }, R.id.btn_base, R.id.btn_presenter, R.id.btn_net_loading, R.id.btn_net_pull);

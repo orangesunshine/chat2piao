@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
 import com.orange.chat2piao.constant.IFinalConst;
 import com.orange.chat2piao.utils.CommonUtils;
 import com.orange.chat2piao.utils.ReflectionUtils;
@@ -19,15 +20,17 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
+import static com.orange.chat2piao.constant.IFinalConst.LINE_SEPARATOR;
+
 public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
-    private ILoadingNetCallback<T> callback;
+    private INetCallback<T> callback;
     private Gson gson = new Gson();
 
-    public LoadingResponseBodyObserver(ILoadingNetCallback<T> callback) {
+    public LoadingResponseBodyObserver(INetCallback<T> callback) {
         this.callback = callback;
     }
 
-    public static <T> void convert(Observable<ResponseBody> observable, ILoadingNetCallback<T> callback) {
+    public static <T> void convert(Observable<ResponseBody> observable, INetCallback<T> callback) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new LoadingResponseBodyObserver<>(callback));
@@ -69,11 +72,12 @@ public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
                 result = gson.fromJson(data, ReflectionUtils.getGenericSuperclassActualTypeArgClass(callback));
             }
         } catch (Exception e) {
-            Throwable cause = e.getCause();
-            while (null != cause) {
-                errorMsg.append("cause: ");
-                errorMsg.append(cause.getMessage());
-                errorMsg.append(System.getProperty("line.separator"));
+            if (null != e) {
+                errorMsg.append(e.getMessage());
+                Throwable cause = e.getCause();
+                while (null != cause) {
+                    errorMsg.append("cause: ").append(cause.getMessage()).append(LINE_SEPARATOR);
+                }
             }
         } finally {
             if (null != callback && null != result) {
@@ -98,14 +102,14 @@ public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
     public void onError(Throwable e) {
         if (null != callback) {
             callback.onError(IFinalConst.CODE_ERROR, e);
-            callback.onComplete();
+            callback.onComplete(true);
         }
     }
 
     @Override
     public void onComplete() {
         if (null != callback)
-            callback.onComplete();
+            callback.onComplete(true);
     }
 
 }

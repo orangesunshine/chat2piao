@@ -1,11 +1,12 @@
 package com.orange.chat2piao.utils;
 
-import com.orange.chat2piao.base.net.INetCallback;
-import com.orange.chat2piao.base.presenter.BasePresenter;
-import com.orange.chat2piao.base.view.activity.PresenterActivity;
+import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
+import com.orange.chat2piao.base.mvp.presenter.BasePresenter;
+import com.orange.chat2piao.base.mvp.view.activity.PresenterActivity;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Objects;
 
 public class ReflectionUtils {
     /**
@@ -43,8 +44,20 @@ public class ReflectionUtils {
                 try {
                     if (null != actualTypeArgument) {
                         String typeName = actualTypeArgument.toString();
-                        if (!TextUtils.isEmpty(typeName))
-                            return (P) Class.forName(typeName).newInstance();
+                        if (!TextUtils.isEmpty(typeName)) {
+                            Object instance = null;
+                            String prefix = "class ";
+                            while (null == instance) {
+                                try {
+                                    instance = Class.forName(typeName).newInstance();
+                                } catch (Exception e) {
+                                    if (typeName.startsWith(prefix)) {
+                                        typeName = typeName.substring(prefix.length());
+                                    }
+                                }
+                            }
+                            return (P) instance;
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

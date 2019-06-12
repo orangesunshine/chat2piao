@@ -1,0 +1,76 @@
+package com.orange.chat2piao.base.mvp.model.net;
+
+import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
+import com.orange.chat2piao.thirdParty.rxjava.LoadingResponseBodyObserver;
+import com.orange.chat2piao.thirdParty.retrofit.IRetrofitCommonApiCallback;
+import com.orange.chat2piao.thirdParty.retrofit.RetrofitClient;
+
+import java.util.Map;
+
+public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
+    private volatile static RetrofitPrefixSuffixApi sInstance;
+
+    public static RetrofitPrefixSuffixApi getInstance() {
+        if (null == sInstance) {
+            synchronized (RetrofitPrefixSuffixApi.class) {
+                if (null == sInstance)
+                    sInstance = new RetrofitPrefixSuffixApi();
+            }
+        }
+        return sInstance;
+    }
+
+    /**
+     * loading方式get网络请求
+     *
+     * @param prefix   一级路径
+     * @param suffix   二级路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <T> void get(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(prefix, suffix, params), callback);
+    }
+
+    /**
+     * loading方式get网络请求，带请求头
+     *
+     * @param headers  请求头
+     * @param prefix   一级路径
+     * @param suffix   二级路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <T> void get(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, prefix, suffix, params), callback);
+    }
+
+    /**
+     * loading方式post网络请求
+     *
+     * @param prefix   一级路径
+     * @param suffix   二级路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <T> void post(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(prefix, suffix, params), callback);
+    }
+
+    /**
+     * loading方式post网络请求，带请求头
+     *
+     * @param headers  请求头
+     * @param prefix   一级路径
+     * @param suffix   二级路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <T> void post(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, prefix, suffix, params), callback);
+    }
+}
