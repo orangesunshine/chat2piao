@@ -1,6 +1,6 @@
 package com.orange.chat2piao.base.pull;
 
-public interface IRefreshNdLoadmore {
+public interface IPull {
 
     /**
      * 刷新
@@ -21,4 +21,12 @@ public interface IRefreshNdLoadmore {
      * 加载完成
      */
     void finishLoadmore(boolean noData);
+
+    /**
+     * 设置能否加载
+     *
+     * @param enable
+     * @return
+     */
+    void enableLoadMore(boolean enable);
 }

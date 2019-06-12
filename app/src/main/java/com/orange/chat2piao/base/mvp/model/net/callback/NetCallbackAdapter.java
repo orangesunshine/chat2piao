@@ -1,7 +1,5 @@
 package com.orange.chat2piao.base.mvp.model.net.callback;
 
-import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
-
 public class NetCallbackAdapter<T> implements INetCallback<T> {
     private INetCallback<T> mNetCallback;
 

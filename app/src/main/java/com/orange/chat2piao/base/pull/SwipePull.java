@@ -2,15 +2,22 @@ package com.orange.chat2piao.base.pull;
 
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.common.holder.IHolder;
-import com.orange.chat2piao.base.pull.RefreshNdLoadmoreImpl;
+import com.orange.chat2piao.base.mvp.model.net.pull.IPageNetRequest;
 import com.orange.chat2piao.utils.ViewUtils;
 
-public class SwipeRefreshNdLoadmore extends RefreshNdLoadmoreImpl<SwipeRefreshLayout, TextView> {
+public class SwipePull extends AbstractPull<SwipeRefreshLayout, TextView> {
     private boolean noData;
+
+    public <T> SwipePull(IHolder holder, IPageNetRequest<T> pageRequest) {
+        super(holder, pageRequest);
+        refreshLayout.setOnRefreshListener(() -> SwipePull.this.onRefresh());
+        RecyclerView recyclerView = holder.getView(R.id.recyclerview);
+    }
 
     @Override
     public void refresh() {
@@ -58,15 +65,13 @@ public class SwipeRefreshNdLoadmore extends RefreshNdLoadmoreImpl<SwipeRefreshLa
     }
 
     /**
-     * 跟视图
+     * 设置能否加载
      *
-     * @param holder
+     * @param enable
+     * @return
      */
     @Override
-    public void attachHolder(IHolder holder) {
-        super.attachHolder(holder);
-        if (null != refreshLayout)
-            refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
-                    android.R.color.holo_green_light, android.R.color.holo_orange_light);
+    public void enableLoadMore(boolean enable) {
+
     }
 }

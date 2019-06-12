@@ -1,6 +1,5 @@
 package com.orange.chat2piao.base.mvp.view.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.orange.chat2piao.base.generate.IBuildPresenter;
@@ -37,7 +36,7 @@ public abstract class PresenterActivity<P extends BasePresenter> extends BaseAct
 
     @Override
     public P generatePresenter() {
-        return ReflectionUtils.getGenericSuperclassActualTypeArgInstance(this);
+        return ReflectionUtils.getGenericActualTypeArgInstance(this);
     }
     // </editor-fold>
 

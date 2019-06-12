@@ -29,10 +29,10 @@ public class MainActivity extends BaseActivity {
                     ActivityUtils.launchActivity(MainActivity.this, BaseActivityDemo.class);
                     break;
                 case R.id.btn_net_loading:
-                    ActivityUtils.launchActivity(MainActivity.this, BaseLoadingNetActivityDemo.class);
+                    ActivityUtils.launchActivity(MainActivity.this, LoadingDemoActivity.class);
                     break;
                 case R.id.btn_net_pull:
-//                    ActivityUtils.launchActivity(MainActivity.this, BasePullNetActivityDemo.class);
+                    ActivityUtils.launchActivity(MainActivity.this, PullDemoActivity.class);
                     break;
             }
         }, R.id.btn_base, R.id.btn_presenter, R.id.btn_net_loading, R.id.btn_net_pull);

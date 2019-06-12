@@ -6,11 +6,15 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.orange.chat2piao.constant.IFinalConst;
 import com.orange.chat2piao.utils.Preconditions;
 import com.orange.chat2piao.utils.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.orange.chat2piao.constant.IFinalConst.TYPE_LOADMORE;
+import static com.orange.chat2piao.constant.IFinalConst.TYPE_REFRESH;
 
 /**
  * 通用recyclerview适配器
@@ -25,6 +29,19 @@ public class CommonAdapter<ITEM> extends RecyclerView.Adapter<RecyclerViewHolder
     private List<ITEM> mDatas;//数据源
     private static EmptyCallback mEmptyCallback;//数据为空回调
     private IConvertRecyclerView<ITEM> mConvertViewHolder;//UI回调
+    private int mPageIndex = 1;//当前页数下标，下拉刷新时用
+
+    /**
+     * 刷新|加载pageIndex
+     */
+    public int getPageIndex(@IFinalConst.PullType int type) {
+        if (IFinalConst.TYPE_LOADMORE == type) {
+            mPageIndex++;
+        } else if (TYPE_REFRESH == type) {
+            mPageIndex = 1;
+        }
+        return mPageIndex;
+    }
 
     /**
      * 构造方法用于pull，数据由静态方法参数

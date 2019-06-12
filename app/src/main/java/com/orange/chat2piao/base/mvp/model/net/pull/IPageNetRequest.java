@@ -6,8 +6,8 @@ public interface IPageNetRequest<T> {
     /**
      * 请求参数curPage网络
      *
-     * @param curPage
+     * @param pageIndex
      * @param callback
      */
-    void reqeust(int curPage, INetCallback<T> callback);
+    void request(int pageIndex, INetCallback<T> callback);
 }

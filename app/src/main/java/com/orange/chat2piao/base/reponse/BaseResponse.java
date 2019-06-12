@@ -1,7 +1,7 @@
 package com.orange.chat2piao.base.reponse;
 
-public class BaseResponse<T> {
+public class BaseResponse<DATA> {
     public int code;
     public String msg;
-    public T data;
+    public DATA data;
 }

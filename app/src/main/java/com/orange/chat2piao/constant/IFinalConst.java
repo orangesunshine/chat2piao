@@ -2,6 +2,11 @@ package com.orange.chat2piao.constant;
 
 import android.widget.Toast;
 
+import androidx.annotation.IntDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 public interface IFinalConst {
     String sBaseUrl = "";
     String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";//loadingDilog TAG
@@ -28,4 +33,12 @@ public interface IFinalConst {
 
     //换行符
     String LINE_SEPARATOR = System.getProperty("line.separator");
+
+    //刷新|加载
+    int TYPE_REFRESH = 0x001;
+    int TYPE_LOADMORE = 0x002;
+    @IntDef({TYPE_REFRESH, TYPE_LOADMORE})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface PullType {
+    }
 }

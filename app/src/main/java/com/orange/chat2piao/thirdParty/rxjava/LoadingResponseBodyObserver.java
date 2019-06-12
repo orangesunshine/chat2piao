@@ -68,9 +68,8 @@ public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
                 responseMsg = msgElement.getAsString();
 
             JsonElement data = jsonObject.get("data");
-            if (null != data) {
-                result = gson.fromJson(data, ReflectionUtils.getGenericSuperclassActualTypeArgClass(callback));
-            }
+            if (null != data)
+                result = gson.fromJson(data, ReflectionUtils.getGenericActualTypeArg(callback));
         } catch (Exception e) {
             if (null != e) {
                 errorMsg.append(e.getMessage());

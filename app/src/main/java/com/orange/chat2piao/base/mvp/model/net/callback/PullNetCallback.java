@@ -4,19 +4,18 @@ import android.os.SystemClock;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
-import com.orange.chat2piao.base.pull.IRefreshNdLoadmore;
+import com.orange.chat2piao.base.pull.IPull;
 import com.orange.chat2piao.constant.IInitConst;
 
 import static com.orange.chat2piao.constant.IFinalConst.LINE_SEPARATOR;
 
 public class PullNetCallback<T> implements INetCallback<T> {
-    private IRefreshNdLoadmore refreshNdLoadmore;
+    private IPull refreshNdLoadmore;
     private StringBuilder log = new StringBuilder();
     private String indentation = "\u3000\u3000";//缩进
     private long startTimeMills = 0;
 
-    public PullNetCallback(IRefreshNdLoadmore refreshNdLoadmore) {
+    public PullNetCallback(IPull refreshNdLoadmore) {
         this.refreshNdLoadmore = refreshNdLoadmore;
     }
 

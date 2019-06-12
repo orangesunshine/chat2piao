@@ -5,11 +5,11 @@ import com.orange.chat2piao.ui.dialog.LoadingDialog;
 
 import java.lang.ref.WeakReference;
 
-public class LoadingImpl implements ILoading {
+public class DefaultLoading implements ILoading {
     private WeakReference<BaseActivity> mReference;
     private ILoadingDialogFragment mFragment;
 
-    public LoadingImpl(BaseActivity activity) {
+    public DefaultLoading(BaseActivity activity) {
         mReference = new WeakReference<>(activity);
         mFragment = new LoadingDialog();
     }

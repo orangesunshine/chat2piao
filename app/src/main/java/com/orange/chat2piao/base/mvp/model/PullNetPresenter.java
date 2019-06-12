@@ -14,6 +14,6 @@ public abstract class PullNetPresenter<V extends IView, T> extends BasePresenter
      * @param callback
      */
     @Override
-    public void reqeust(int curPage, INetCallback<T> callback) {
+    public void request(int curPage, INetCallback<T> callback) {
     }
 }

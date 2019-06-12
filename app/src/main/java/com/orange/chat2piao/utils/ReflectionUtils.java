@@ -16,14 +16,19 @@ public class ReflectionUtils {
      * @param <T>
      * @return
      */
-    public static <T> Type getGenericSuperclassActualTypeArgClass(INetCallback<T> callback) {
+    public static <T> Type getGenericActualTypeArg(INetCallback<T> callback) {
         Preconditions.checkNotNull(callback, "null == callback");
-        Type genericSuperclass = callback.getClass().getGenericSuperclass();
-        if (null != genericSuperclass && genericSuperclass instanceof ParameterizedType) {
-            Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
-            if (null != actualTypeArguments && actualTypeArguments.length > 0)
-                return actualTypeArguments[0];
-        }
+        Type type = null;
+        Type[] types = callback.getClass().getGenericInterfaces();
+        if (null != types && types.length > 0)
+            type = types[0];
+        if (null == type || !(type instanceof ParameterizedType))
+            type = callback.getClass().getGenericSuperclass();
+        if (null == type || !(type instanceof ParameterizedType)) return null;
+
+        Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+        if (null != actualTypeArguments && actualTypeArguments.length > 0)
+            return actualTypeArguments[0];
         return null;
     }
 
@@ -34,34 +39,39 @@ public class ReflectionUtils {
      * @param <P>
      * @return
      */
-    public static <P extends BasePresenter> P getGenericSuperclassActualTypeArgInstance(PresenterActivity<P> presenterActivity) {
+    public static <P extends BasePresenter> P getGenericActualTypeArgInstance(PresenterActivity<P> presenterActivity) {
         Preconditions.checkNotNull(presenterActivity);
-        Type genericSuperclass = presenterActivity.getClass().getGenericSuperclass();
-        if (genericSuperclass instanceof ParameterizedType) {
-            Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
-            if (null != actualTypeArguments && actualTypeArguments.length > 0) {
-                Type actualTypeArgument = actualTypeArguments[0];
-                try {
-                    if (null != actualTypeArgument) {
-                        String typeName = actualTypeArgument.toString();
-                        if (!TextUtils.isEmpty(typeName)) {
-                            Object instance = null;
-                            String prefix = "class ";
-                            while (null == instance) {
-                                try {
-                                    instance = Class.forName(typeName).newInstance();
-                                } catch (Exception e) {
-                                    if (typeName.startsWith(prefix)) {
-                                        typeName = typeName.substring(prefix.length());
-                                    }
+        Type type = null;
+        type = presenterActivity.getClass().getGenericSuperclass();
+        if (null == type || !(type instanceof ParameterizedType)) {
+            Type[] types = presenterActivity.getClass().getGenericInterfaces();
+            if (null != types && types.length > 0)
+                type = types[0];
+        }
+        if (null == type || !(type instanceof ParameterizedType)) return null;
+        Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+        if (null != actualTypeArguments && actualTypeArguments.length > 0) {
+            Type actualTypeArgument = actualTypeArguments[0];
+            try {
+                if (null != actualTypeArgument) {
+                    String typeName = actualTypeArgument.toString();
+                    if (!TextUtils.isEmpty(typeName)) {
+                        Object instance = null;
+                        String prefix = "class ";
+                        while (null == instance) {
+                            try {
+                                instance = Class.forName(typeName).newInstance();
+                            } catch (Exception e) {
+                                if (typeName.startsWith(prefix)) {
+                                    typeName = typeName.substring(prefix.length());
                                 }
                             }
-                            return (P) instance;
                         }
+                        return (P) instance;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         return null;

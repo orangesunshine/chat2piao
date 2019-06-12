@@ -16,7 +16,7 @@ public class PullDemoPresenter extends BasePresenter<IView> {
      * @param callback
      */
 //    @Override
-//    public void reqeust(int curPage, INetCallback<BetRecordSearch> callback) {
+//    public void request(int curPage, INetCallback<BetRecordSearch> callback) {
 //        Map<String, String> params = new HashMap<>();
 //        params.put("gametype", "-1");
 //        params.put("pageSize", String.valueOf(curPage));
