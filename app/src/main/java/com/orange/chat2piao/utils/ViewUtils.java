@@ -47,7 +47,7 @@ public class ViewUtils {
      * @param stringRes
      */
     public static void setText(TextView tv, @StringRes int stringRes) {
-        if (null == tv) throw new NullPointerException();
+        if (null == tv) return;
         tv.setText(stringRes);
     }
 
@@ -58,7 +58,7 @@ public class ViewUtils {
      * @param text
      */
     public static void setText(TextView tv, CharSequence text) {
-        if (null == tv) throw new NullPointerException();
+        if (null == tv) return;
         if (null == text) text = "";
         tv.setText(text);
     }
@@ -70,7 +70,7 @@ public class ViewUtils {
      * @param size
      */
     public static void setTextSize(TextView tv, float size) {
-        if (null == tv) throw new NullPointerException();
+        if (null == tv) return;
         if (size < 0) return;
         tv.setTextSize(size);
     }
@@ -82,7 +82,7 @@ public class ViewUtils {
      * @param color
      */
     public static void setTextColor(TextView tv, @ColorInt int color) {
-        if (null == tv) throw new NullPointerException();
+        if (null == tv) return;
         tv.setTextColor(color);
     }
 
@@ -93,7 +93,7 @@ public class ViewUtils {
      * @param resId
      */
     public static void setImageResource(ImageView iv, int resId) {
-        if (null == iv) throw new NullPointerException();
+        if (null == iv) return;
         if (resId <= 0) resId = R.drawable.shape_picture_placeholder;
         iv.setImageResource(resId);
     }
@@ -105,7 +105,7 @@ public class ViewUtils {
      * @param visible
      */
     public static void setVisible(View view, boolean visible) {
-        if (null == view) throw new NullPointerException();
+        if (null == view) return;
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
@@ -116,7 +116,7 @@ public class ViewUtils {
      * @param selected
      */
     public static void setSelect(View view, boolean selected) {
-        if (null == view) throw new NullPointerException();
+        if (null == view) return;
         view.setSelected(selected);
     }
 
@@ -126,7 +126,7 @@ public class ViewUtils {
      * @return
      */
     public static void setBackgroudColor(View view, @ColorInt int color) {
-        if (null == view) throw new NullPointerException();
+        if (null == view) return;
         view.setBackgroundColor(color);
     }
 
@@ -136,12 +136,12 @@ public class ViewUtils {
      * @return
      */
     public static void setBackgroundResource(View view, @DrawableRes int resId) {
-        if (null == view) throw new NullPointerException();
+        if (null == view) return;
         view.setBackgroundResource(resId);
     }
 
     public static void setOnClickListener(View view, View.OnClickListener listener) {
-        if (null == view) throw new NullPointerException();
+        if (null == view) return;
         view.setOnClickListener(listener);
     }
 
@@ -214,7 +214,7 @@ public class ViewUtils {
      * 验证Edit输入内容是否满足验证条件
      */
     public static void verifyEditContent(EditText edtv, final VerifyCallback callback) {
-        if (null == edtv) throw new NullPointerException();
+        if (null == edtv) return;
         edtv.addTextChangedListener(new TextWatcherAdapter() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -233,7 +233,7 @@ public class ViewUtils {
      * @param drawRes
      */
     public static void setCircleImage(ImageView ivImage, Context context, @DrawableRes int drawRes) {
-        if (null == ivImage || null == context) throw new NullPointerException();
+        if (null == ivImage || null == context) return;
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), drawRes);
         if (null != bitmap)
             ivImage.setImageBitmap(circleDrawable(context, bitmap));
@@ -247,7 +247,7 @@ public class ViewUtils {
      * @param urlString
      */
     public static void setCircleImage(final ImageView ivImage, final Context context, final String urlString) {
-        if (null == ivImage || null == context) throw new NullPointerException();
+        if (null == ivImage || null == context) return;
         if (TextUtils.isEmpty(urlString)) {
             setCircleImage(ivImage, context, GlobleImpl.getInstance().placeholder());//placeholder
         } else if (Patterns.WEB_URL.matcher(urlString).matches()) {
@@ -289,8 +289,7 @@ public class ViewUtils {
      * @return
      */
     private static Bitmap circleDrawable(Context context, Bitmap bitmap) {
-        if (null == context) throw new NullPointerException();
-        if (null == bitmap) throw new NullPointerException();
+        if (null == context || null == bitmap) return null;
 
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();

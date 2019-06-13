@@ -74,9 +74,8 @@ public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
             if (null != e) {
                 errorMsg.append(e.getMessage());
                 Throwable cause = e.getCause();
-                while (null != cause) {
+                if (null != cause)
                     errorMsg.append("cause: ").append(cause.getMessage()).append(LINE_SEPARATOR);
-                }
             }
         } finally {
             if (null != callback && null != result) {

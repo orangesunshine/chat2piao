@@ -26,11 +26,6 @@ public class DefaultConfig implements IBuildFactory {
     }
 
     @Override
-    public IActionBar buildActionBar() {
-        return new CommonActionBar();
-    }
-
-    @Override
     public IToast buildToast() {
         return new ToastImpl();
     }

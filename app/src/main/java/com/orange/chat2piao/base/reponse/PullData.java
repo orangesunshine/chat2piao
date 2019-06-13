@@ -4,7 +4,7 @@ import com.orange.chat2piao.constant.IFinalConst;
 
 import java.util.List;
 
-public abstract class PullData<ITEM> {
+public abstract class PullData<DATA, ITEM> extends BaseResponse<DATA> {
 
     /**
      * DATA转List<ITEM>

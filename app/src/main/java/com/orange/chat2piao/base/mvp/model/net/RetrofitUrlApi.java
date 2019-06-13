@@ -1,9 +1,11 @@
 package com.orange.chat2piao.base.mvp.model.net;
 
 import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
+import com.orange.chat2piao.base.reponse.PullData;
 import com.orange.chat2piao.thirdParty.retrofit.IRetrofitCommonApiCallback;
 import com.orange.chat2piao.thirdParty.retrofit.RetrofitClient;
 import com.orange.chat2piao.thirdParty.rxjava.LoadingResponseBodyObserver;
+import com.orange.chat2piao.thirdParty.rxjava.PullResponseBodyObserver;
 
 import java.util.Map;
 
@@ -32,6 +34,19 @@ public class RetrofitUrlApi implements IUrlApi {
         LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(url, params), callback);
     }
 
+
+    /**
+     * pull方式post网络请求
+     *
+     * @param url      全路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void getPull(String url, Map<String, String> params, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(url, params), callback);
+    }
+
     /**
      * loading方式get网络请求，带请求头
      *
@@ -43,6 +58,20 @@ public class RetrofitUrlApi implements IUrlApi {
     @Override
     public <T> void get(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
         LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, url, params), callback);
+    }
+
+
+    /**
+     * pull方式get网络请求，带请求头
+     *
+     * @param headers  请求头
+     * @param url      全路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void getPull(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, url, params), callback);
     }
 
     /**
@@ -58,6 +87,18 @@ public class RetrofitUrlApi implements IUrlApi {
     }
 
     /**
+     * pull方式post网络请求
+     *
+     * @param url      全路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void postPull(String url, Map<String, String> params, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(url, params), callback);
+    }
+
+    /**
      * loading方式post网络请求，带请求头
      *
      * @param headers  请求头
@@ -68,5 +109,17 @@ public class RetrofitUrlApi implements IUrlApi {
     @Override
     public <T> void post(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
         LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, url, params), callback);
+    }
+
+    /**
+     * pull方式post网络请求
+     *
+     * @param url      全路径
+     * @param params   参数
+     * @param callback 回调
+     */
+    @Override
+    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void postPull(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, url, params), callback);
     }
 }

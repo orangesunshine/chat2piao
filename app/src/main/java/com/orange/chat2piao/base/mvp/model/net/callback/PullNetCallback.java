@@ -59,10 +59,8 @@ public class PullNetCallback<T> implements INetCallback<T> {
             if (null != error) {
                 errorMsg.append(error.getMessage());
                 Throwable cause = error.getCause();
-                while (null != cause) {
+                if (null != cause)
                     errorMsg.append(cause.getMessage());
-                    cause = cause.getCause();
-                }
                 if (errorMsg.length() > 0)
                     ToastUtils.showShort(errorMsg);
             }

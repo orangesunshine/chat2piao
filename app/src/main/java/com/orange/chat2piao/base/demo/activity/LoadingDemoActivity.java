@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.orange.chat2piao.R;
+import com.orange.chat2piao.base.common.IConvert;
 import com.orange.chat2piao.base.loading.DefaultLoading;
 import com.orange.chat2piao.base.mvp.model.net.RetrofitUrlApi;
 import com.orange.chat2piao.base.mvp.view.activity.PresenterActivity;
@@ -21,8 +22,8 @@ public class LoadingDemoActivity extends PresenterActivity {
     public void onActivityCreate(Activity activity, Bundle bundle) {
         super.onActivityCreate(activity, bundle);
         NetUtils.loadingNetData(new DefaultLoading(this), callback -> {
-            RetrofitUrlApi.getInstance().post("http://192.168.254.103:8080/ifc/loading", new HashMap<>(), callback);
-        }, (NetUtils.IConvert<String>) data -> {
+            RetrofitUrlApi.getInstance().post("http://172.168.70.200:8080/ifc/loading", new HashMap<>(), callback);
+        }, (IConvert<String>) data -> {
             showToast(data);
         });
     }

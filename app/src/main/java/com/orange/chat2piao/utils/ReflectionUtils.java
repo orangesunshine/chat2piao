@@ -25,7 +25,6 @@ public class ReflectionUtils {
         if (null == type || !(type instanceof ParameterizedType))
             type = callback.getClass().getGenericSuperclass();
         if (null == type || !(type instanceof ParameterizedType)) return null;
-
         Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
         if (null != actualTypeArguments && actualTypeArguments.length > 0)
             return actualTypeArguments[0];

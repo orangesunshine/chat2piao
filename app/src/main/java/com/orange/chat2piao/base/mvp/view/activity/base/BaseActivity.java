@@ -13,7 +13,6 @@ import com.orange.chat2piao.base.common.holder.DefaultHolder;
 import com.orange.chat2piao.base.toast.ToastImpl;
 import com.orange.chat2piao.base.common.DefaultConfig;
 import com.orange.chat2piao.base.mvp.view.IView;
-import com.orange.chat2piao.base.common.holder.IAttachHolder;
 import com.orange.chat2piao.base.common.IContentView;
 import com.orange.chat2piao.base.common.holder.IHolder;
 import com.orange.chat2piao.base.actbar.IActionBar;
@@ -65,12 +64,6 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
         //statusbar
         mStatusBar.setStatusBar(activity);
 
-        //actionbar
-        if (null == mActionBar)
-            mActionBar = DefaultConfig.getInstance().buildActionBar();
-        if (mActionBar instanceof IAttachHolder)
-            ((IAttachHolder) mActionBar).attachHolder(mHolder);
-
         //toast
         if (null == mToast)
             mToast = DefaultConfig.getInstance().buildToast();
@@ -113,7 +106,7 @@ public abstract class BaseActivity<V extends IView> extends FragmentActivity imp
      */
     @Override
     public IActionBar buildActionBar() {
-        return new CommonActionBar();
+        return new CommonActionBar(mHolder);
     }
     // </editor-fold>
 

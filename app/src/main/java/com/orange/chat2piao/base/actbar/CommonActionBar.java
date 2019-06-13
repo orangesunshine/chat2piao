@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.common.holder.IAttachHolder;
 import com.orange.chat2piao.base.common.holder.IHolder;
 
 import butterknife.OnClick;
@@ -12,11 +11,15 @@ import butterknife.OnClick;
 /**
  *
  */
-public class CommonActionBar implements IActionBar<LinearLayout>, IAttachHolder {
+public class CommonActionBar implements IActionBar<LinearLayout> {
 
     //vars
     private IHolder mHolder;
     private IActionBarCallback mActionBarCallback;
+
+    public CommonActionBar(IHolder holder) {
+        mHolder = holder;
+    }
 
     @Override
     public void setActionBarCallback(IActionBarCallback actionBarCallback) {
@@ -81,15 +84,5 @@ public class CommonActionBar implements IActionBar<LinearLayout>, IAttachHolder 
                     mActionBarCallback.onRight();
                 break;
         }
-    }
-
-    /**
-     * 跟视图
-     *
-     * @param holder
-     */
-    @Override
-    public void attachHolder(IHolder holder) {
-        mHolder = holder;
     }
 }

@@ -10,6 +10,7 @@
 
     <!-- recyclerview -->
     <item name="recyclerview" type="id" />
+    <item name="empty_view" type="id" />
 
     <!-- actbar -->
     <item name="layout_actbar" type="id" />
