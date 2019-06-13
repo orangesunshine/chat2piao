@@ -8,11 +8,19 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.orange.chat2piao.base.demo.response.PullDemoData;
 import com.orange.chat2piao.base.reponse.PullData;
 import com.orange.chat2piao.constant.IFinalConst;
 import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
 import com.orange.chat2piao.utils.CommonUtils;
 import com.orange.chat2piao.utils.ReflectionUtils;
+
+import java.lang.reflect.GenericDeclaration;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -21,12 +29,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class PullResponseBodyObserver<DATA, ITEM, T extends PullData<DATA, ITEM>> implements Observer<ResponseBody> {
-    private INetCallback<T> callback;
+public class PullResponseBodyObserver implements Observer<ResponseBody> {
+    private INetCallback callback;
     private boolean noData = false;
     private Gson gson = new Gson();
 
-    public PullResponseBodyObserver(INetCallback<T> callback) {
+    public <DATA, ITEM, T extends PullData<DATA, ITEM>> PullResponseBodyObserver(INetCallback<T> callback) {
         this.callback = callback;
     }
 
@@ -44,7 +52,7 @@ public class PullResponseBodyObserver<DATA, ITEM, T extends PullData<DATA, ITEM>
     @Override
     public void onNext(ResponseBody responseBody) {
         if (null == responseBody) return;
-        T result = null;
+        Object result = null;
         int code = IFinalConst.CODE_ERROR;
         StringBuilder errorMsg = new StringBuilder();
         String responseMsg = "";
@@ -69,7 +77,16 @@ public class PullResponseBodyObserver<DATA, ITEM, T extends PullData<DATA, ITEM>
 
             JsonElement data = jsonObject.get("data");
             if (null != data) {
-                result = gson.fromJson(data, ReflectionUtils.getGenericActualTypeArg(callback));
+                String asString = data.toString();
+                Type genericSuperclass = callback.getClass().getGenericSuperclass();
+                Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
+                Type type = actualTypeArguments[0];
+//                Type type = ReflectionUtils.getGenericActualTypeArg(callback);
+                if (null == genericSuperclass) throw new IllegalStateException("获取type失败");
+                TypeToken<?> typeToken = TypeToken.get(type);
+                TypeAdapter<?> adapter = gson.getAdapter(typeToken);
+//                result = adapter.fromJson(asString);
+                result = gson.fromJson(jsonObject, PullDemoData.class);
             }
         } catch (Exception e) {
             Throwable cause = e.getCause();
@@ -79,8 +96,8 @@ public class PullResponseBodyObserver<DATA, ITEM, T extends PullData<DATA, ITEM>
                 errorMsg.append(System.getProperty("line.separator"));
             }
         } finally {
-            if (null != result)
-                noData = result.noMoreData();
+            if (null != result && result instanceof PullData)
+                noData = ((PullData) result).noMoreData();
             if (null != callback && null != result) {
                 if (CommonUtils.checkCodeSuccess(code)) {
                     if (!TextUtils.isEmpty(responseMsg) && TextUtils.isEmpty(errorMsg))

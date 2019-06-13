@@ -33,7 +33,8 @@ public class PullDemoActivity extends PullNetActivity {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("count", "10");
                 params.put("pageIndex", String.valueOf(pageIndex));
-                RetrofitUrlApi.getInstance().postPull("http://172.168.70.200:8080/ifc/pull", params, callback);
+//                RetrofitUrlApi.getInstance().postPull("http://172.168.70.200:8080/ifc/pull", params, callback);
+                RetrofitUrlApi.getInstance().postPull("http://192.168.254.103:8080/ifc/pull", params, callback);
             }
         }, new IConvertRecyclerView<String>() {
             @Override

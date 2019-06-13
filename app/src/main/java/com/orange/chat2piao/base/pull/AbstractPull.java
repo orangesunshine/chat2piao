@@ -8,14 +8,14 @@ import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
 import com.orange.chat2piao.base.mvp.model.net.pull.IPageNetRequest;
 import com.orange.chat2piao.base.reponse.PullData;
 
-public abstract class AbstractPull<REFRESH extends View, F extends View, ITEM> implements IPull, IPullCallback {
+public abstract class AbstractPull<REFRESH extends View, F extends View> implements IPull, IPullCallback {
     protected REFRESH refreshLayout;
     protected F footer;
     protected int pageIndex;//当前页下标
     protected IPageNetRequest mPageRequest;//网络请求（自带page参数）
     protected INetCallback mNetCallback;//网络结果回调
 
-    public <DATA> AbstractPull(IHolder holder, IPageNetRequest<? extends PullData<DATA, ITEM>> pageRequest) {
+    public <T> AbstractPull(IHolder holder, IPageNetRequest<T> pageRequest) {
         refreshLayout = holder.getView(R.id.refreshlayout);
         footer = holder.getView(R.id.refreshlayout_footer);
         mPageRequest = pageRequest;

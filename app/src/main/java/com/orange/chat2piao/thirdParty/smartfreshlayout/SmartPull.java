@@ -22,7 +22,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.List;
 
-public class SmartPull<ITEM> extends AbstractPull<SmartRefreshLayout, View, ITEM> {
+public class SmartPull<ITEM> extends AbstractPull<SmartRefreshLayout, View> {
     protected CommonAdapter<ITEM> mAdapter;
 
     /**
@@ -34,7 +34,7 @@ public class SmartPull<ITEM> extends AbstractPull<SmartRefreshLayout, View, ITEM
      * @param pageRequest
      * @param convertRecyclerView
      */
-    public <DATA, T extends PullData<DATA, ITEM>> SmartPull(Context context, int itemLayoutId, IHolder holder, IPageNetRequest<T> pageRequest, IConvertRecyclerView<ITEM> convertRecyclerView) {
+    public <T> SmartPull(Context context, int itemLayoutId, IHolder holder, IPageNetRequest<T> pageRequest, IConvertRecyclerView<ITEM> convertRecyclerView) {
         super(holder, pageRequest);
         RecyclerView recyclerView = holder.getView(R.id.recyclerview);
         View emptyView = holder.getView(R.id.empty_view);
@@ -45,9 +45,10 @@ public class SmartPull<ITEM> extends AbstractPull<SmartRefreshLayout, View, ITEM
             public void onSuccess(T data) {
                 super.onSuccess(data);
                 List<ITEM> datas = null;
-                if (null != data)
-                    datas = data.getList();
-                mAdapter = CommonAdapter.newInstance(context, recyclerView, emptyView, mAdapter, itemLayoutId, datas, pageIndex > 1, convertRecyclerView);
+                if (null != data && data instanceof PullData) {
+                    datas = ((PullData)data).getList();
+                    mAdapter = CommonAdapter.newInstance(context, recyclerView, emptyView, mAdapter, itemLayoutId, datas, pageIndex > 1, convertRecyclerView);
+                }
             }
         };
 
@@ -130,7 +131,7 @@ public class SmartPull<ITEM> extends AbstractPull<SmartRefreshLayout, View, ITEM
             List<ITEM> datas = null;
             if (null != data)
                 datas = data.getList();
-            mAdapter = CommonAdapter.newInstance(context, recyclerView, emptyView, mAdapter, itemLayoutId, datas, pageIndex > 1, convertRecyclerView);
+//            mAdapter = CommonAdapter.newInstance(context, recyclerView, emptyView, mAdapter, itemLayoutId, datas, pageIndex > 1, convertRecyclerView);
         }
     }
 }
