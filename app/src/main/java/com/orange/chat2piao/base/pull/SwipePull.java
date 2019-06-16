@@ -15,7 +15,7 @@
 //
 //    public <T> SwipePull(IHolder holder, IPageNetRequest<T> pageRequest) {
 //        super(holder, pageRequest);
-//        refreshLayout.setOnRefreshListener(() -> SwipePull.this.onRefresh());
+//        refreshLayout.setOnRefreshListener(() -> SwipePull.this.onPullRefresh());
 //        RecyclerView recyclerView = holder.getView(R.id.recyclerview);
 //    }
 //

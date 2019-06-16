@@ -7,7 +7,7 @@ import com.orange.chat2piao.base.mvp.model.net.callback.LoadingNetCallback;
 
 public class NetUtils {
 
-// <editor-fold defaultstate="collapsed" desc="loading网络数据">
+    // <editor-fold defaultstate="collapsed" desc="loading网络数据">
 
     /**
      * netRequest请求网络数据，默认LoadingNetCallback处理，convert自定义处理onSuccess返回
@@ -43,5 +43,5 @@ public class NetUtils {
     public interface INetRequest<T> {
         void request(INetCallback<T> callback);
     }
-// </editor-fold>
+    // </editor-fold>
 }

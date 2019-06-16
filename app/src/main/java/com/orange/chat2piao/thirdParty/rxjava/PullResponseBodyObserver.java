@@ -10,17 +10,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
-import com.orange.chat2piao.base.demo.response.PullDemoData;
 import com.orange.chat2piao.base.reponse.PullData;
 import com.orange.chat2piao.constant.IFinalConst;
 import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
 import com.orange.chat2piao.utils.CommonUtils;
 import com.orange.chat2piao.utils.ReflectionUtils;
 
-import java.lang.reflect.GenericDeclaration;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -29,19 +25,22 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class PullResponseBodyObserver implements Observer<ResponseBody> {
+public class PullResponseBodyObserver<T> implements Observer<ResponseBody> {
     private INetCallback callback;
-    private boolean noData = false;
+    private boolean mNoData = false;
+    private boolean mEmpty = true;
+    private Type mType;
     private Gson gson = new Gson();
 
-    public <DATA, ITEM, T extends PullData<DATA, ITEM>> PullResponseBodyObserver(INetCallback<T> callback) {
+    public <T> PullResponseBodyObserver(Type type, INetCallback<T> callback) {
+        mType = type;
         this.callback = callback;
     }
 
-    public static <DATA, ITEM, T extends PullData<DATA, ITEM>> void convert(Observable<ResponseBody> observable, INetCallback<T> callback) {
+    public static <T> void convert(Observable<ResponseBody> observable, Type type, INetCallback<T> callback) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new PullResponseBodyObserver(callback));
+                .subscribe(new PullResponseBodyObserver(type, callback));
     }
 
     @Override
@@ -77,41 +76,34 @@ public class PullResponseBodyObserver implements Observer<ResponseBody> {
 
             JsonElement data = jsonObject.get("data");
             if (null != data) {
-                String asString = data.toString();
-                Type genericSuperclass = callback.getClass().getGenericSuperclass();
-                Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();
-                Type type = actualTypeArguments[0];
-//                Type type = ReflectionUtils.getGenericActualTypeArg(callback);
-                if (null == genericSuperclass) throw new IllegalStateException("获取type失败");
-                TypeToken<?> typeToken = TypeToken.get(type);
+                if (null == mType)
+                    mType = ReflectionUtils.getGenericActualTypeArg(callback);
+                TypeToken<?> typeToken = TypeToken.get(mType);
                 TypeAdapter<?> adapter = gson.getAdapter(typeToken);
-//                result = adapter.fromJson(asString);
-                result = gson.fromJson(jsonObject, PullDemoData.class);
+                result = adapter.fromJson(data.toString());
             }
         } catch (Exception e) {
             Throwable cause = e.getCause();
-            while (null != cause) {
+            if (null != cause) {
                 errorMsg.append("cause: ");
                 errorMsg.append(cause.getMessage());
                 errorMsg.append(System.getProperty("line.separator"));
             }
         } finally {
-            if (null != result && result instanceof PullData)
-                noData = ((PullData) result).noMoreData();
-            if (null != callback && null != result) {
-                if (CommonUtils.checkCodeSuccess(code)) {
+            if (null != result && result instanceof PullData) {
+                mEmpty = ((PullData) result).empty();
+                mNoData = ((PullData) result).noMoreData();
+            }
+            if (null != callback) {
+                if (null != result && CommonUtils.checkCodeSuccess(code)) {
                     if (!TextUtils.isEmpty(responseMsg) && TextUtils.isEmpty(errorMsg))
                         ToastUtils.showShort(responseMsg);
                     callback.onSuccess(result);
-                    return;
+                } else {
+                    if (errorMsg.length() == 0)
+                        errorMsg.append(TextUtils.isEmpty(responseMsg) ? "未知异常" : responseMsg);
+                    callback.onError(code, new Throwable(errorMsg.toString()));
                 }
-                errorMsg.append("succuess code != 200");
-            }
-            if (null != callback) {
-                if (errorMsg.length() == 0) {
-                    errorMsg.append(TextUtils.isEmpty(responseMsg) ? "未知异常" : responseMsg);
-                }
-                callback.onError(code, new Throwable(errorMsg.toString()));
             }
         }
     }
@@ -120,13 +112,13 @@ public class PullResponseBodyObserver implements Observer<ResponseBody> {
     public void onError(Throwable e) {
         if (null != callback) {
             callback.onError(IFinalConst.CODE_ERROR, e);
-            callback.onComplete(true);
+            callback.onComplete(true, true);
         }
     }
 
     @Override
     public void onComplete() {
         if (null != callback)
-            callback.onComplete(noData);
+            callback.onComplete(mNoData, mEmpty);
     }
 }

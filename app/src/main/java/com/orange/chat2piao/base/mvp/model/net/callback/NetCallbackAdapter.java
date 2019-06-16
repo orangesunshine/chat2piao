@@ -33,9 +33,9 @@ public class NetCallbackAdapter<T> implements INetCallback<T> {
      * @param noData
      */
     @Override
-    public void onComplete(boolean noData) {
+    public void onComplete(boolean noData, boolean emtpy) {
         if (null != mNetCallback)
-            mNetCallback.onComplete(noData);
+            mNetCallback.onComplete(noData, emtpy);
     }
 
     /**

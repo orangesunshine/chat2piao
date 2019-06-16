@@ -6,34 +6,55 @@ import com.orange.chat2piao.R;
 import com.orange.chat2piao.base.common.holder.IHolder;
 import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
 import com.orange.chat2piao.base.mvp.model.net.pull.IPageNetRequest;
-import com.orange.chat2piao.base.reponse.PullData;
+import com.orange.chat2piao.utils.Preconditions;
 
-public abstract class AbstractPull<REFRESH extends View, F extends View> implements IPull, IPullCallback {
+import java.lang.reflect.Type;
+
+public class AbstractPull<REFRESH extends View> implements IPullCallback {
+    protected Type mType;
+    protected int mPageIndex;
     protected REFRESH refreshLayout;
-    protected F footer;
-    protected int pageIndex;//当前页下标
-    protected IPageNetRequest mPageRequest;//网络请求（自带page参数）
-    protected INetCallback mNetCallback;//网络结果回调
+    protected INetCallback mNetCallback;
+    protected IPageNetRequest mPageNetRequest;
 
     public <T> AbstractPull(IHolder holder, IPageNetRequest<T> pageRequest) {
         refreshLayout = holder.getView(R.id.refreshlayout);
-        footer = holder.getView(R.id.refreshlayout_footer);
-        mPageRequest = pageRequest;
+        mPageNetRequest = pageRequest;
     }
 
+    public <T> AbstractPull(REFRESH refreshLayout, IPageNetRequest<T> pageRequest) {
+        this.refreshLayout = refreshLayout;
+        mPageNetRequest = pageRequest;
+    }
+
+
+    /**
+     * 下拉刷新
+     */
     @Override
-    public void onRefresh() {
-        pageIndex = 1;
-        mPageRequest.request(pageIndex, mNetCallback);
+    public void onPullRefresh() {
+        Preconditions.checkNotNull(mPageNetRequest, mNetCallback);
+        mPageIndex = 1;
+        mPageNetRequest.request(mPageIndex, mType, mNetCallback);
     }
 
+    /**
+     * 上拉加载
+     */
     @Override
-    public void onLoadMore() {
-        pageIndex++;
-        mPageRequest.request(pageIndex, mNetCallback);
+    public void onPullLoadMore() {
+        Preconditions.checkNotNull(mPageNetRequest, mNetCallback);
+        mPageIndex++;
+        mPageNetRequest.request(mPageIndex, mType, mNetCallback);
     }
 
+    /**
+     * 获取当前页数
+     *
+     * @return
+     */
+    @Override
     public int getCurPage() {
-        return pageIndex;
+        return mPageIndex;
     }
 }

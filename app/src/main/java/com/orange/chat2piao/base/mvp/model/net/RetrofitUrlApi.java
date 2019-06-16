@@ -7,6 +7,7 @@ import com.orange.chat2piao.thirdParty.retrofit.RetrofitClient;
 import com.orange.chat2piao.thirdParty.rxjava.LoadingResponseBodyObserver;
 import com.orange.chat2piao.thirdParty.rxjava.PullResponseBodyObserver;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 public class RetrofitUrlApi implements IUrlApi {
@@ -43,8 +44,8 @@ public class RetrofitUrlApi implements IUrlApi {
      * @param callback 回调
      */
     @Override
-    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void getPull(String url, Map<String, String> params, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(url, params), callback);
+    public <T> void getPull(String url, Map<String, String> params, Type type, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(url, params), type, callback);
     }
 
     /**
@@ -70,8 +71,8 @@ public class RetrofitUrlApi implements IUrlApi {
      * @param callback 回调
      */
     @Override
-    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void getPull(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, url, params), callback);
+    public <T> void getPull(Map<String, String> headers, String url, Map<String, String> params, Type type, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, url, params), type, callback);
     }
 
     /**
@@ -94,8 +95,8 @@ public class RetrofitUrlApi implements IUrlApi {
      * @param callback 回调
      */
     @Override
-    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void postPull(String url, Map<String, String> params, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(url, params), callback);
+    public <T> void postPull(String url, Map<String, String> params, Type type, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(url, params), type, callback);
     }
 
     /**
@@ -119,7 +120,7 @@ public class RetrofitUrlApi implements IUrlApi {
      * @param callback 回调
      */
     @Override
-    public <DATA, ITEM, T extends PullData<DATA, ITEM>> void postPull(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, url, params), callback);
+    public <T> void postPull(Map<String, String> headers, String url, Map<String, String> params, Type type, INetCallback<T> callback) {
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, url, params), type, callback);
     }
 }

@@ -17,9 +17,9 @@ public abstract class PullNetActivity<P extends BasePresenter> extends Presenter
     @Override
     public void initVars(Bundle bundle) {
         super.initVars(bundle);
-        mPull = buildHeaderNdFooter();
+        buildHeaderNdFooter();
     }
 
-    public abstract AbstractPull buildHeaderNdFooter();
+    public abstract void buildHeaderNdFooter();
     // </editor-fold>
 }

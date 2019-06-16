@@ -2,9 +2,10 @@ package com.orange.chat2piao.base.demo.response;
 
 import com.orange.chat2piao.base.reponse.PullData;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PullDemoData extends PullData<List<String>, String> {
+public class PullDemoData extends ArrayList<String> implements PullData<String> {
 
     /**
      * DATA转List<ITEM>
@@ -13,6 +14,6 @@ public class PullDemoData extends PullData<List<String>, String> {
      */
     @Override
     public List<String> getList() {
-        return null == data ? null : data;
+        return this;
     }
 }

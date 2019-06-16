@@ -100,14 +100,14 @@ public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
     public void onError(Throwable e) {
         if (null != callback) {
             callback.onError(IFinalConst.CODE_ERROR, e);
-            callback.onComplete(true);
+            callback.onComplete(true, true);
         }
     }
 
     @Override
     public void onComplete() {
         if (null != callback)
-            callback.onComplete(true);
+            callback.onComplete(true, true);
     }
 
 }

@@ -13,6 +13,6 @@ public abstract class PullNetRequestImpl<T> implements IPullNetRequest<T> {
             curPage++;
         }
 
-        request(curPage, callback);
+//        request(curPage, callback);
     }
 }

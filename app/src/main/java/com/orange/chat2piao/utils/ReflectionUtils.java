@@ -1,6 +1,7 @@
 package com.orange.chat2piao.utils;
 
 import com.orange.chat2piao.base.mvp.model.net.callback.INetCallback;
+import com.orange.chat2piao.base.mvp.model.net.pull.IPageNetRequest;
 import com.orange.chat2piao.base.mvp.presenter.BasePresenter;
 import com.orange.chat2piao.base.mvp.view.activity.PresenterActivity;
 
@@ -74,5 +75,26 @@ public class ReflectionUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 获取IPageNetRequest的泛型type
+     *
+     * @param pageNetRequest
+     * @param <T>
+     * @return
+     */
+    public static <T> Type pageNetRequestGenericType(IPageNetRequest<T> pageNetRequest) {
+        Preconditions.checkNotNull(pageNetRequest);
+        Type type = null;
+        if (null != pageNetRequest) {
+            Type[] genericInterfaces = pageNetRequest.getClass().getGenericInterfaces();
+            Type genericInterface = genericInterfaces[0];
+            type = ((ParameterizedType) genericInterface).getActualTypeArguments()[0];
+        }
+        if (null == type) {
+
+        }
+        return type;
     }
 }
